@@ -6,6 +6,7 @@ import net.Indyuce.mmoitems.MMOItems;
 import net.Indyuce.mmoitems.api.Type;
 import net.Indyuce.mmoitems.api.item.mmoitem.MMOItem;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
 
@@ -20,7 +21,7 @@ public class MMOItemsProvider implements Provider<ItemStack> {
     }
 
     @Override
-    public Optional<ItemStack> build(String id, BuildContext context) {
+    public Optional<ItemStack> build(String id, @NotNull BuildContext context) {
         String[] split = id.split(":", 2);
         if (split.length == 1) {
             split = split[0].split("_", 2);
@@ -34,7 +35,7 @@ public class MMOItemsProvider implements Provider<ItemStack> {
     }
 
     @Override
-    public Optional<String> id(ItemStack item) {
+    public Optional<String> id(@NotNull ItemStack item) {
         Type type = MMOItems.getType(item);
         String id = MMOItems.getID(item);
         if (type == null || id == null) {
@@ -44,14 +45,14 @@ public class MMOItemsProvider implements Provider<ItemStack> {
     }
 
     @Override
-    public boolean is(ItemStack item) {
+    public boolean is(@NotNull ItemStack item) {
         Type type = MMOItems.getType(item);
         String id = MMOItems.getID(item);
         return type != null && id != null;
     }
 
     @Override
-    public boolean has(String id) {
+    public boolean has(@NotNull String id) {
         String[] split = id.split(":", 2);
         if (split.length == 1) {
             split = split[0].split("_", 2);

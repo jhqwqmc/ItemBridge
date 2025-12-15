@@ -56,6 +56,16 @@ final class BuildContextImpl implements BuildContext {
         }
 
         @Override
+        public <T> Builder withOptional(ContextKey<T> key, @Nullable T value) {
+            if (value == null) {
+                this.contextData.remove(key);
+            } else {
+                this.contextData.put(key, new SimpleSupplier<>(value));
+            }
+            return this;
+        }
+
+        @Override
         public <T> Optional<T> get(ContextKey<T> key) {
             return Optional.ofNullable(this.contextData.get(key)).map(property -> (T) property.get());
         }

@@ -5,6 +5,7 @@ import cn.gtemc.itembridge.api.context.BuildContext;
 import io.th0rgal.oraxen.api.OraxenItems;
 import io.th0rgal.oraxen.items.ItemBuilder;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
 
@@ -19,7 +20,7 @@ public class OraxenProvider implements Provider<ItemStack> {
     }
 
     @Override
-    public Optional<ItemStack> build(String id, BuildContext context) {
+    public Optional<ItemStack> build(String id, @NotNull BuildContext context) {
         ItemBuilder item = OraxenItems.getItemById(id);
         if (item == null) {
             return Optional.empty();
@@ -28,17 +29,17 @@ public class OraxenProvider implements Provider<ItemStack> {
     }
 
     @Override
-    public Optional<String> id(ItemStack item) {
+    public Optional<String> id(@NotNull ItemStack item) {
         return Optional.ofNullable(OraxenItems.getIdByItem(item));
     }
 
     @Override
-    public boolean is(ItemStack item) {
+    public boolean is(@NotNull ItemStack item) {
         return OraxenItems.exists(item);
     }
 
     @Override
-    public boolean has(String id) {
+    public boolean has(@NotNull String id) {
         return OraxenItems.exists(id);
     }
 }

@@ -4,6 +4,7 @@ import cn.gtemc.itembridge.api.Provider;
 import cn.gtemc.itembridge.api.context.BuildContext;
 import dev.lone.itemsadder.api.CustomStack;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
 
@@ -18,7 +19,7 @@ public class ItemsAdderProvider implements Provider<ItemStack> {
     }
 
     @Override
-    public Optional<ItemStack> build(String id, BuildContext context) {
+    public Optional<ItemStack> build(String id, @NotNull BuildContext context) {
         CustomStack instance = CustomStack.getInstance(id);
         if (instance == null) {
             return Optional.empty();
@@ -27,7 +28,7 @@ public class ItemsAdderProvider implements Provider<ItemStack> {
     }
 
     @Override
-    public Optional<String> id(ItemStack item) {
+    public Optional<String> id(@NotNull ItemStack item) {
         CustomStack customStack = CustomStack.byItemStack(item);
         if (customStack == null) {
             return Optional.empty();
@@ -36,12 +37,12 @@ public class ItemsAdderProvider implements Provider<ItemStack> {
     }
 
     @Override
-    public boolean is(ItemStack item) {
+    public boolean is(@NotNull ItemStack item) {
         return CustomStack.byItemStack(item) != null;
     }
 
     @Override
-    public boolean has(String id) {
+    public boolean has(@NotNull String id) {
         return CustomStack.isInRegistry(id);
     }
 }

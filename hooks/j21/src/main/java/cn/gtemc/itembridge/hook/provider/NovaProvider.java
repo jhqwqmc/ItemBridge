@@ -3,6 +3,7 @@ package cn.gtemc.itembridge.hook.provider;
 import cn.gtemc.itembridge.api.Provider;
 import cn.gtemc.itembridge.api.context.BuildContext;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 import xyz.xenondevs.nova.api.Nova;
 import xyz.xenondevs.nova.api.item.NovaItem;
 
@@ -19,7 +20,7 @@ public class NovaProvider implements Provider<ItemStack> {
     }
 
     @Override
-    public Optional<ItemStack> build(String id, BuildContext context) {
+    public Optional<ItemStack> build(String id, @NotNull BuildContext context) {
         NovaItem novaItem = Nova.getNova().getItemRegistry().getOrNull(id);
         if (novaItem == null) {
             return Optional.empty();
@@ -28,7 +29,7 @@ public class NovaProvider implements Provider<ItemStack> {
     }
 
     @Override
-    public Optional<String> id(ItemStack item) {
+    public Optional<String> id(@NotNull ItemStack item) {
         NovaItem novaItem = Nova.getNova().getItemRegistry().getOrNull(item);
         if (novaItem == null) {
             return Optional.empty();
@@ -37,12 +38,12 @@ public class NovaProvider implements Provider<ItemStack> {
     }
 
     @Override
-    public boolean is(ItemStack item) {
+    public boolean is(@NotNull ItemStack item) {
         return Nova.getNova().getItemRegistry().getOrNull(item) != null;
     }
 
     @Override
-    public boolean has(String id) {
+    public boolean has(@NotNull String id) {
         return Nova.getNova().getItemRegistry().getOrNull(id) != null;
     }
 }

@@ -6,13 +6,14 @@ import com.willfp.eco.core.items.CustomItem;
 import com.willfp.eco.core.items.Items;
 import com.willfp.eco.core.items.TestableItem;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
 
 public record EcoProvider(@Override String plugin) implements Provider<ItemStack> {
 
     @Override
-    public Optional<ItemStack> build(String id, BuildContext context) {
+    public Optional<ItemStack> build(String id, @NotNull BuildContext context) {
         TestableItem item = Items.lookup(plugin + ":" + id);
         if (!(item instanceof CustomItem customItem)) {
             return Optional.empty();
@@ -21,7 +22,7 @@ public record EcoProvider(@Override String plugin) implements Provider<ItemStack
     }
 
     @Override
-    public Optional<String> id(ItemStack item) {
+    public Optional<String> id(@NotNull ItemStack item) {
         CustomItem customItem = Items.getCustomItem(item);
         if (customItem == null) {
             return Optional.empty();
@@ -30,12 +31,12 @@ public record EcoProvider(@Override String plugin) implements Provider<ItemStack
     }
 
     @Override
-    public boolean is(ItemStack item) {
+    public boolean is(@NotNull ItemStack item) {
         return Items.getCustomItem(item) != null;
     }
 
     @Override
-    public boolean has(String id) {
+    public boolean has(@NotNull String id) {
         return Items.lookup(plugin + ":" + id) instanceof CustomItem;
     }
 }

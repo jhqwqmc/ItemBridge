@@ -6,6 +6,7 @@ import cn.gtemc.itembridge.hook.context.ItemContextKeys;
 import com.ssomar.score.api.executableitems.ExecutableItemsAPI;
 import com.ssomar.score.sobject.SObjectInterface;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
 
@@ -20,26 +21,26 @@ public class ExecutableItemsProvider implements Provider<ItemStack> {
     }
 
     @Override
-    public Optional<ItemStack> build(String id, BuildContext context) {
+    public Optional<ItemStack> build(String id, @NotNull BuildContext context) {
         return ExecutableItemsAPI.getExecutableItemsManager()
                 .getExecutableItem(id)
                 .map(i -> i.buildItem(1, context.get(ItemContextKeys.PLAYER)));
     }
 
     @Override
-    public Optional<String> id(ItemStack item) {
+    public Optional<String> id(@NotNull ItemStack item) {
         return ExecutableItemsAPI.getExecutableItemsManager()
                 .getExecutableItem(item)
                 .map(SObjectInterface::getId);
     }
 
     @Override
-    public boolean is(ItemStack item) {
+    public boolean is(@NotNull ItemStack item) {
         return ExecutableItemsAPI.getExecutableItemsManager().getExecutableItem(item).isPresent();
     }
 
     @Override
-    public boolean has(String id) {
+    public boolean has(@NotNull String id) {
         return ExecutableItemsAPI.getExecutableItemsManager().isValidID(id);
     }
 }

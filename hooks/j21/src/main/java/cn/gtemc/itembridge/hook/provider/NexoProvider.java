@@ -5,6 +5,7 @@ import cn.gtemc.itembridge.api.context.BuildContext;
 import com.nexomc.nexo.api.NexoItems;
 import com.nexomc.nexo.items.ItemBuilder;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
 
@@ -19,7 +20,7 @@ public class NexoProvider implements Provider<ItemStack> {
     }
 
     @Override
-    public Optional<ItemStack> build(String id, BuildContext context) {
+    public Optional<ItemStack> build(String id, @NotNull BuildContext context) {
         ItemBuilder itemBuilder = NexoItems.itemFromId(id);
         if (itemBuilder == null) {
             return Optional.empty();
@@ -28,17 +29,17 @@ public class NexoProvider implements Provider<ItemStack> {
     }
 
     @Override
-    public Optional<String> id(ItemStack item) {
+    public Optional<String> id(@NotNull ItemStack item) {
         return Optional.ofNullable(NexoItems.idFromItem(item));
     }
 
     @Override
-    public boolean is(ItemStack item) {
+    public boolean is(@NotNull ItemStack item) {
         return NexoItems.exists(item);
     }
 
     @Override
-    public boolean has(String id) {
+    public boolean has(@NotNull String id) {
         return NexoItems.exists(id);
     }
 }

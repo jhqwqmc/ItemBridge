@@ -8,6 +8,7 @@ import net.momirealms.customfishing.api.mechanic.context.Context;
 import net.momirealms.customfishing.api.mechanic.context.ContextKeys;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
 
@@ -24,23 +25,23 @@ public class CustomFishingProvider implements Provider<ItemStack> {
 
     @SuppressWarnings("UnstableApiUsage")
     @Override
-    public Optional<ItemStack> build(String id, BuildContext context) {
+    public Optional<ItemStack> build(String id, @NotNull BuildContext context) {
         Context<Player> ctx = Context.player(context.getOrNull(ItemContextKeys.PLAYER)).arg(ContextKeys.ID, id);
         return Optional.ofNullable(BukkitCustomFishingPlugin.getInstance().getItemManager().buildInternal(ctx, id));
     }
 
     @Override
-    public Optional<String> id(ItemStack item) {
+    public Optional<String> id(@NotNull ItemStack item) {
         return Optional.ofNullable(BukkitCustomFishingPlugin.getInstance().getItemManager().getCustomFishingItemID(item));
     }
 
     @Override
-    public boolean is(ItemStack item) {
+    public boolean is(@NotNull ItemStack item) {
         return BukkitCustomFishingPlugin.getInstance().getItemManager().getCustomFishingItemID(item) != null;
     }
 
     @Override
-    public boolean has(String id) {
+    public boolean has(@NotNull String id) {
         return BukkitCustomFishingPlugin.getInstance().getItemManager().getItemIDs().contains(id);
     }
 }

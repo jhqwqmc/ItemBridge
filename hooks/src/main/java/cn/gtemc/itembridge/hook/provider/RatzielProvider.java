@@ -9,6 +9,7 @@ import cn.gtemc.itembridge.api.Provider;
 import cn.gtemc.itembridge.api.context.BuildContext;
 import cn.gtemc.itembridge.hook.context.ItemContextKeys;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
 
@@ -23,7 +24,7 @@ public class RatzielProvider implements Provider<ItemStack> {
     }
 
     @Override
-    public Optional<ItemStack> build(String id, BuildContext context) {
+    public Optional<ItemStack> build(String id, @NotNull BuildContext context) {
         ItemGenerator itemGenerator = ItemManager.INSTANCE.getRegistry().get(id);
         if (itemGenerator == null) {
             return Optional.empty();
@@ -35,7 +36,7 @@ public class RatzielProvider implements Provider<ItemStack> {
     }
 
     @Override
-    public Optional<String> id(ItemStack item) {
+    public Optional<String> id(@NotNull ItemStack item) {
         RatzielItem ratzielItem = RatzielItem.of(item);
         if (ratzielItem == null) {
             return Optional.empty();
@@ -44,12 +45,12 @@ public class RatzielProvider implements Provider<ItemStack> {
     }
 
     @Override
-    public boolean is(ItemStack item) {
+    public boolean is(@NotNull ItemStack item) {
         return RatzielItem.isRatzielItem(item);
     }
 
     @Override
-    public boolean has(String id) {
+    public boolean has(@NotNull String id) {
         return ItemManager.INSTANCE.getRegistry().containsKey(id);
     }
 }

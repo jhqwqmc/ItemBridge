@@ -30,6 +30,8 @@ public interface BuildContext {
 
         <T> Builder with(ContextKey<T> key, Supplier<@NotNull T> value);
 
+        <T> Builder withOptional(ContextKey<T> key, @Nullable T value);
+
         <T> Optional<T> get(ContextKey<T> key);
 
         <T> T getOrThrow(ContextKey<T> key);

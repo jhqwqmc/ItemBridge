@@ -5,6 +5,7 @@ import cn.gtemc.itembridge.api.context.BuildContext;
 import com.hibiscusmc.hmccosmetics.api.HMCCosmeticsAPI;
 import com.hibiscusmc.hmccosmetics.cosmetic.Cosmetic;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,7 +21,7 @@ public class HMCCosmeticsProvider implements Provider<ItemStack> {
     }
 
     @Override
-    public Optional<ItemStack> build(String id, BuildContext context) {
+    public Optional<ItemStack> build(String id, @NotNull BuildContext context) {
         Cosmetic cosmetic = HMCCosmeticsAPI.getCosmetic(id);
         if (cosmetic == null) {
             return Optional.empty();
@@ -29,7 +30,7 @@ public class HMCCosmeticsProvider implements Provider<ItemStack> {
     }
 
     @Override
-    public Optional<String> id(ItemStack item) {
+    public Optional<String> id(@NotNull ItemStack item) {
         List<Cosmetic> allCosmetics = HMCCosmeticsAPI.getAllCosmetics();
         for (Cosmetic cosmetic : allCosmetics) {
             ItemStack itemStack = cosmetic.getItem();
@@ -41,12 +42,12 @@ public class HMCCosmeticsProvider implements Provider<ItemStack> {
     }
 
     @Override
-    public boolean is(ItemStack item) {
+    public boolean is(@NotNull ItemStack item) {
         return id(item).isPresent();
     }
 
     @Override
-    public boolean has(String id) {
+    public boolean has(@NotNull String id) {
         return HMCCosmeticsAPI.getCosmetic(id) != null;
     }
 }

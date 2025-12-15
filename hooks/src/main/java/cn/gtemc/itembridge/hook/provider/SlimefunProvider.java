@@ -4,6 +4,7 @@ import cn.gtemc.itembridge.api.Provider;
 import cn.gtemc.itembridge.api.context.BuildContext;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
 
@@ -18,7 +19,7 @@ public class SlimefunProvider implements Provider<ItemStack> {
     }
 
     @Override
-    public Optional<ItemStack> build(String id, BuildContext context) {
+    public Optional<ItemStack> build(String id, @NotNull BuildContext context) {
         SlimefunItem item = SlimefunItem.getById(id);
         if (item == null) {
             return Optional.empty();
@@ -27,7 +28,7 @@ public class SlimefunProvider implements Provider<ItemStack> {
     }
 
     @Override
-    public Optional<String> id(ItemStack item) {
+    public Optional<String> id(@NotNull ItemStack item) {
         SlimefunItem slimefunItem = SlimefunItem.getByItem(item);
         if (slimefunItem == null) {
             return Optional.empty();
@@ -36,12 +37,12 @@ public class SlimefunProvider implements Provider<ItemStack> {
     }
 
     @Override
-    public boolean is(ItemStack item) {
+    public boolean is(@NotNull ItemStack item) {
         return SlimefunItem.getByItem(item) != null;
     }
 
     @Override
-    public boolean has(String id) {
+    public boolean has(@NotNull String id) {
         return SlimefunItem.getById(id) != null;
     }
 }

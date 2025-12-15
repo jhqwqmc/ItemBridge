@@ -5,6 +5,7 @@ import cn.gtemc.itembridge.api.Provider;
 import cn.gtemc.itembridge.api.context.BuildContext;
 import cn.gtemc.itembridge.hook.HookHelper;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
@@ -16,12 +17,18 @@ final class ItemBridgeImpl implements ItemBridge {
         this.providers = Collections.unmodifiableMap(providers);
     }
 
+    @Override
+    public Optional<Provider<ItemStack>> provider(@NotNull String plugin) {
+        return Optional.empty();
+    }
+
+    @Override
     public Collection<Provider<ItemStack>> providers() {
         return this.providers.values();
     }
 
     @Override
-    public Optional<ItemStack> build(String plugin, String id, BuildContext context) {
+    public Optional<ItemStack> build(@NotNull String plugin, @NotNull String id, @NotNull BuildContext context) {
         Provider<ItemStack> provider = this.providers.get(plugin);
         if (provider == null) {
             return Optional.empty();
@@ -30,7 +37,34 @@ final class ItemBridgeImpl implements ItemBridge {
     }
 
     @Override
-    public boolean hasPlugin(String plugin) {
+    public Optional<String> id(@NotNull String plugin, @NotNull ItemStack item) {
+        Provider<ItemStack> provider = this.providers.get(plugin);
+        if (provider == null) {
+            return Optional.empty();
+        }
+        return provider.id(item);
+    }
+
+    @Override
+    public boolean is(@NotNull String plugin, @NotNull ItemStack item) {
+        Provider<ItemStack> provider = this.providers.get(plugin);
+        if (provider == null) {
+            return false;
+        }
+        return provider.is(item);
+    }
+
+    @Override
+    public boolean has(@NotNull String plugin, @NotNull String id) {
+        Provider<ItemStack> provider = this.providers.get(plugin);
+        if (provider == null) {
+            return false;
+        }
+        return provider.has(id);
+    }
+
+    @Override
+    public boolean hasProvider(@NotNull String plugin) {
         return this.providers.containsKey(plugin);
     }
 
@@ -47,7 +81,7 @@ final class ItemBridgeImpl implements ItemBridge {
         }
 
         @Override
-        public Builder register(Provider<ItemStack> provider) {
+        public Builder register(@NotNull Provider<ItemStack> provider) {
             if (this.providers.containsKey(provider.plugin())) {
                 throw new ItemBridgeException("Item provider '" + provider.plugin() + "' already registered");
             }
@@ -56,7 +90,7 @@ final class ItemBridgeImpl implements ItemBridge {
         }
 
         @Nullable
-        public Provider<ItemStack> removeById(String id) {
+        public Provider<ItemStack> removeById(@NotNull String id) {
             return this.providers.remove(id);
         }
 

@@ -17,7 +17,7 @@ public final class J21HookHelper {
         HookHelper.j21ProvidersGetter = J21HookHelper::getSupportedPlugins;
     }
 
-    public static Map<String, Provider<ItemStack>> getSupportedPlugins() {
+    private static Map<String, Provider<ItemStack>> getSupportedPlugins() {
         Map<String, Provider<ItemStack>> providers = new HashMap<>();
         if (hasPlugin("CraftEngine")) {
             MiscUtils.addToMap(CraftEngineProvider.INSTANCE, providers);

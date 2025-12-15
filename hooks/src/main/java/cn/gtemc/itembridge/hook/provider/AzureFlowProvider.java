@@ -11,6 +11,7 @@ import io.rokuko.azureflow.features.item.factory.AzureFlowItemFactoryService;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 import java.util.Optional;
@@ -26,7 +27,7 @@ public class AzureFlowProvider implements Provider<ItemStack> {
     }
 
     @Override
-    public Optional<ItemStack> build(String id, BuildContext context) {
+    public Optional<ItemStack> build(String id, @NotNull BuildContext context) {
         ItemFactory<ItemStack, Player, Location> factory = AzureFlowAPI.INSTANCE.getFactory(id);
         if (factory == null) {
             return Optional.empty();
@@ -35,7 +36,7 @@ public class AzureFlowProvider implements Provider<ItemStack> {
     }
 
     @Override
-    public Optional<String> id(ItemStack item) {
+    public Optional<String> id(@NotNull ItemStack item) {
         Item<ItemStack, Player, Location> azureFlowItem = AzureFlowAPI.INSTANCE.toItem(item);
         if (azureFlowItem == null) {
             return Optional.empty();
@@ -50,12 +51,12 @@ public class AzureFlowProvider implements Provider<ItemStack> {
     }
 
     @Override
-    public boolean is(ItemStack item) {
+    public boolean is(@NotNull ItemStack item) {
         return AzureFlowAPI.INSTANCE.toItem(item) != null;
     }
 
     @Override
-    public boolean has(String id) {
+    public boolean has(@NotNull String id) {
         return AzureFlowAPI.INSTANCE.getFactory(id) != null;
     }
 }
