@@ -1,0 +1,61 @@
+package cn.gtemc.itembridge.hook.provider;
+
+import cn.gtemc.itembridge.api.Provider;
+import cn.gtemc.itembridge.api.context.BuildContext;
+import cn.gtemc.itembridge.hook.context.ItemContextKeys;
+import io.rokuko.azureflow.api.AzureFlowAPI;
+import io.rokuko.azureflow.api.item.Item;
+import io.rokuko.azureflow.api.item.ItemFactory;
+import io.rokuko.azureflow.features.item.factory.AzureFlowItemFactory;
+import io.rokuko.azureflow.features.item.factory.AzureFlowItemFactoryService;
+import org.bukkit.Location;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+
+import java.util.Map;
+import java.util.Optional;
+
+public class AzureFlowProvider implements Provider<ItemStack> {
+    public static final AzureFlowProvider INSTANCE = new AzureFlowProvider();
+
+    private AzureFlowProvider() {}
+
+    @Override
+    public String plugin() {
+        return "azureflow";
+    }
+
+    @Override
+    public Optional<ItemStack> build(String id, BuildContext context) {
+        ItemFactory<ItemStack, Player, Location> factory = AzureFlowAPI.INSTANCE.getFactory(id);
+        if (factory == null) {
+            return Optional.empty();
+        }
+        return Optional.ofNullable(factory.build().itemStack(context.getOrNull(ItemContextKeys.PLAYER), null));
+    }
+
+    @Override
+    public Optional<String> id(ItemStack item) {
+        Item<ItemStack, Player, Location> azureFlowItem = AzureFlowAPI.INSTANCE.toItem(item);
+        if (azureFlowItem == null) {
+            return Optional.empty();
+        }
+        ItemFactory<ItemStack, Player, Location> factory = azureFlowItem.getFactory();
+        for (Map.Entry<String, AzureFlowItemFactory> entry : AzureFlowItemFactoryService.INSTANCE.getContainer().entrySet()) {
+            if (entry.getValue().equals(factory)) {
+                return Optional.of(entry.getKey());
+            }
+        }
+        return Optional.empty();
+    }
+
+    @Override
+    public boolean is(ItemStack item) {
+        return AzureFlowAPI.INSTANCE.toItem(item) != null;
+    }
+
+    @Override
+    public boolean has(String id) {
+        return AzureFlowAPI.INSTANCE.getFactory(id) != null;
+    }
+}

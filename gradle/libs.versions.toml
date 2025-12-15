@@ -1,0 +1,68 @@
+[versions]
+paper = "1.21.11-R0.1-SNAPSHOT"
+paper-legacy = "1.20.4-R0.1-SNAPSHOT"
+shadowjar = "9.2.2"
+jetbrains-annotations = "26.0.2"
+kotlin = "2.2.0"
+customfishing = "2.3.7"
+craftengine = "0.0.66"
+itemsadder = "4.0.10"
+nexo = "1.16.1"
+mmoitems-api = "6.10.1-SNAPSHOT"
+mmoitems-lib = "1.7.1-SNAPSHOT"
+mythicmobs = "5.9.0"
+neigeitems = "1.21.42"
+sxitem = "4.4.6"
+zaphkiel = "2.1.0"
+slimefun = "RC-32"
+headdatabase = "1.3.2"
+oraxen = "1.200.0"
+nova = "0.21.2"
+eco = "6.77.2"
+
+[libraries]
+kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref = "kotlin" }
+jetbrains-annotations = { module = "org.jetbrains:annotations", version.ref = "jetbrains-annotations" }
+platform-paper = { module = "io.papermc.paper:paper-api", version.ref = "paper" }
+platform-paper-legacy = { module = "io.papermc.paper:paper-api", version.ref = "paper-legacy" }
+hook-customfishing = { module = "net.momirealms:custom-fishing", version.ref = "customfishing" }
+hook-craftengine-core = { module = "net.momirealms:craft-engine-core", version.ref = "craftengine" }
+hook-craftengine-bukkit = { module = "net.momirealms:craft-engine-bukkit", version.ref = "craftengine" }
+hook-itemsadder = { module = "dev.lone:api-itemsadder", version.ref = "itemsadder" }
+hook-nexo = { module = "com.nexomc:nexo", version.ref = "nexo" }
+hook-mmoitems-api = { module = "net.Indyuce:MMOItems-API", version.ref = "mmoitems-api" }
+hook-mmoitems-lib = { module = "io.lumine:MythicLib-dist", version.ref = "mmoitems-lib" }
+hook-mythicmobs = { module = "io.lumine:Mythic-Dist", version.ref = "mythicmobs" }
+hook-neigeitems = { module = "pers.neige.neigeitems:NeigeItems", version.ref = "neigeitems" }
+hook-sxitem = { module = "com.github.Saukiya:SX-Item", version.ref = "sxitem" }
+hook-zaphkiel = { module = "ink.ptms:ZaphkielAPI", version.ref = "zaphkiel" }
+hook-slimefun = { module = "io.github.Slimefun:Slimefun4", version.ref = "slimefun" }
+hook-headdatabase = { module = "com.arcaniax:HeadDatabase-API", version.ref = "headdatabase" }
+hook-oraxen = { module = "io.th0rgal:oraxen", version.ref = "oraxen" }
+hook-nova = { module = "xyz.xenondevs.nova:nova-api", version.ref = "nova" }
+hook-eco = { module = "com.willfp:eco", version.ref = "eco" }
+
+[bundles]
+hooks = [
+    "hook-customfishing",
+    "hook-itemsadder",
+    "hook-mmoitems-api",
+    "hook-mmoitems-lib",
+    "hook-neigeitems",
+    "hook-sxitem",
+    "hook-zaphkiel",
+    "hook-slimefun",
+    "hook-headdatabase",
+]
+hooks-j21 = [
+    "hook-craftengine-core",
+    "hook-craftengine-bukkit",
+    "hook-nexo",
+    "hook-oraxen",
+    "hook-nova",
+    "hook-mythicmobs",
+    "hook-eco",
+]
+
+[plugins]
+shadowjar = { id = "com.gradleup.shadow", version.ref = "shadowjar" }
