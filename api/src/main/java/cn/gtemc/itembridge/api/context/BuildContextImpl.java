@@ -26,7 +26,7 @@ final class BuildContextImpl implements BuildContext {
     }
 
     @Override
-    public <T> T getOrThrow(ContextKey<T> key) {
+    public <T> @NotNull T getOrThrow(ContextKey<T> key) {
         Supplier<T> supplier = (Supplier<T>) this.contextData.get(key);
         if (supplier == null) {
             throw new NoSuchElementException(key.key());
@@ -71,7 +71,7 @@ final class BuildContextImpl implements BuildContext {
         }
 
         @Override
-        public <T> T getOrThrow(ContextKey<T> key) {
+        public <T> @NotNull T getOrThrow(ContextKey<T> key) {
             Supplier<T> supplier = (Supplier<T>) this.contextData.get(key);
             if (supplier == null) {
                 throw new NoSuchElementException(key.key());

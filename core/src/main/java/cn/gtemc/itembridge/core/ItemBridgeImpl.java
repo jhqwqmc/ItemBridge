@@ -19,7 +19,7 @@ final class ItemBridgeImpl implements ItemBridge {
 
     @Override
     public Optional<Provider<ItemStack>> provider(@NotNull String plugin) {
-        return Optional.empty();
+        return Optional.ofNullable(this.providers.get(plugin));
     }
 
     @Override
@@ -72,9 +72,8 @@ final class ItemBridgeImpl implements ItemBridge {
         private final Map<String, Provider<ItemStack>> providers;
 
         BuilderImpl() {
-            this.providers = new HashMap<>();
             try {
-                this.providers.putAll(HookHelper.getSupportedPlugins());
+                this.providers = HookHelper.getSupportedPlugins();
             } catch (Throwable e) {
                 throw new ItemBridgeException("Failed to load builtin providers", e);
             }
