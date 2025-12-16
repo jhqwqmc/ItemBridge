@@ -11,16 +11,20 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
-
+/**
+ * BukkitItemBridge is a unified item bridging interface used to build and identify items across different plugins.
+ * <p>
+ * It supports item operations for various plugins by registering {@link Provider}.
+ */
 public interface BukkitItemBridge extends ItemBridge<ItemStack> {
 
     /**
-     * Retrieves a {@code Builder} used to construct and configure an {@code ItemBridge} instance.
+     * Retrieves a {@code BukkitBuilder} used to construct and configure an {@code BukkitItemBridge} instance.
      *
-     * @return An {@code ItemBridge} {@code Builder} instance.
+     * @return An {@code BukkitItemBridge} {@code BukkitBuilder} instance.
      */
     static BukkitBuilder builder() {
-        return new BukkitItemBridgeImpl.BuilderImpl();
+        return new BukkitItemBridgeImpl.BukkitBuilderImpl();
     }
 
     /**
@@ -37,6 +41,12 @@ public interface BukkitItemBridge extends ItemBridge<ItemStack> {
         return build(plugin, id, BuildContext.builder().withOptional(ItemContextKeys.PLAYER, player).build());
     }
 
+    /**
+     * Interface for building and configuring {@link BukkitItemBridge} instances.
+     * <p>
+     * All available built-in item providers are automatically loaded upon creation.
+     * Custom providers can be registered or existing ones removed through this builder.
+     */
     interface BukkitBuilder extends Builder<ItemStack> {
 
         /**
@@ -56,9 +66,9 @@ public interface BukkitItemBridge extends ItemBridge<ItemStack> {
         @Nullable Provider<ItemStack> removeById(@NotNull String id);
 
         /**
-         * Builds and returns an immutable {@link ItemBridge} instance.
+         * Builds and returns an immutable {@link BukkitItemBridge} instance.
          *
-         * @return The completed {@link ItemBridge} instance.
+         * @return The completed {@link BukkitItemBridge} instance.
          */
         BukkitItemBridge build();
     }

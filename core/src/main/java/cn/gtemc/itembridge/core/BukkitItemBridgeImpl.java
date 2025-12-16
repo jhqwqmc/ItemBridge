@@ -1,6 +1,5 @@
 package cn.gtemc.itembridge.core;
 
-import cn.gtemc.itembridge.api.ItemBridge;
 import cn.gtemc.itembridge.api.ItemBridgeException;
 import cn.gtemc.itembridge.api.Provider;
 import cn.gtemc.itembridge.api.context.BuildContext;
@@ -69,10 +68,10 @@ final class BukkitItemBridgeImpl implements BukkitItemBridge {
         return this.providers.containsKey(plugin);
     }
 
-    final static class BuilderImpl implements BukkitBuilder {
+    final static class BukkitBuilderImpl implements BukkitBuilder {
         private final Map<String, Provider<ItemStack>> providers;
 
-        BuilderImpl() {
+        BukkitBuilderImpl() {
             try {
                 this.providers = HookHelper.getSupportedPlugins();
             } catch (Throwable e) {

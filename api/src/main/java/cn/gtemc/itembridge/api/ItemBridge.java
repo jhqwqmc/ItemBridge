@@ -10,7 +10,7 @@ import java.util.Optional;
 /**
  * ItemBridge is a unified item bridging interface used to build and identify items across different plugins.
  * <p>
- * It supports item operations for various plugins by registering {@link Provider}s.
+ * It supports item operations for various plugins by registering {@link Provider}.
  */
 public interface ItemBridge<I> {
 
@@ -23,9 +23,9 @@ public interface ItemBridge<I> {
     Optional<Provider<I>> provider(@NotNull String plugin);
 
     /**
-     * Retrieves a collection of all registered {@link Provider}s.
+     * Retrieves a collection of all registered {@link Provider}.
      *
-     * @return An unmodifiable collection of all registered {@link Provider}s.
+     * @return An unmodifiable collection of all registered {@link Provider}.
      */
     Collection<Provider<I>> providers();
 
