@@ -34,3 +34,32 @@
 ## Reference Projects
 
 - [AntiGriefLib](https://github.com/Xiao-MoMi/AntiGriefLib)
+
+## How to use
+
+### Add dependencies to the project
+
+```kts
+repositories {
+    maven("https://repo.gtemc.net/releases/")
+}
+```
+```kts
+dependencies {
+    implementation("cn.gtemc:itembridge:1.0.6")
+}
+```
+
+### Example code
+
+```java
+ItemBridge itemBridge = ItemBridge.builder()
+        .register(new CustomItemProvider())
+        .build();
+
+BuildContext context = BuildContext.builder()
+        .withOptional(ItemContextKeys.PLAYER, player)
+        .build();
+
+ItemStack itemStack = itemBridge.build("pluginname", "itemid", context);
+```
