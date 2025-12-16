@@ -1,5 +1,6 @@
 package cn.gtemc.itembridge.core;
 
+import cn.gtemc.itembridge.api.ItemBridge;
 import cn.gtemc.itembridge.api.ItemBridgeException;
 import cn.gtemc.itembridge.api.Provider;
 import cn.gtemc.itembridge.api.context.BuildContext;
@@ -10,10 +11,10 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
-final class ItemBridgeImpl implements ItemBridge {
+final class BukkitItemBridgeImpl implements BukkitItemBridge {
     private final Map<String, Provider<ItemStack>> providers;
 
-    private ItemBridgeImpl(Map<String, Provider<ItemStack>> providers) {
+    private BukkitItemBridgeImpl(Map<String, Provider<ItemStack>> providers) {
         this.providers = Collections.unmodifiableMap(providers);
     }
 
@@ -68,7 +69,7 @@ final class ItemBridgeImpl implements ItemBridge {
         return this.providers.containsKey(plugin);
     }
 
-    final static class BuilderImpl implements Builder {
+    final static class BuilderImpl implements BukkitBuilder {
         private final Map<String, Provider<ItemStack>> providers;
 
         BuilderImpl() {
@@ -80,7 +81,7 @@ final class ItemBridgeImpl implements ItemBridge {
         }
 
         @Override
-        public Builder register(@NotNull Provider<ItemStack> provider) {
+        public BukkitBuilder register(@NotNull Provider<ItemStack> provider) {
             if (this.providers.containsKey(provider.plugin())) {
                 throw new ItemBridgeException("Item provider '" + provider.plugin() + "' already registered");
             }
@@ -94,8 +95,8 @@ final class ItemBridgeImpl implements ItemBridge {
         }
 
         @Override
-        public ItemBridge build() {
-            return new ItemBridgeImpl(this.providers);
+        public BukkitItemBridge build() {
+            return new BukkitItemBridgeImpl(this.providers);
         }
     }
 }
