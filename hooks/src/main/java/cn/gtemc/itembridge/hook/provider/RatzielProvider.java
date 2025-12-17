@@ -7,13 +7,14 @@ import cn.fd.ratziel.module.item.impl.RatzielItem;
 import cn.fd.ratziel.module.item.util.NeoItemUtilKt;
 import cn.gtemc.itembridge.api.Provider;
 import cn.gtemc.itembridge.api.context.BuildContext;
-import cn.gtemc.itembridge.hook.context.ItemContextKeys;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
-public class RatzielProvider implements Provider<ItemStack> {
+public class RatzielProvider implements Provider<ItemStack, Player> {
     public static final RatzielProvider INSTANCE = new RatzielProvider();
 
     private RatzielProvider() {}
@@ -24,15 +25,15 @@ public class RatzielProvider implements Provider<ItemStack> {
     }
 
     @Override
-    public Optional<ItemStack> build(String id, @NotNull BuildContext context) {
+    public Optional<ItemStack> build(String id, @Nullable Player player, @NotNull BuildContext context) {
         ItemGenerator itemGenerator = ItemManager.INSTANCE.getRegistry().get(id);
         if (itemGenerator == null) {
             return Optional.empty();
         }
-        return context.get(ItemContextKeys.PLAYER)
-                .map(SimpleContext::new)
-                .map(ctx -> itemGenerator.build(ctx).thenApply(NeoItemUtilKt::toItemStack).join())
-                .or(() -> Optional.ofNullable(itemGenerator.build().thenApply(NeoItemUtilKt::toItemStack).join()));
+        if (player == null) {
+            return Optional.ofNullable(itemGenerator.build().thenApply(NeoItemUtilKt::toItemStack).join());
+        }
+        return Optional.ofNullable(itemGenerator.build(new SimpleContext(player)).thenApply(NeoItemUtilKt::toItemStack).join());
     }
 
     @Override

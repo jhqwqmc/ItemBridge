@@ -4,12 +4,14 @@ import cn.gtemc.itembridge.api.Provider;
 import cn.gtemc.itembridge.api.context.BuildContext;
 import com.nexomc.nexo.api.NexoItems;
 import com.nexomc.nexo.items.ItemBuilder;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
-public class NexoProvider implements Provider<ItemStack> {
+public class NexoProvider implements Provider<ItemStack, Player> {
     public static final NexoProvider INSTANCE = new NexoProvider();
 
     private NexoProvider() {}
@@ -20,7 +22,7 @@ public class NexoProvider implements Provider<ItemStack> {
     }
 
     @Override
-    public Optional<ItemStack> build(String id, @NotNull BuildContext context) {
+    public Optional<ItemStack> build(String id, @Nullable Player player, @NotNull BuildContext context) {
         ItemBuilder itemBuilder = NexoItems.itemFromId(id);
         if (itemBuilder == null) {
             return Optional.empty();

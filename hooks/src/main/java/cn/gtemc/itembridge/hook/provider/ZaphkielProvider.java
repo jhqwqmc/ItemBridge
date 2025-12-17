@@ -2,15 +2,15 @@ package cn.gtemc.itembridge.hook.provider;
 
 import cn.gtemc.itembridge.api.Provider;
 import cn.gtemc.itembridge.api.context.BuildContext;
-import cn.gtemc.itembridge.hook.context.ItemContextKeys;
 import ink.ptms.zaphkiel.Zaphkiel;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
-public class ZaphkielProvider implements Provider<ItemStack> {
+public class ZaphkielProvider implements Provider<ItemStack, Player> {
     public static final ZaphkielProvider INSTANCE = new ZaphkielProvider();
 
     private ZaphkielProvider() {}
@@ -21,8 +21,7 @@ public class ZaphkielProvider implements Provider<ItemStack> {
     }
 
     @Override
-    public Optional<ItemStack> build(String id, @NotNull BuildContext context) {
-        Player player = context.getOrNull(ItemContextKeys.PLAYER);
+    public Optional<ItemStack> build(String id, @Nullable Player player, @NotNull BuildContext context) {
         return Optional.ofNullable(Zaphkiel.INSTANCE.api().getItemManager().generateItemStack(id, player));
     }
 

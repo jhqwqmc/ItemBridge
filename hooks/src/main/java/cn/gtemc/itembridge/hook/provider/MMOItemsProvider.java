@@ -5,12 +5,14 @@ import cn.gtemc.itembridge.api.context.BuildContext;
 import net.Indyuce.mmoitems.MMOItems;
 import net.Indyuce.mmoitems.api.Type;
 import net.Indyuce.mmoitems.api.item.mmoitem.MMOItem;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
-public class MMOItemsProvider implements Provider<ItemStack> {
+public class MMOItemsProvider implements Provider<ItemStack, Player> {
     public static final MMOItemsProvider INSTANCE = new MMOItemsProvider();
 
     private MMOItemsProvider() {}
@@ -21,7 +23,7 @@ public class MMOItemsProvider implements Provider<ItemStack> {
     }
 
     @Override
-    public Optional<ItemStack> build(String id, @NotNull BuildContext context) {
+    public Optional<ItemStack> build(String id, @Nullable Player player, @NotNull BuildContext context) {
         String[] split = id.split(":", 2);
         if (split.length == 1) {
             split = split[0].split("_", 2);

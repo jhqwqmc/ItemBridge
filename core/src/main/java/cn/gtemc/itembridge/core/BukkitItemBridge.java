@@ -2,21 +2,17 @@ package cn.gtemc.itembridge.core;
 
 import cn.gtemc.itembridge.api.ItemBridge;
 import cn.gtemc.itembridge.api.Provider;
-import cn.gtemc.itembridge.api.context.BuildContext;
-import cn.gtemc.itembridge.hook.context.ItemContextKeys;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.Optional;
 
 /**
  * BukkitItemBridge is a unified item bridging interface used to build and identify items across different plugins.
  * <p>
  * It supports item operations for various plugins by registering {@link Provider}.
  */
-public interface BukkitItemBridge extends ItemBridge<ItemStack> {
+public interface BukkitItemBridge extends ItemBridge<ItemStack, Player> {
 
     /**
      * Retrieves a {@code BukkitBuilder} used to construct and configure an {@code BukkitItemBridge} instance.
@@ -28,26 +24,12 @@ public interface BukkitItemBridge extends ItemBridge<ItemStack> {
     }
 
     /**
-     * Builds an {@link ItemStack} based on the specified plugin, item ID, and {@link Player}.
-     * <p>
-     * The {@link Player} will be added to the build context.
-     *
-     * @param plugin The lower-case name of the plugin.
-     * @param id     The item ID.
-     * @param player An optional {@link Player} to be used for context construction.
-     * @return An {@code Optional} containing the successfully built {@link ItemStack}, or {@code Optional.empty()} if building fails or the {@link Provider} does not exist.
-     */
-    default Optional<ItemStack> build(@NotNull String plugin, @NotNull String id, @Nullable Player player) {
-        return build(plugin, id, BuildContext.builder().withOptional(ItemContextKeys.PLAYER, player).build());
-    }
-
-    /**
      * Interface for building and configuring {@link BukkitItemBridge} instances.
      * <p>
      * All available built-in item providers are automatically loaded upon creation.
      * Custom providers can be registered or existing ones removed through this builder.
      */
-    interface BukkitBuilder extends Builder<ItemStack> {
+    interface BukkitBuilder extends Builder<ItemStack, Player> {
 
         /**
          * Registers a {@link Provider} into the ItemBridge.
@@ -55,7 +37,7 @@ public interface BukkitItemBridge extends ItemBridge<ItemStack> {
          * @param provider The item provider to register.
          * @return The current builder instance, supporting method chaining.
          */
-        BukkitBuilder register(@NotNull Provider<ItemStack> provider);
+        BukkitBuilder register(@NotNull Provider<ItemStack, Player> provider);
 
         /**
          * Removes a registered provider based on the plugin name.
@@ -63,7 +45,7 @@ public interface BukkitItemBridge extends ItemBridge<ItemStack> {
          * @param id The lower-case name of the plugin.
          * @return The removed provider, or null if it did not exist.
          */
-        @Nullable Provider<ItemStack> removeById(@NotNull String id);
+        @Nullable Provider<ItemStack, Player> removeById(@NotNull String id);
 
         /**
          * Builds and returns an immutable {@link BukkitItemBridge} instance.

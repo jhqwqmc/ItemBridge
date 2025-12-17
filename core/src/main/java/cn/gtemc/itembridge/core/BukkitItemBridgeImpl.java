@@ -4,6 +4,7 @@ import cn.gtemc.itembridge.api.ItemBridgeException;
 import cn.gtemc.itembridge.api.Provider;
 import cn.gtemc.itembridge.api.context.BuildContext;
 import cn.gtemc.itembridge.hook.HookHelper;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -11,34 +12,34 @@ import org.jetbrains.annotations.Nullable;
 import java.util.*;
 
 final class BukkitItemBridgeImpl implements BukkitItemBridge {
-    private final Map<String, Provider<ItemStack>> providers;
+    private final Map<String, Provider<ItemStack, Player>> providers;
 
-    private BukkitItemBridgeImpl(Map<String, Provider<ItemStack>> providers) {
+    private BukkitItemBridgeImpl(Map<String, Provider<ItemStack, Player>> providers) {
         this.providers = Collections.unmodifiableMap(providers);
     }
 
     @Override
-    public Optional<Provider<ItemStack>> provider(@NotNull String plugin) {
+    public Optional<Provider<ItemStack, Player>> provider(@NotNull String plugin) {
         return Optional.ofNullable(this.providers.get(plugin));
     }
 
     @Override
-    public Collection<Provider<ItemStack>> providers() {
+    public Collection<Provider<ItemStack, Player>> providers() {
         return this.providers.values();
     }
 
     @Override
-    public Optional<ItemStack> build(@NotNull String plugin, @NotNull String id, @NotNull BuildContext context) {
-        Provider<ItemStack> provider = this.providers.get(plugin);
+    public Optional<ItemStack> build(@NotNull String plugin, @NotNull String id, @Nullable Player player, @NotNull BuildContext context) {
+        Provider<ItemStack, Player> provider = this.providers.get(plugin);
         if (provider == null) {
             return Optional.empty();
         }
-        return provider.build(id, context);
+        return provider.build(id, player, context);
     }
 
     @Override
     public Optional<String> id(@NotNull String plugin, @NotNull ItemStack item) {
-        Provider<ItemStack> provider = this.providers.get(plugin);
+        Provider<ItemStack, Player> provider = this.providers.get(plugin);
         if (provider == null) {
             return Optional.empty();
         }
@@ -47,7 +48,7 @@ final class BukkitItemBridgeImpl implements BukkitItemBridge {
 
     @Override
     public boolean is(@NotNull String plugin, @NotNull ItemStack item) {
-        Provider<ItemStack> provider = this.providers.get(plugin);
+        Provider<ItemStack, Player> provider = this.providers.get(plugin);
         if (provider == null) {
             return false;
         }
@@ -56,7 +57,7 @@ final class BukkitItemBridgeImpl implements BukkitItemBridge {
 
     @Override
     public boolean has(@NotNull String plugin, @NotNull String id) {
-        Provider<ItemStack> provider = this.providers.get(plugin);
+        Provider<ItemStack, Player> provider = this.providers.get(plugin);
         if (provider == null) {
             return false;
         }
@@ -69,7 +70,7 @@ final class BukkitItemBridgeImpl implements BukkitItemBridge {
     }
 
     final static class BukkitBuilderImpl implements BukkitBuilder {
-        private final Map<String, Provider<ItemStack>> providers;
+        private final Map<String, Provider<ItemStack, Player>> providers;
 
         BukkitBuilderImpl() {
             try {
@@ -80,7 +81,7 @@ final class BukkitItemBridgeImpl implements BukkitItemBridge {
         }
 
         @Override
-        public BukkitBuilder register(@NotNull Provider<ItemStack> provider) {
+        public BukkitBuilder register(@NotNull Provider<ItemStack, Player> provider) {
             if (this.providers.containsKey(provider.plugin())) {
                 throw new ItemBridgeException("Item provider '" + provider.plugin() + "' already registered");
             }
@@ -89,7 +90,7 @@ final class BukkitItemBridgeImpl implements BukkitItemBridge {
         }
 
         @Nullable
-        public Provider<ItemStack> removeById(@NotNull String id) {
+        public Provider<ItemStack, Player> removeById(@NotNull String id) {
             return this.providers.remove(id);
         }
 

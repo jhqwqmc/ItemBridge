@@ -3,12 +3,14 @@ package cn.gtemc.itembridge.hook.provider;
 import cn.gtemc.itembridge.api.Provider;
 import cn.gtemc.itembridge.api.context.BuildContext;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
-public class SlimefunProvider implements Provider<ItemStack> {
+public class SlimefunProvider implements Provider<ItemStack, Player> {
     public static final SlimefunProvider INSTANCE = new SlimefunProvider();
 
     private SlimefunProvider() {}
@@ -19,7 +21,7 @@ public class SlimefunProvider implements Provider<ItemStack> {
     }
 
     @Override
-    public Optional<ItemStack> build(String id, @NotNull BuildContext context) {
+    public Optional<ItemStack> build(String id, @Nullable Player player, @NotNull BuildContext context) {
         SlimefunItem item = SlimefunItem.getById(id);
         if (item == null) {
             return Optional.empty();

@@ -3,6 +3,7 @@ package cn.gtemc.itembridge.hook;
 import cn.gtemc.itembridge.api.Provider;
 import cn.gtemc.itembridge.api.util.MiscUtils;
 import cn.gtemc.itembridge.hook.provider.*;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.HashMap;
@@ -17,8 +18,10 @@ public final class J21HookHelper {
         HookHelper.j21ProvidersGetter = J21HookHelper::getSupportedPlugins;
     }
 
-    private static Map<String, Provider<ItemStack>> getSupportedPlugins() {
-        Map<String, Provider<ItemStack>> providers = new HashMap<>();
+    private J21HookHelper() {}
+
+    private static Map<String, Provider<ItemStack, Player>> getSupportedPlugins() {
+        Map<String, Provider<ItemStack, Player>> providers = new HashMap<>();
         if (hasPlugin("CraftEngine")) {
             MiscUtils.addToMap(CraftEngineProvider.INSTANCE, providers);
         }

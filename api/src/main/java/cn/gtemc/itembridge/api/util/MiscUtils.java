@@ -22,7 +22,7 @@ public final class MiscUtils {
         }
     }
 
-    public static <T> void addToMap(Provider<T> provider, Map<String, Provider<T>> map) {
+    public static <T, P> void addToMap(Provider<T, P> provider, Map<String, Provider<T, P>> map) {
         map.put(provider.plugin(), provider);
     }
 

@@ -2,7 +2,6 @@ package cn.gtemc.itembridge.hook.provider;
 
 import cn.gtemc.itembridge.api.Provider;
 import cn.gtemc.itembridge.api.context.BuildContext;
-import cn.gtemc.itembridge.hook.context.ItemContextKeys;
 import io.rokuko.azureflow.api.AzureFlowAPI;
 import io.rokuko.azureflow.api.item.Item;
 import io.rokuko.azureflow.api.item.ItemFactory;
@@ -12,11 +11,12 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
 import java.util.Optional;
 
-public class AzureFlowProvider implements Provider<ItemStack> {
+public class AzureFlowProvider implements Provider<ItemStack, Player> {
     public static final AzureFlowProvider INSTANCE = new AzureFlowProvider();
 
     private AzureFlowProvider() {}
@@ -27,12 +27,12 @@ public class AzureFlowProvider implements Provider<ItemStack> {
     }
 
     @Override
-    public Optional<ItemStack> build(String id, @NotNull BuildContext context) {
+    public Optional<ItemStack> build(String id, @Nullable Player player, @NotNull BuildContext context) {
         ItemFactory<ItemStack, Player, Location> factory = AzureFlowAPI.INSTANCE.getFactory(id);
         if (factory == null) {
             return Optional.empty();
         }
-        return Optional.ofNullable(factory.build().itemStack(context.getOrNull(ItemContextKeys.PLAYER), null));
+        return Optional.ofNullable(factory.build().itemStack(player, null));
     }
 
     @Override

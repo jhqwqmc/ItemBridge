@@ -2,14 +2,16 @@ package cn.gtemc.itembridge.hook.provider;
 
 import cn.gtemc.itembridge.api.Provider;
 import cn.gtemc.itembridge.api.context.BuildContext;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import xyz.xenondevs.nova.api.Nova;
 import xyz.xenondevs.nova.api.item.NovaItem;
 
 import java.util.Optional;
 
-public class NovaProvider implements Provider<ItemStack> {
+public class NovaProvider implements Provider<ItemStack, Player> {
     public static final NovaProvider INSTANCE = new NovaProvider();
 
     private NovaProvider() {}
@@ -20,7 +22,7 @@ public class NovaProvider implements Provider<ItemStack> {
     }
 
     @Override
-    public Optional<ItemStack> build(String id, @NotNull BuildContext context) {
+    public Optional<ItemStack> build(String id, @Nullable Player player, @NotNull BuildContext context) {
         NovaItem novaItem = Nova.getNova().getItemRegistry().getOrNull(id);
         if (novaItem == null) {
             return Optional.empty();

@@ -5,15 +5,17 @@ import cn.gtemc.itembridge.api.context.BuildContext;
 import com.willfp.eco.core.items.CustomItem;
 import com.willfp.eco.core.items.Items;
 import com.willfp.eco.core.items.TestableItem;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
-public record EcoProvider(@Override String plugin) implements Provider<ItemStack> {
+public record EcoProvider(@Override String plugin) implements Provider<ItemStack, Player> {
 
     @Override
-    public Optional<ItemStack> build(String id, @NotNull BuildContext context) {
+    public Optional<ItemStack> build(String id, @Nullable Player player, @NotNull BuildContext context) {
         TestableItem item = Items.lookup(plugin + ":" + id);
         if (!(item instanceof CustomItem customItem)) {
             return Optional.empty();

@@ -5,6 +5,7 @@ import cn.gtemc.itembridge.api.Provider;
 import cn.gtemc.itembridge.api.util.MiscUtils;
 import cn.gtemc.itembridge.hook.provider.*;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import java.lang.invoke.MethodHandles;
@@ -13,7 +14,7 @@ import java.util.Map;
 import java.util.function.Supplier;
 
 public final class HookHelper {
-    static Supplier<Map<String, Provider<ItemStack>>> j21ProvidersGetter;
+    static Supplier<Map<String, Provider<ItemStack, Player>>> j21ProvidersGetter;
 
     static {
         if (MiscUtils.isRunningOnJava21()) {
@@ -29,13 +30,12 @@ public final class HookHelper {
 
     private HookHelper() {}
 
-
     static boolean hasPlugin(String plugin) {
         return Bukkit.getPluginManager().getPlugin(plugin) != null;
     }
 
-    public static Map<String, Provider<ItemStack>> getSupportedPlugins() {
-        Map<String, Provider<ItemStack>> providers = new HashMap<>(j21ProvidersGetter.get());
+    public static Map<String, Provider<ItemStack, Player>> getSupportedPlugins() {
+        Map<String, Provider<ItemStack, Player>> providers = new HashMap<>(j21ProvidersGetter.get());
         if (hasPlugin("CustomFishing")) {
             MiscUtils.addToMap(CustomFishingProvider.INSTANCE, providers);
         }

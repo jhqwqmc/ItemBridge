@@ -4,12 +4,14 @@ import cn.gtemc.itembridge.api.Provider;
 import cn.gtemc.itembridge.api.context.BuildContext;
 import io.th0rgal.oraxen.api.OraxenItems;
 import io.th0rgal.oraxen.items.ItemBuilder;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
-public class OraxenProvider implements Provider<ItemStack> {
+public class OraxenProvider implements Provider<ItemStack, Player> {
     public static final OraxenProvider INSTANCE = new OraxenProvider();
 
     private OraxenProvider() {}
@@ -20,7 +22,7 @@ public class OraxenProvider implements Provider<ItemStack> {
     }
 
     @Override
-    public Optional<ItemStack> build(String id, @NotNull BuildContext context) {
+    public Optional<ItemStack> build(String id, @Nullable Player player, @NotNull BuildContext context) {
         ItemBuilder item = OraxenItems.getItemById(id);
         if (item == null) {
             return Optional.empty();

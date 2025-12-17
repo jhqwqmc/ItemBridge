@@ -12,7 +12,7 @@ import java.util.Optional;
  * <p>
  * It supports item operations for various plugins by registering {@link Provider}.
  */
-public interface ItemBridge<I> {
+public interface ItemBridge<I, P> {
 
     /**
      * Retrieves the corresponding {@link Provider} for the specified plugin.
@@ -20,24 +20,36 @@ public interface ItemBridge<I> {
      * @param plugin The lower-case name of the plugin.
      * @return An {@code Optional} containing the corresponding {@link Provider}, or {@code Optional.empty()} if it does not exist.
      */
-    Optional<Provider<I>> provider(@NotNull String plugin);
+    Optional<Provider<I, P>> provider(@NotNull String plugin);
 
     /**
      * Retrieves a collection of all registered {@link Provider}.
      *
      * @return An unmodifiable collection of all registered {@link Provider}.
      */
-    Collection<Provider<I>> providers();
+    Collection<Provider<I, P>> providers();
 
     /**
-     * Builds an {@link I} based on the specified plugin and item ID using an empty context.
+     * Builds an {@link I} based on the specified plugin and item ID using an empty context and a null player.
      *
      * @param plugin The lower-case name of the plugin.
      * @param id     The item ID.
      * @return An {@code Optional} containing the successfully built {@link I}, or {@code Optional.empty()} if building fails or the {@link Provider} does not exist.
      */
     default Optional<I> build(@NotNull String plugin, @NotNull String id) {
-        return build(plugin, id, BuildContext.empty());
+        return build(plugin, id, null, BuildContext.empty());
+    }
+
+    /**
+     * Builds an {@link I} based on the specified plugin and item ID using an empty context.
+     *
+     * @param plugin The lower-case name of the plugin.
+     * @param id     The item ID.
+     * @param player  An optional {@link P} representing the player.
+     * @return An {@code Optional} containing the successfully built {@link I}, or {@code Optional.empty()} if building fails or the {@link Provider} does not exist.
+     */
+    default Optional<I> build(@NotNull String plugin, @Nullable P player, @NotNull String id) {
+        return build(plugin, id, player, BuildContext.empty());
     }
 
     /**
@@ -45,10 +57,11 @@ public interface ItemBridge<I> {
      *
      * @param plugin  The lower-case name of the plugin.
      * @param id      The item ID.
+     * @param player  An optional {@link P} representing the player.
      * @param context The build context {@link BuildContext}.
      * @return An {@code Optional} containing the successfully built {@link I}, or {@code Optional.empty()} if building fails or the {@link Provider} does not exist.
      */
-    Optional<I> build(@NotNull String plugin, @NotNull String id, @NotNull BuildContext context);
+    Optional<I> build(@NotNull String plugin, @NotNull String id, @Nullable P player, @NotNull BuildContext context);
 
     /**
      * Retrieves the ID of a given {@link I} within the specified plugin.
@@ -91,7 +104,7 @@ public interface ItemBridge<I> {
      * All available built-in item providers are automatically loaded upon creation.
      * Custom providers can be registered or existing ones removed through this builder.
      */
-    interface Builder<I> {
+    interface Builder<I, P> {
 
         /**
          * Registers a {@link Provider} into the ItemBridge.
@@ -99,7 +112,7 @@ public interface ItemBridge<I> {
          * @param provider The item provider to register.
          * @return The current builder instance, supporting method chaining.
          */
-        Builder<I> register(@NotNull Provider<I> provider);
+        Builder<I, P> register(@NotNull Provider<I, P> provider);
 
         /**
          * Removes a registered provider based on the plugin name.
@@ -107,13 +120,13 @@ public interface ItemBridge<I> {
          * @param id The lower-case name of the plugin.
          * @return The removed provider, or null if it did not exist.
          */
-        @Nullable Provider<I> removeById(@NotNull String id);
+        @Nullable Provider<I, P> removeById(@NotNull String id);
 
         /**
          * Builds and returns an immutable {@link ItemBridge} instance.
          *
          * @return The completed {@link ItemBridge} instance.
          */
-        ItemBridge<I> build();
+        ItemBridge<I, P> build();
     }
 }

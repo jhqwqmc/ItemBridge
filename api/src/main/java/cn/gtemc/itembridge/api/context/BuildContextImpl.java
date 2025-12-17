@@ -40,6 +40,11 @@ final class BuildContextImpl implements BuildContext {
         return supplier == null ? defaultValue : supplier.get();
     }
 
+    @Override
+    public Map<ContextKey<?>, Supplier<Object>> contextData() {
+        return this.contextData;
+    }
+
     final static class BuilderImpl implements Builder {
         private final Map<ContextKey<?>, Supplier<Object>> contextData = new HashMap<>();
 

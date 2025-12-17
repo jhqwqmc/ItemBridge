@@ -2,7 +2,6 @@ package cn.gtemc.itembridge.hook.provider;
 
 import cn.gtemc.itembridge.api.Provider;
 import cn.gtemc.itembridge.api.context.BuildContext;
-import cn.gtemc.itembridge.hook.context.ItemContextKeys;
 import com.pxpmc.pxrpg.api.MAPI;
 import com.pxpmc.pxrpg.api.Module;
 import com.pxpmc.pxrpg.api.adapter.AdapterItemStack;
@@ -12,12 +11,14 @@ import com.pxpmc.pxrpg.api.modules.item.ItemInter;
 import com.pxpmc.pxrpg.api.modules.item.ItemManager;
 import com.pxpmc.pxrpg.api.modules.item.ItemModule;
 import com.pxpmc.pxrpg.api.util.ParameterResolver;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
-public class PxRpgProvider implements Provider<ItemStack> {
+public class PxRpgProvider implements Provider<ItemStack, Player> {
     public static final PxRpgProvider INSTANCE = new PxRpgProvider();
     private final ItemManager itemManager = Module.getModule(ItemModule.class).getItemManager();
 
@@ -29,14 +30,14 @@ public class PxRpgProvider implements Provider<ItemStack> {
     }
 
     @Override
-    public Optional<ItemStack> build(String id, @NotNull BuildContext context) {
+    public Optional<ItemStack> build(String id, @Nullable Player player, @NotNull BuildContext context) {
         String[] split = id.split(",", 2);
         String itemId = split[0];
         ItemConfig itemConfig = itemManager.getRegister(itemId);
         if (itemConfig == null) {
             return Optional.empty();
         }
-        AdapterPlayer pxRpgPlayer = MAPI.getBukkitPxRpgAPI().toPxRpgPlayer(context.getOrNull(ItemContextKeys.PLAYER));
+        AdapterPlayer pxRpgPlayer = MAPI.getBukkitPxRpgAPI().toPxRpgPlayer(player);
         ParameterResolver resolver = new ParameterResolver();
         if (split.length == 2) {
             resolver.parser(split[1]);

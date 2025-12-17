@@ -1,16 +1,18 @@
 package cn.gtemc.itembridge.api.context;
 
 import cn.gtemc.itembridge.api.Provider;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Map;
 import java.util.Optional;
 import java.util.function.Supplier;
 
 /**
  * Item Build Context Interface.
  * <p>
- * Used to pass additional, optional, or mutable parameters (such as a player object) during the item building process ({@link Provider#build(String, BuildContext)}).
+ * Used to pass additional, optional, or mutable parameters during the item building process ({@link Provider#build(String, BuildContext)}).
  * <p>
  * Uses a Key-Value pattern to store data, where the Key is a type-safe {@link ContextKey}, ensuring data type safety.
  */
@@ -75,6 +77,9 @@ public interface BuildContext {
      * @param <T> The type of the data.
      */
     <T> @Nullable T getOrDefault(ContextKey<T> key, T defaultValue);
+
+    @ApiStatus.Internal
+    Map<ContextKey<?>, Supplier<Object>> contextData();
 
     /**
      * Builder Interface.

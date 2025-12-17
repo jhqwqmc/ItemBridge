@@ -2,15 +2,19 @@ package cn.gtemc.itembridge.hook.provider;
 
 import cn.gtemc.itembridge.api.Provider;
 import cn.gtemc.itembridge.api.context.BuildContext;
-import cn.gtemc.itembridge.hook.context.ItemContextKeys;
+import cn.gtemc.itembridge.api.context.ContextKey;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import pers.neige.neigeitems.manager.ItemManager;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
+import java.util.function.Supplier;
 
-public class NeigeItemsProvider implements Provider<ItemStack> {
+public class NeigeItemsProvider implements Provider<ItemStack, Player> {
     public static final NeigeItemsProvider INSTANCE = new NeigeItemsProvider();
 
     private NeigeItemsProvider() {}
@@ -21,9 +25,20 @@ public class NeigeItemsProvider implements Provider<ItemStack> {
     }
 
     @Override
-    public Optional<ItemStack> build(String id, @NotNull BuildContext context) {
-        Player player = context.getOrNull(ItemContextKeys.PLAYER);
-        return Optional.ofNullable(ItemManager.INSTANCE.getItemStack(id, player));
+    public Optional<ItemStack> build(String id, @Nullable Player player, @NotNull BuildContext context) {
+        Map<ContextKey<?>, Supplier<Object>> contextData = context.contextData();
+        if (contextData.isEmpty()) {
+            return Optional.ofNullable(ItemManager.INSTANCE.getItemStack(id, player));
+        }
+        Map<String, String> params = new HashMap<>();
+        for (Map.Entry<ContextKey<?>, Supplier<Object>> entry : contextData.entrySet()) {
+            ContextKey<?> key = entry.getKey();
+            if (key.type() != String.class) {
+                continue;
+            }
+            params.put(key.key(), (String) entry.getValue().get());
+        }
+        return Optional.ofNullable(ItemManager.INSTANCE.getItemStack(id, player, params));
     }
 
     @Override
