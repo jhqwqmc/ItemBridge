@@ -32,11 +32,7 @@ public class NeigeItemsProvider implements Provider<ItemStack, Player> {
         }
         Map<String, String> params = new HashMap<>();
         for (Map.Entry<ContextKey<?>, Supplier<Object>> entry : contextData.entrySet()) {
-            ContextKey<?> key = entry.getKey();
-            if (key.type() != String.class) {
-                continue;
-            }
-            params.put(key.key(), (String) entry.getValue().get());
+            params.put(entry.getKey().key(), String.valueOf(entry.getValue().get()));
         }
         return Optional.ofNullable(ItemManager.INSTANCE.getItemStack(id, player, params));
     }
