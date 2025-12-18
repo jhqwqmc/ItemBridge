@@ -30,16 +30,26 @@ public class NeigeItemsProvider implements Provider<ItemStack, Player> {
         if (contextData.isEmpty()) {
             return Optional.ofNullable(ItemManager.INSTANCE.getItemStack(id, player));
         }
-        Map<String, String> params = new HashMap<>();
-        for (Map.Entry<ContextKey<?>, Supplier<Object>> entry : contextData.entrySet()) {
-            params.put(entry.getKey().key(), String.valueOf(entry.getValue().get()));
+        return Optional.ofNullable(ItemManager.INSTANCE.getItemStack(id, player, adapt(contextData)));
+    }
+
+    @Override
+    public @Nullable ItemStack buildOrNull(String id, @Nullable Player player, @NotNull BuildContext context) {
+        Map<ContextKey<?>, Supplier<Object>> contextData = context.contextData();
+        if (contextData.isEmpty()) {
+            return ItemManager.INSTANCE.getItemStack(id, player);
         }
-        return Optional.ofNullable(ItemManager.INSTANCE.getItemStack(id, player, params));
+        return ItemManager.INSTANCE.getItemStack(id, player, adapt(contextData));
     }
 
     @Override
     public Optional<String> id(@NotNull ItemStack item) {
         return Optional.ofNullable(ItemManager.INSTANCE.getItemId(item));
+    }
+
+    @Override
+    public @Nullable String idOrNull(@NotNull ItemStack item) {
+        return ItemManager.INSTANCE.getItemId(item);
     }
 
     @Override
@@ -50,5 +60,13 @@ public class NeigeItemsProvider implements Provider<ItemStack, Player> {
     @Override
     public boolean has(@NotNull String id) {
         return ItemManager.INSTANCE.hasItem(id);
+    }
+
+    private static Map<String, String> adapt(Map<ContextKey<?>, Supplier<Object>> contextData) {
+        Map<String, String> params = new HashMap<>();
+        for (Map.Entry<ContextKey<?>, Supplier<Object>> entry : contextData.entrySet()) {
+            params.put(entry.getKey().key(), String.valueOf(entry.getValue().get()));
+        }
+        return params;
     }
 }

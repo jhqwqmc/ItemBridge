@@ -58,12 +58,32 @@ public interface Provider<I, P> {
     Optional<I> build(String id, @Nullable P player, @NotNull BuildContext context);
 
     /**
+     * Builds an item based on the item ID and build context.
+     * <p>
+     * The context may contain additional build parameters.
+     *
+     * @param id      The item ID.
+     * @param player  An optional {@link P} representing the player.
+     * @param context The build context {@link BuildContext}.
+     * @return The built item object, or null if the ID is invalid or building fails.
+     */
+    @Nullable I buildOrNull(String id, @Nullable P player, @NotNull BuildContext context);
+
+    /**
      * Resolves the corresponding ID from the item object.
      *
      * @param item The item object.
      * @return An {@code Optional} containing the ID if the item belongs to this provider, otherwise {@code Optional.empty()}.
      */
     Optional<String> id(@NotNull I item);
+
+    /**
+     * Resolves the corresponding ID from the item object.
+     *
+     * @param item The item object.
+     * @return The ID if the item belongs to this provider, otherwise null.
+     */
+    @Nullable String idOrNull(@NotNull I item);
 
     /**
      * Determines whether the specified item object belongs to this provider.

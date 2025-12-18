@@ -30,12 +30,30 @@ public class ItemsAdderProvider implements Provider<ItemStack, Player> {
     }
 
     @Override
+    public @Nullable ItemStack buildOrNull(String id, @Nullable Player player, @NotNull BuildContext context) {
+        CustomStack instance = CustomStack.getInstance(id);
+        if (instance == null) {
+            return null;
+        }
+        return instance.getItemStack();
+    }
+
+    @Override
     public Optional<String> id(@NotNull ItemStack item) {
         CustomStack customStack = CustomStack.byItemStack(item);
         if (customStack == null) {
             return Optional.empty();
         }
         return Optional.of(customStack.getNamespacedID());
+    }
+
+    @Override
+    public @Nullable String idOrNull(@NotNull ItemStack item) {
+        CustomStack customStack = CustomStack.byItemStack(item);
+        if (customStack == null) {
+            return null;
+        }
+        return customStack.getNamespacedID();
     }
 
     @Override

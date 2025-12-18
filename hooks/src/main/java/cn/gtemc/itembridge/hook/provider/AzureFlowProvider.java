@@ -36,6 +36,15 @@ public class AzureFlowProvider implements Provider<ItemStack, Player> {
     }
 
     @Override
+    public @Nullable ItemStack buildOrNull(String id, @Nullable Player player, @NotNull BuildContext context) {
+        ItemFactory<ItemStack, Player, Location> factory = AzureFlowAPI.INSTANCE.getFactory(id);
+        if (factory == null) {
+            return null;
+        }
+        return factory.build().itemStack(player, null);
+    }
+
+    @Override
     public Optional<String> id(@NotNull ItemStack item) {
         Item<ItemStack, Player, Location> azureFlowItem = AzureFlowAPI.INSTANCE.toItem(item);
         if (azureFlowItem == null) {
@@ -48,6 +57,21 @@ public class AzureFlowProvider implements Provider<ItemStack, Player> {
             }
         }
         return Optional.empty();
+    }
+
+    @Override
+    public @Nullable String idOrNull(@NotNull ItemStack item) {
+        Item<ItemStack, Player, Location> azureFlowItem = AzureFlowAPI.INSTANCE.toItem(item);
+        if (azureFlowItem == null) {
+            return null;
+        }
+        ItemFactory<ItemStack, Player, Location> factory = azureFlowItem.getFactory();
+        for (Map.Entry<String, AzureFlowItemFactory> entry : AzureFlowItemFactoryService.INSTANCE.getContainer().entrySet()) {
+            if (entry.getValue().equals(factory)) {
+                return entry.getKey();
+            }
+        }
+        return null;
     }
 
     @Override

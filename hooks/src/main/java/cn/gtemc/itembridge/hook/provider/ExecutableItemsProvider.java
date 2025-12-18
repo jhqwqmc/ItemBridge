@@ -29,10 +29,20 @@ public class ExecutableItemsProvider implements Provider<ItemStack, Player> {
     }
 
     @Override
+    public @Nullable ItemStack buildOrNull(String id, @Nullable Player player, @NotNull BuildContext context) {
+        return build(id, player, context).orElse(null);
+    }
+
+    @Override
     public Optional<String> id(@NotNull ItemStack item) {
         return ExecutableItemsAPI.getExecutableItemsManager()
                 .getExecutableItem(item)
                 .map(SObjectInterface::getId);
+    }
+
+    @Override
+    public @Nullable String idOrNull(@NotNull ItemStack item) {
+        return id(item).orElse(null);
     }
 
     @Override

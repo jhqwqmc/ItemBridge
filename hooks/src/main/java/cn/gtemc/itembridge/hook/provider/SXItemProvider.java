@@ -26,8 +26,18 @@ public class SXItemProvider implements Provider<ItemStack, Player> {
     }
 
     @Override
+    public @Nullable ItemStack buildOrNull(String id, @Nullable Player player, @NotNull BuildContext context) {
+        return SXItem.getItemManager().getItem(id, player);
+    }
+
+    @Override
     public Optional<String> id(@NotNull ItemStack item) {
         return Optional.ofNullable(SXItem.getItemManager().getItemKey(item));
+    }
+
+    @Override
+    public @Nullable String idOrNull(@NotNull ItemStack item) {
+        return SXItem.getItemManager().getItemKey(item);
     }
 
     @Override

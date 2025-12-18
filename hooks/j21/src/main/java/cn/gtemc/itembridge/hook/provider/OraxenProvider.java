@@ -31,8 +31,22 @@ public class OraxenProvider implements Provider<ItemStack, Player> {
     }
 
     @Override
+    public @Nullable ItemStack buildOrNull(String id, @Nullable Player player, @NotNull BuildContext context) {
+        ItemBuilder item = OraxenItems.getItemById(id);
+        if (item == null) {
+            return null;
+        }
+        return item.build();
+    }
+
+    @Override
     public Optional<String> id(@NotNull ItemStack item) {
         return Optional.ofNullable(OraxenItems.getIdByItem(item));
+    }
+
+    @Override
+    public @Nullable String idOrNull(@NotNull ItemStack item) {
+        return OraxenItems.getIdByItem(item);
     }
 
     @Override

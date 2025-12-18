@@ -31,12 +31,30 @@ public class MagicGemProvider implements Provider<ItemStack, Player> {
     }
 
     @Override
+    public @Nullable ItemStack buildOrNull(String id, @Nullable Player player, @NotNull BuildContext context) {
+        Gem gem = GemManager.getGemByName(id);
+        if (gem == null) {
+            return null;
+        }
+        return gem.getRealGem();
+    }
+
+    @Override
     public Optional<String> id(@NotNull ItemStack item) {
         Gem gem = GemManager.getGem(item);
         if (gem == null) {
             return Optional.empty();
         }
         return Optional.ofNullable(gem.getName());
+    }
+
+    @Override
+    public @Nullable String idOrNull(@NotNull ItemStack item) {
+        Gem gem = GemManager.getGem(item);
+        if (gem == null) {
+            return null;
+        }
+        return gem.getName();
     }
 
     @Override

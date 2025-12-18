@@ -42,8 +42,29 @@ public class CraftEngineProvider implements Provider<ItemStack, Player> {
     }
 
     @Override
+    public @Nullable ItemStack buildOrNull(String id, @Nullable Player player, @NotNull BuildContext context) {
+        Key itemId = Key.of(id);
+        CustomItem<ItemStack> customItem = CraftEngineItems.byId(itemId);
+        if (customItem == null) {
+            return null;
+        }
+        ContextHolder.Builder builder = ContextHolder.builder().withParameter(DirectContextParameters.ID, itemId);
+        ItemBuildContext itemBuildContext = ItemBuildContext.of(player == null ? null : BukkitAdaptors.adapt(player), adapt(builder, context));
+        return customItem.buildItemStack(itemBuildContext);
+    }
+
+    @Override
     public Optional<String> id(@NotNull ItemStack item) {
         return Optional.ofNullable(CraftEngineItems.getCustomItemId(item)).map(Key::asString);
+    }
+
+    @Override
+    public @Nullable String idOrNull(@NotNull ItemStack item) {
+        Key itemId = CraftEngineItems.getCustomItemId(item);
+        if (itemId == null) {
+            return null;
+        }
+        return itemId.asString();
     }
 
     @Override

@@ -30,12 +30,30 @@ public class SlimefunProvider implements Provider<ItemStack, Player> {
     }
 
     @Override
+    public @Nullable ItemStack buildOrNull(String id, @Nullable Player player, @NotNull BuildContext context) {
+        SlimefunItem item = SlimefunItem.getById(id);
+        if (item == null) {
+            return null;
+        }
+        return item.getItem();
+    }
+
+    @Override
     public Optional<String> id(@NotNull ItemStack item) {
         SlimefunItem slimefunItem = SlimefunItem.getByItem(item);
         if (slimefunItem == null) {
             return Optional.empty();
         }
         return Optional.of(slimefunItem.getId());
+    }
+
+    @Override
+    public @Nullable String idOrNull(@NotNull ItemStack item) {
+        SlimefunItem slimefunItem = SlimefunItem.getByItem(item);
+        if (slimefunItem == null) {
+            return null;
+        }
+        return slimefunItem.getId();
     }
 
     @Override

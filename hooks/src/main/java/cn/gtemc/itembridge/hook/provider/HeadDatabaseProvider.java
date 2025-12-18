@@ -27,8 +27,18 @@ public class HeadDatabaseProvider implements Provider<ItemStack, Player> {
     }
 
     @Override
+    public @Nullable ItemStack buildOrNull(String id, @Nullable Player player, @NotNull BuildContext context) {
+        return api.getItemHead(id);
+    }
+
+    @Override
     public Optional<String> id(@NotNull ItemStack item) {
         return Optional.ofNullable(api.getItemID(item));
+    }
+
+    @Override
+    public @Nullable String idOrNull(@NotNull ItemStack item) {
+        return api.getItemID(item);
     }
 
     @Override

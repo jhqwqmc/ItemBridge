@@ -38,12 +38,30 @@ final class BukkitItemBridgeImpl implements BukkitItemBridge {
     }
 
     @Override
+    public @Nullable ItemStack buildOrNull(@NotNull String plugin, @NotNull String id, @Nullable Player player, @NotNull BuildContext context) {
+        Provider<ItemStack, Player> provider = this.providers.get(plugin);
+        if (provider == null) {
+            return null;
+        }
+        return provider.buildOrNull(id, player, context);
+    }
+
+    @Override
     public Optional<String> id(@NotNull String plugin, @NotNull ItemStack item) {
         Provider<ItemStack, Player> provider = this.providers.get(plugin);
         if (provider == null) {
             return Optional.empty();
         }
         return provider.id(item);
+    }
+
+    @Override
+    public @Nullable String idOrNull(@NotNull String plugin, @NotNull ItemStack item) {
+        Provider<ItemStack, Player> provider = this.providers.get(plugin);
+        if (provider == null) {
+            return null;
+        }
+        return provider.idOrNull(item);
     }
 
     @Override
@@ -67,6 +85,41 @@ final class BukkitItemBridgeImpl implements BukkitItemBridge {
     @Override
     public boolean hasProvider(@NotNull String plugin) {
         return this.providers.containsKey(plugin);
+    }
+
+    @Override
+    public @Nullable ItemStack getFirstBuild(@NotNull String id, @Nullable Player player, @NotNull BuildContext context) {
+        for (Provider<ItemStack, Player> provider : this.providers.values()) {
+            ItemStack item = provider.buildOrNull(id, player, context);
+            if (item != null) {
+                return item;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public @Nullable String getFirstId(@NotNull ItemStack item) {
+        for (Provider<ItemStack, Player> provider : this.providers.values()) {
+            String id = provider.idOrNull(item);
+            if (id != null) {
+                return id;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public Map<String, String> getIds(@NotNull ItemStack item) {
+        Map<String, String> ids = new HashMap<>();
+        for (Provider<ItemStack, Player> provider : this.providers.values()) {
+            String id = provider.idOrNull(item);
+            if (id == null) {
+                continue;
+            }
+            ids.put(provider.plugin(), id);
+        }
+        return ids;
     }
 
     final static class BukkitBuilderImpl implements BukkitBuilder {

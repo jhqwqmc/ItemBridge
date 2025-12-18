@@ -30,9 +30,21 @@ public class CustomFishingProvider implements Provider<ItemStack, Player> {
         return Optional.ofNullable(BukkitCustomFishingPlugin.getInstance().getItemManager().buildInternal(ctx, id));
     }
 
+    @SuppressWarnings("UnstableApiUsage")
+    @Override
+    public @Nullable ItemStack buildOrNull(String id, @Nullable Player player, @NotNull BuildContext context) {
+        Context<Player> ctx = Context.player(player).arg(ContextKeys.ID, id);
+        return BukkitCustomFishingPlugin.getInstance().getItemManager().buildInternal(ctx, id);
+    }
+
     @Override
     public Optional<String> id(@NotNull ItemStack item) {
         return Optional.ofNullable(BukkitCustomFishingPlugin.getInstance().getItemManager().getCustomFishingItemID(item));
+    }
+
+    @Override
+    public @Nullable String idOrNull(@NotNull ItemStack item) {
+        return BukkitCustomFishingPlugin.getInstance().getItemManager().getCustomFishingItemID(item);
     }
 
     @Override

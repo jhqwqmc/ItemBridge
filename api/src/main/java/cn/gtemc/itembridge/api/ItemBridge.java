@@ -5,6 +5,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -64,6 +65,17 @@ public interface ItemBridge<I, P> {
     Optional<I> build(@NotNull String plugin, @NotNull String id, @Nullable P player, @NotNull BuildContext context);
 
     /**
+     * Builds an {@link I} based on the specified plugin, item ID, and {@link BuildContext}.
+     *
+     * @param plugin  The lower-case name of the plugin.
+     * @param id      The item ID.
+     * @param player  An optional {@link P} representing the player.
+     * @param context The build context {@link BuildContext}.
+     * @return The built item object, or null if the ID is invalid or building fails.
+     */
+    @Nullable I buildOrNull(@NotNull String plugin, @NotNull String id, @Nullable P player, @NotNull BuildContext context);
+
+    /**
      * Retrieves the ID of a given {@link I} within the specified plugin.
      *
      * @param plugin The lower-case name of the plugin.
@@ -71,6 +83,15 @@ public interface ItemBridge<I, P> {
      * @return An {@code Optional} containing the item ID if the item belongs to the specified plugin or its Provider exists, otherwise {@code Optional.empty()}.
      */
     Optional<String> id(@NotNull String plugin, @NotNull I item);
+
+    /**
+     * Retrieves the ID of a given {@link I} within the specified plugin.
+     *
+     * @param plugin The lower-case name of the plugin.
+     * @param item   The item object {@link I}.
+     * @return The ID if the item belongs to this provider, otherwise null.
+     */
+    @Nullable String idOrNull(@NotNull String plugin, @NotNull I item);
 
     /**
      * Checks if the given {@link I} is an item provided by the specified plugin.
@@ -97,6 +118,39 @@ public interface ItemBridge<I, P> {
      * @return {@code true} if registered, {@code false} otherwise.
      */
     boolean hasProvider(@NotNull String plugin);
+
+    /**
+     * Attempts to build an item by iterating through all registered providers.
+     * <p>
+     * Returns the result from the first provider that successfully creates the item.
+     *
+     * @param id      The item ID.
+     * @param player  An optional {@link P} representing the player.
+     * @param context The build context {@link BuildContext}.
+     * @return The built item {@link I}, or {@code null} if no provider could build the ID.
+     */
+    @Nullable I getFirstBuild(@NotNull String id, @Nullable P player, @NotNull BuildContext context);
+
+    /**
+     * Retrieves the item ID from the first provider that recognizes the given item.
+     * <p>
+     * This is useful for identifying the source plugin and internal ID of an unknown item.
+     *
+     * @param item The item object {@link I}.
+     * @return The item ID string, or {@code null} if no registered provider recognizes the item.
+     */
+    @Nullable String getFirstId(@NotNull I item);
+
+    /**
+     * Gets all IDs associated with the given item across all registered providers.
+     * <p>
+     * This returns a complete mapping of every plugin that recognizes the item.
+     *
+     * @param item The item object {@link I}.
+     * @return A map where keys are plugin names and values are the corresponding item IDs.
+     * Returns an empty map if no providers recognize the item.
+     */
+    Map<String, String> getIds(@NotNull I item);
 
     /**
      * Interface for building and configuring {@link ItemBridge} instances.

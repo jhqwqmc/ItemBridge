@@ -37,6 +37,23 @@ public class MMOItemsProvider implements Provider<ItemStack, Player> {
     }
 
     @Override
+    public @Nullable ItemStack buildOrNull(String id, @Nullable Player player, @NotNull BuildContext context) {
+        String[] split = id.split(":", 2);
+        if (split.length == 1) {
+            split = split[0].split("_", 2);
+        }
+        if (split.length == 1) {
+            return null;
+        }
+        String mmoItemId = split[1].toUpperCase().replace("-", "_").replace(" ", "_");
+        MMOItem mmoItem = MMOItems.plugin.getMMOItem(Type.get(split[0]), mmoItemId);
+        if (mmoItem == null) {
+            return null;
+        }
+        return mmoItem.newBuilder().build();
+    }
+
+    @Override
     public Optional<String> id(@NotNull ItemStack item) {
         Type type = MMOItems.getType(item);
         String id = MMOItems.getID(item);
@@ -44,6 +61,16 @@ public class MMOItemsProvider implements Provider<ItemStack, Player> {
             return Optional.empty();
         }
         return Optional.of(type + "_" + id);
+    }
+
+    @Override
+    public @Nullable String idOrNull(@NotNull ItemStack item) {
+        Type type = MMOItems.getType(item);
+        String id = MMOItems.getID(item);
+        if (type == null || id == null) {
+            return null;
+        }
+        return type + "_" + id;
     }
 
     @Override

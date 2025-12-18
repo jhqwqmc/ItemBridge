@@ -37,12 +37,33 @@ public class RatzielProvider implements Provider<ItemStack, Player> {
     }
 
     @Override
+    public @Nullable ItemStack buildOrNull(String id, @Nullable Player player, @NotNull BuildContext context) {
+        ItemGenerator itemGenerator = ItemManager.INSTANCE.getRegistry().get(id);
+        if (itemGenerator == null) {
+            return null;
+        }
+        if (player == null) {
+            return itemGenerator.build().thenApply(NeoItemUtilKt::toItemStack).join();
+        }
+        return itemGenerator.build(new SimpleContext(player)).thenApply(NeoItemUtilKt::toItemStack).join();
+    }
+
+    @Override
     public Optional<String> id(@NotNull ItemStack item) {
         RatzielItem ratzielItem = RatzielItem.of(item);
         if (ratzielItem == null) {
             return Optional.empty();
         }
         return Optional.of(ratzielItem.getIdentifier().getContent());
+    }
+
+    @Override
+    public @Nullable String idOrNull(@NotNull ItemStack item) {
+        RatzielItem ratzielItem = RatzielItem.of(item);
+        if (ratzielItem == null) {
+            return null;
+        }
+        return ratzielItem.getIdentifier().getContent();
     }
 
     @Override

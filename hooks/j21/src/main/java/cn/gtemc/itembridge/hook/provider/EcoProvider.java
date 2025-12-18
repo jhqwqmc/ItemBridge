@@ -24,12 +24,30 @@ public record EcoProvider(@Override String plugin) implements Provider<ItemStack
     }
 
     @Override
+    public @Nullable ItemStack buildOrNull(String id, @Nullable Player player, @NotNull BuildContext context) {
+        TestableItem item = Items.lookup(plugin + ":" + id);
+        if (!(item instanceof CustomItem customItem)) {
+            return null;
+        }
+        return customItem.getItem();
+    }
+
+    @Override
     public Optional<String> id(@NotNull ItemStack item) {
         CustomItem customItem = Items.getCustomItem(item);
         if (customItem == null) {
             return Optional.empty();
         }
         return Optional.of(customItem.getKey().toString());
+    }
+
+    @Override
+    public @Nullable String idOrNull(@NotNull ItemStack item) {
+        CustomItem customItem = Items.getCustomItem(item);
+        if (customItem == null) {
+            return null;
+        }
+        return customItem.getKey().toString();
     }
 
     @Override

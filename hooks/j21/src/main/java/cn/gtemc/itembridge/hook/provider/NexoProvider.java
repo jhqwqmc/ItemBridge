@@ -31,8 +31,22 @@ public class NexoProvider implements Provider<ItemStack, Player> {
     }
 
     @Override
+    public @Nullable ItemStack buildOrNull(String id, @Nullable Player player, @NotNull BuildContext context) {
+        ItemBuilder itemBuilder = NexoItems.itemFromId(id);
+        if (itemBuilder == null) {
+            return null;
+        }
+        return itemBuilder.build();
+    }
+
+    @Override
     public Optional<String> id(@NotNull ItemStack item) {
         return Optional.ofNullable(NexoItems.idFromItem(item));
+    }
+
+    @Override
+    public @Nullable String idOrNull(@NotNull ItemStack item) {
+        return NexoItems.idFromItem(item);
     }
 
     @Override

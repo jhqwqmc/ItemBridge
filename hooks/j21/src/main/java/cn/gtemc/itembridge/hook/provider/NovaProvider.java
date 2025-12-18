@@ -31,12 +31,30 @@ public class NovaProvider implements Provider<ItemStack, Player> {
     }
 
     @Override
+    public @Nullable ItemStack buildOrNull(String id, @Nullable Player player, @NotNull BuildContext context) {
+        NovaItem novaItem = Nova.getNova().getItemRegistry().getOrNull(id);
+        if (novaItem == null) {
+            return null;
+        }
+        return novaItem.createItemStack();
+    }
+
+    @Override
     public Optional<String> id(@NotNull ItemStack item) {
         NovaItem novaItem = Nova.getNova().getItemRegistry().getOrNull(item);
         if (novaItem == null) {
             return Optional.empty();
         }
         return Optional.of(novaItem.getId().toString());
+    }
+
+    @Override
+    public @Nullable String idOrNull(@NotNull ItemStack item) {
+        NovaItem novaItem = Nova.getNova().getItemRegistry().getOrNull(item);
+        if (novaItem == null) {
+            return null;
+        }
+        return novaItem.getId().toString();
     }
 
     @Override

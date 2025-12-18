@@ -50,6 +50,26 @@ public class PxRpgProvider implements Provider<ItemStack, Player> {
     }
 
     @Override
+    public @Nullable ItemStack buildOrNull(String id, @Nullable Player player, @NotNull BuildContext context) {
+        String[] split = id.split(",", 2);
+        String itemId = split[0];
+        ItemConfig itemConfig = itemManager.getRegister(itemId);
+        if (itemConfig == null) {
+            return null;
+        }
+        AdapterPlayer pxRpgPlayer = MAPI.getBukkitPxRpgAPI().toPxRpgPlayer(player);
+        ParameterResolver resolver = new ParameterResolver();
+        if (split.length == 2) {
+            resolver.parser(split[1]);
+        }
+        AdapterItemStack adapterItemStack = itemManager.spawnItemStack(itemConfig, pxRpgPlayer, null, resolver);
+        if (adapterItemStack == null) {
+            return null;
+        }
+        return MAPI.getBukkitPxRpgAPI().toBukkitItemStack(adapterItemStack);
+    }
+
+    @Override
     public Optional<String> id(@NotNull ItemStack item) {
         AdapterItemStack pxRpgItemStack = MAPI.getBukkitPxRpgAPI().toPxRpgItemStack(item);
         if (pxRpgItemStack == null) {
@@ -60,6 +80,19 @@ public class PxRpgProvider implements Provider<ItemStack, Player> {
             return Optional.empty();
         }
         return Optional.ofNullable(that.getId());
+    }
+
+    @Override
+    public @Nullable String idOrNull(@NotNull ItemStack item) {
+        AdapterItemStack pxRpgItemStack = MAPI.getBukkitPxRpgAPI().toPxRpgItemStack(item);
+        if (pxRpgItemStack == null) {
+            return null;
+        }
+        ItemInter that = itemManager.toThat(pxRpgItemStack);
+        if (that == null) {
+            return null;
+        }
+        return that.getId();
     }
 
     @Override

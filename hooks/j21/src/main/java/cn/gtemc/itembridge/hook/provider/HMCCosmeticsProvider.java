@@ -32,6 +32,15 @@ public class HMCCosmeticsProvider implements Provider<ItemStack, Player> {
     }
 
     @Override
+    public @Nullable ItemStack buildOrNull(String id, @Nullable Player player, @NotNull BuildContext context) {
+        Cosmetic cosmetic = HMCCosmeticsAPI.getCosmetic(id);
+        if (cosmetic == null) {
+            return null;
+        }
+        return cosmetic.getItem();
+    }
+
+    @Override
     public Optional<String> id(@NotNull ItemStack item) {
         List<Cosmetic> allCosmetics = HMCCosmeticsAPI.getAllCosmetics();
         for (Cosmetic cosmetic : allCosmetics) {
@@ -41,6 +50,18 @@ public class HMCCosmeticsProvider implements Provider<ItemStack, Player> {
             }
         }
         return Optional.empty();
+    }
+
+    @Override
+    public @Nullable String idOrNull(@NotNull ItemStack item) {
+        List<Cosmetic> allCosmetics = HMCCosmeticsAPI.getAllCosmetics();
+        for (Cosmetic cosmetic : allCosmetics) {
+            ItemStack itemStack = cosmetic.getItem();
+            if (itemStack != null && itemStack.equals(item)) {
+                return cosmetic.getId();
+            }
+        }
+        return null;
     }
 
     @Override

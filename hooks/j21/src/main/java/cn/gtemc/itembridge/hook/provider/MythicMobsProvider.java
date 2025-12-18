@@ -43,8 +43,29 @@ public class MythicMobsProvider implements Provider<ItemStack, Player> {
     }
 
     @Override
+    public @Nullable ItemStack buildOrNull(String id, @Nullable Player player, @NotNull BuildContext context) {
+        Optional<MythicItem> item = MythicBukkit.inst().getItemManager().getItem(id);
+        if (item.isEmpty()) {
+            return null;
+        }
+        MythicItem mythicItem = item.get();
+        if (player == null) {
+            return BukkitAdapter.adapt(mythicItem.generateItemStack(1));
+        }
+        AbstractPlayer mythicPlayer = BukkitAdapter.adapt(player);
+        SkillCaster caster = MythicBukkit.inst().getSkillManager().getCaster(mythicPlayer);
+        DropMetadataImpl meta = new DropMetadataImpl(caster, mythicPlayer);
+        return BukkitAdapter.adapt(mythicItem.generateItemStack(meta, 1));
+    }
+
+    @Override
     public Optional<String> id(@NotNull ItemStack item) {
         return Optional.ofNullable(MythicBukkit.inst().getItemManager().getMythicTypeFromItem(item));
+    }
+
+    @Override
+    public @Nullable String idOrNull(@NotNull ItemStack item) {
+        return MythicBukkit.inst().getItemManager().getMythicTypeFromItem(item);
     }
 
     @Override
