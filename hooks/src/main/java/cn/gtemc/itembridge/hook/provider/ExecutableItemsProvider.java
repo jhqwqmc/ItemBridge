@@ -2,6 +2,7 @@ package cn.gtemc.itembridge.hook.provider;
 
 import cn.gtemc.itembridge.api.Provider;
 import cn.gtemc.itembridge.api.context.BuildContext;
+import cn.gtemc.itembridge.api.util.MiscUtils;
 import com.ssomar.score.api.executableitems.ExecutableItemsAPI;
 import com.ssomar.score.sobject.SObjectInterface;
 import org.bukkit.entity.Player;
@@ -9,6 +10,7 @@ import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Map;
 import java.util.Optional;
 
 public class ExecutableItemsProvider implements Provider<ItemStack, Player> {
@@ -25,7 +27,10 @@ public class ExecutableItemsProvider implements Provider<ItemStack, Player> {
     public Optional<ItemStack> build(String id, @Nullable Player player, @NotNull BuildContext context) {
         return ExecutableItemsAPI.getExecutableItemsManager()
                 .getExecutableItem(id)
-                .map(i -> i.buildItem(1, Optional.ofNullable(player)));
+                .map(item -> {
+                    Map<String, Object> map = MiscUtils.adaptString2Object(context);
+                    return item.buildItem(1, Optional.ofNullable(player), map != null ? map : Map.of());
+                });
     }
 
     @Override

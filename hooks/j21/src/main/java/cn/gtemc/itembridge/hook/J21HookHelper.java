@@ -67,6 +67,9 @@ public final class J21HookHelper {
         if (hasPlugin("HMCCosmetics")) {
             MiscUtils.addToMap(HMCCosmeticsProvider.INSTANCE, providers);
         }
+        if (hasPlugin("Sertraline")) {
+            MiscUtils.addToMap(SertralineProvider.INSTANCE, providers);
+        }
         return providers;
     }
 }

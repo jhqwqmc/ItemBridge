@@ -12,7 +12,9 @@ import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Collection;
 import java.util.Optional;
+import java.util.function.Supplier;
 
 public class RatzielProvider implements Provider<ItemStack, Player> {
     public static final RatzielProvider INSTANCE = new RatzielProvider();
@@ -33,7 +35,11 @@ public class RatzielProvider implements Provider<ItemStack, Player> {
         if (player == null) {
             return Optional.ofNullable(itemGenerator.build().thenApply(NeoItemUtilKt::toItemStack).join());
         }
-        return Optional.ofNullable(itemGenerator.build(new SimpleContext(player)).thenApply(NeoItemUtilKt::toItemStack).join());
+        SimpleContext simpleContext = new SimpleContext(player);
+        for (Supplier<Object> value : context.contextData().values()) {
+            simpleContext.put(value.get());
+        }
+        return Optional.ofNullable(itemGenerator.build(simpleContext).thenApply(NeoItemUtilKt::toItemStack).join());
     }
 
     @Override
@@ -45,7 +51,11 @@ public class RatzielProvider implements Provider<ItemStack, Player> {
         if (player == null) {
             return itemGenerator.build().thenApply(NeoItemUtilKt::toItemStack).join();
         }
-        return itemGenerator.build(new SimpleContext(player)).thenApply(NeoItemUtilKt::toItemStack).join();
+        SimpleContext simpleContext = new SimpleContext(player);
+        for (Supplier<Object> value : context.contextData().values()) {
+            simpleContext.put(value.get());
+        }
+        return itemGenerator.build(simpleContext).thenApply(NeoItemUtilKt::toItemStack).join();
     }
 
     @Override

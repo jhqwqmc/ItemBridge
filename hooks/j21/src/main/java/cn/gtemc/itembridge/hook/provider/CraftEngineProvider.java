@@ -84,7 +84,8 @@ public class CraftEngineProvider implements Provider<ItemStack, Player> {
         return builder;
     }
 
-    private static <T> void withParameter(ContextHolder.Builder builder, ContextKey<T> key, Supplier<T> value) {
-        builder.withParameter(key, value);
+    @SuppressWarnings("unchecked")
+    private static <T, C> void withParameter(ContextHolder.Builder builder, ContextKey<T> key, Supplier<C> value) {
+        builder.withParameter(key, (T) value);
     }
 }

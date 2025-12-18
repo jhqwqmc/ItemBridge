@@ -6,6 +6,7 @@ dependencies {
     compileOnly(libs.platform.paper)
     compileOnly(libs.bundles.hooks.j21) { isTransitive = false }
     compileOnly(files("${project.rootDir}/libs/HMCCosmetics-api.jar")) // hmccosmetics
+    compileOnly(files("${project.rootDir}/libs/Sertraline-api.jar")) // sertraline
     compileOnly(project(":api"))
     compileOnly(project(":hooks"))
 }
