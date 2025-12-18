@@ -3,6 +3,7 @@ package cn.gtemc.itembridge.core;
 import cn.gtemc.itembridge.api.ItemBridgeException;
 import cn.gtemc.itembridge.api.Provider;
 import cn.gtemc.itembridge.api.context.BuildContext;
+import cn.gtemc.itembridge.api.util.Pair;
 import cn.gtemc.itembridge.hook.HookHelper;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -99,11 +100,11 @@ final class BukkitItemBridgeImpl implements BukkitItemBridge {
     }
 
     @Override
-    public @Nullable String getFirstId(@NotNull ItemStack item) {
+    public @Nullable Pair<String, String> getFirstId(@NotNull ItemStack item) {
         for (Provider<ItemStack, Player> provider : this.providers.values()) {
             String id = provider.idOrNull(item);
             if (id != null) {
-                return id;
+                return Pair.of(provider.plugin(), id);
             }
         }
         return null;

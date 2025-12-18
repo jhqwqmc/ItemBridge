@@ -1,6 +1,7 @@
 package cn.gtemc.itembridge.api;
 
 import cn.gtemc.itembridge.api.context.BuildContext;
+import cn.gtemc.itembridge.api.util.Pair;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -132,14 +133,16 @@ public interface ItemBridge<I, P> {
     @Nullable I getFirstBuild(@NotNull String id, @Nullable P player, @NotNull BuildContext context);
 
     /**
-     * Retrieves the item ID from the first provider that recognizes the given item.
+     * Retrieves both the plugin name and the item ID from the first provider that recognizes the given item.
      * <p>
-     * This is useful for identifying the source plugin and internal ID of an unknown item.
+     * This is useful for identifying the specific source plugin and the internal ID of an unknown item
+     * in a single lookup.
      *
      * @param item The item object {@link I}.
-     * @return The item ID string, or {@code null} if no registered provider recognizes the item.
+     * @return A {@link Pair} where the first element is the plugin name and the second element
+     * is the item ID, or {@code null} if no registered provider recognizes the item.
      */
-    @Nullable String getFirstId(@NotNull I item);
+    @Nullable Pair<String, String> getFirstId(@NotNull I item);
 
     /**
      * Gets all IDs associated with the given item across all registered providers.
