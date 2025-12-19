@@ -51,16 +51,21 @@ tasks {
     }
 }
 
-val accessCredentials = OnepasswordAccessCredentials("Employee", "maven-repo")
+val isPublishing = gradle.startParameter.taskNames.any {
+    it.contains("publish", ignoreCase = true)
+}
 
 publishing {
     repositories {
         maven {
             name = "releases"
             url = uri("https://repo.gtemc.net/releases")
-            credentials(PasswordCredentials::class) {
-                username = accessCredentials.username
-                password = accessCredentials.password
+            if (isPublishing) {
+                credentials(PasswordCredentials::class) {
+                    val accessCredentials = OnepasswordAccessCredentials("Employee", "maven-repo")
+                    username = accessCredentials.username
+                    password = accessCredentials.password
+                }
             }
         }
     }
