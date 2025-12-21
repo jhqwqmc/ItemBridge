@@ -20,7 +20,17 @@ public interface BukkitItemBridge extends ItemBridge<ItemStack, Player> {
      * @return An {@code BukkitItemBridge} {@code BukkitBuilder} instance.
      */
     static BukkitBuilder builder() {
-        return new BukkitItemBridgeImpl.BukkitBuilderImpl();
+        return new BukkitItemBridgeImpl.BukkitBuilderImpl(true);
+    }
+
+    /**
+     * Retrieves a {@code BukkitBuilder} used to construct and configure an {@code BukkitItemBridge} instance.
+     *
+     * @param loggingEnabled Whether to enable log printing.
+     * @return An {@code BukkitItemBridge} {@code BukkitBuilder} instance.
+     */
+    static BukkitBuilder builder(boolean loggingEnabled) {
+        return new BukkitItemBridgeImpl.BukkitBuilderImpl(loggingEnabled);
     }
 
     /**

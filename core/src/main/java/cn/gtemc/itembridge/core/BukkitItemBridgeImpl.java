@@ -126,12 +126,8 @@ final class BukkitItemBridgeImpl implements BukkitItemBridge {
     final static class BukkitBuilderImpl implements BukkitBuilder {
         private final Map<String, Provider<ItemStack, Player>> providers;
 
-        BukkitBuilderImpl() {
-            try {
-                this.providers = HookHelper.getSupportedPlugins();
-            } catch (Throwable e) {
-                throw new ItemBridgeException("Failed to load builtin providers", e);
-            }
+        BukkitBuilderImpl(boolean loggingEnabled) {
+            this.providers = HookHelper.getSupportedPlugins(loggingEnabled);
         }
 
         @Override

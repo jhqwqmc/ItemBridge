@@ -9,7 +9,7 @@ import org.bukkit.inventory.ItemStack;
 import java.util.HashMap;
 import java.util.Map;
 
-import static cn.gtemc.itembridge.hook.HookHelper.hasPlugin;
+import static cn.gtemc.itembridge.hook.HookHelper.tryHook;
 
 @SuppressWarnings("unused")
 public final class J21HookHelper {
@@ -20,56 +20,24 @@ public final class J21HookHelper {
 
     private J21HookHelper() {}
 
-    private static Map<String, Provider<ItemStack, Player>> getSupportedPlugins() {
+    private static Map<String, Provider<ItemStack, Player>> getSupportedPlugins(boolean loggingEnabled) {
         Map<String, Provider<ItemStack, Player>> providers = new HashMap<>();
-        if (hasPlugin("CraftEngine")) {
-            MiscUtils.addToMap(CraftEngineProvider.INSTANCE, providers);
-        }
-        if (hasPlugin("Nexo")) {
-            MiscUtils.addToMap(NexoProvider.INSTANCE, providers);
-        }
-        if (hasPlugin("Oraxen")) {
-            MiscUtils.addToMap(OraxenProvider.INSTANCE, providers);
-        }
-        if (hasPlugin("Nova")) {
-            MiscUtils.addToMap(NovaProvider.INSTANCE, providers);
-        }
-        if (hasPlugin("MythicMobs")) {
-            MiscUtils.addToMap(MythicMobsProvider.INSTANCE, providers);
-        }
-        if (hasPlugin("EcoArmor")) {
-            MiscUtils.addToMap(new EcoProvider("ecoarmor"), providers);
-        }
-        if (hasPlugin("EcoCrates")) {
-            MiscUtils.addToMap(new EcoProvider("ecocrates"), providers);
-        }
-        if (hasPlugin("EcoItems")) {
-            MiscUtils.addToMap(new EcoProvider("ecoitems"), providers);
-        }
-        if (hasPlugin("EcoMobs")) {
-            MiscUtils.addToMap(new EcoProvider("ecomobs"), providers);
-        }
-        if (hasPlugin("EcoPets")) {
-            MiscUtils.addToMap(new EcoProvider("ecopets"), providers);
-        }
-        if (hasPlugin("EcoScrolls")) {
-            MiscUtils.addToMap(new EcoProvider("ecoscrolls"), providers);
-        }
-        if (hasPlugin("Reforges")) {
-            MiscUtils.addToMap(new EcoProvider("reforges"), providers);
-        }
-        if (hasPlugin("StatTrackers")) {
-            MiscUtils.addToMap(new EcoProvider("stattrackers"), providers);
-        }
-        if (hasPlugin("Talismans")) {
-            MiscUtils.addToMap(new EcoProvider("talismans"), providers);
-        }
-        if (hasPlugin("HMCCosmetics")) {
-            MiscUtils.addToMap(HMCCosmeticsProvider.INSTANCE, providers);
-        }
-        if (hasPlugin("Sertraline")) {
-            MiscUtils.addToMap(SertralineProvider.INSTANCE, providers);
-        }
+        tryHook(() -> MiscUtils.addToMap(CraftEngineProvider.INSTANCE, providers), "CraftEngine", loggingEnabled);
+        tryHook(() -> MiscUtils.addToMap(NexoProvider.INSTANCE, providers), "Nexo", loggingEnabled);
+        tryHook(() -> MiscUtils.addToMap(OraxenProvider.INSTANCE, providers), "Oraxen", loggingEnabled);
+        tryHook(() -> MiscUtils.addToMap(NovaProvider.INSTANCE, providers), "Nova", loggingEnabled);
+        tryHook(() -> MiscUtils.addToMap(MythicMobsProvider.INSTANCE, providers), "MythicMobs", loggingEnabled);
+        tryHook(() -> MiscUtils.addToMap(new EcoProvider("ecoarmor"), providers), "EcoArmor", loggingEnabled);
+        tryHook(() -> MiscUtils.addToMap(new EcoProvider("ecocrates"), providers), "EcoCrates", loggingEnabled);
+        tryHook(() -> MiscUtils.addToMap(new EcoProvider("ecoitems"), providers), "EcoItems", loggingEnabled);
+        tryHook(() -> MiscUtils.addToMap(new EcoProvider("ecomobs"), providers), "EcoMobs", loggingEnabled);
+        tryHook(() -> MiscUtils.addToMap(new EcoProvider("ecopets"), providers), "EcoPets", loggingEnabled);
+        tryHook(() -> MiscUtils.addToMap(new EcoProvider("ecoscrolls"), providers), "EcoScrolls", loggingEnabled);
+        tryHook(() -> MiscUtils.addToMap(new EcoProvider("reforges"), providers), "Reforges", loggingEnabled);
+        tryHook(() -> MiscUtils.addToMap(new EcoProvider("stattrackers"), providers), "StatTrackers", loggingEnabled);
+        tryHook(() -> MiscUtils.addToMap(new EcoProvider("talismans"), providers), "Talismans", loggingEnabled);
+        tryHook(() -> MiscUtils.addToMap(HMCCosmeticsProvider.INSTANCE, providers), "HMCCosmetics", loggingEnabled);
+        tryHook(() -> MiscUtils.addToMap(SertralineProvider.INSTANCE, providers), "Sertraline", loggingEnabled);
         return providers;
     }
 }
