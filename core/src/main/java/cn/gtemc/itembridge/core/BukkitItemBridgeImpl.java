@@ -7,12 +7,14 @@ import cn.gtemc.itembridge.api.util.Pair;
 import cn.gtemc.itembridge.hook.HookHelper;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
+import java.util.function.Predicate;
 
 final class BukkitItemBridgeImpl implements BukkitItemBridge {
     private final Map<String, Provider<ItemStack, Player>> providers;
@@ -191,8 +193,13 @@ final class BukkitItemBridgeImpl implements BukkitItemBridge {
         }
 
         @Override
-        public BukkitBuilder detectSupportedPlugins() {
-            this.providers.putAll(HookHelper.getSupportedPlugins(this.onHookSuccess, this.onHookFailure));
+        public Builder<ItemStack, Player> detectSupportedPlugins() {
+            return detectSupportedPlugins(plugin -> true);
+        }
+
+        @Override
+        public BukkitBuilder detectSupportedPlugins(@NotNull Predicate<Plugin> predicate) {
+            this.providers.putAll(HookHelper.getSupportedPlugins(this.onHookSuccess, this.onHookFailure, predicate));
             return this;
         }
 

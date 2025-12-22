@@ -4,10 +4,12 @@ import cn.gtemc.itembridge.api.ItemBridge;
 import cn.gtemc.itembridge.api.Provider;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
+import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 /**
@@ -92,7 +94,15 @@ public interface BukkitItemBridge extends ItemBridge<ItemStack, Player> {
          *
          * @return The current builder instance, supporting method chaining.
          */
-        BukkitBuilder detectSupportedPlugins();
+        Builder<ItemStack, Player> detectSupportedPlugins();
+
+        /**
+         * Detects and registers all supported plugins.
+         *
+         * @param predicate The predicate to filter plugins.
+         * @return The current builder instance, supporting method chaining.
+         */
+        BukkitBuilder detectSupportedPlugins(@NotNull Predicate<Plugin> predicate);
 
         /**
          * Builds and returns an immutable {@link BukkitItemBridge} instance.

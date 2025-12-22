@@ -5,11 +5,13 @@ import cn.gtemc.itembridge.api.util.MiscUtils;
 import cn.gtemc.itembridge.hook.provider.*;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.Plugin;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
+import java.util.function.Predicate;
 
 import static cn.gtemc.itembridge.hook.HookHelper.tryHook;
 
@@ -22,24 +24,24 @@ public final class J21HookHelper {
 
     private J21HookHelper() {}
 
-    private static Map<String, Provider<ItemStack, Player>> getSupportedPlugins(Consumer<String> onSuccess, BiConsumer<String, Throwable> onFailure) {
+    private static Map<String, Provider<ItemStack, Player>> getSupportedPlugins(Consumer<String> onSuccess, BiConsumer<String, Throwable> onFailure, Predicate<Plugin> predicate) {
         Map<String, Provider<ItemStack, Player>> providers = new HashMap<>();
-        tryHook(() -> MiscUtils.addToMap(CraftEngineProvider.INSTANCE, providers), "CraftEngine", onSuccess, onFailure);
-        tryHook(() -> MiscUtils.addToMap(NexoProvider.INSTANCE, providers), "Nexo", onSuccess, onFailure);
-        tryHook(() -> MiscUtils.addToMap(OraxenProvider.INSTANCE, providers), "Oraxen", onSuccess, onFailure);
-        tryHook(() -> MiscUtils.addToMap(NovaProvider.INSTANCE, providers), "Nova", onSuccess, onFailure);
-        tryHook(() -> MiscUtils.addToMap(MythicMobsProvider.INSTANCE, providers), "MythicMobs", onSuccess, onFailure);
-        tryHook(() -> MiscUtils.addToMap(new EcoProvider("ecoarmor"), providers), "EcoArmor", onSuccess, onFailure);
-        tryHook(() -> MiscUtils.addToMap(new EcoProvider("ecocrates"), providers), "EcoCrates", onSuccess, onFailure);
-        tryHook(() -> MiscUtils.addToMap(new EcoProvider("ecoitems"), providers), "EcoItems", onSuccess, onFailure);
-        tryHook(() -> MiscUtils.addToMap(new EcoProvider("ecomobs"), providers), "EcoMobs", onSuccess, onFailure);
-        tryHook(() -> MiscUtils.addToMap(new EcoProvider("ecopets"), providers), "EcoPets", onSuccess, onFailure);
-        tryHook(() -> MiscUtils.addToMap(new EcoProvider("ecoscrolls"), providers), "EcoScrolls", onSuccess, onFailure);
-        tryHook(() -> MiscUtils.addToMap(new EcoProvider("reforges"), providers), "Reforges", onSuccess, onFailure);
-        tryHook(() -> MiscUtils.addToMap(new EcoProvider("stattrackers"), providers), "StatTrackers", onSuccess, onFailure);
-        tryHook(() -> MiscUtils.addToMap(new EcoProvider("talismans"), providers), "Talismans", onSuccess, onFailure);
-        tryHook(() -> MiscUtils.addToMap(HMCCosmeticsProvider.INSTANCE, providers), "HMCCosmetics", onSuccess, onFailure);
-        tryHook(() -> MiscUtils.addToMap(SertralineProvider.INSTANCE, providers), "Sertraline", onSuccess, onFailure);
+        tryHook(() -> MiscUtils.addToMap(CraftEngineProvider.INSTANCE, providers), "CraftEngine", onSuccess, onFailure, predicate);
+        tryHook(() -> MiscUtils.addToMap(NexoProvider.INSTANCE, providers), "Nexo", onSuccess, onFailure, predicate);
+        tryHook(() -> MiscUtils.addToMap(OraxenProvider.INSTANCE, providers), "Oraxen", onSuccess, onFailure, predicate);
+        tryHook(() -> MiscUtils.addToMap(NovaProvider.INSTANCE, providers), "Nova", onSuccess, onFailure, predicate);
+        tryHook(() -> MiscUtils.addToMap(MythicMobsProvider.INSTANCE, providers), "MythicMobs", onSuccess, onFailure, predicate);
+        tryHook(() -> MiscUtils.addToMap(new EcoProvider("ecoarmor"), providers), "EcoArmor", onSuccess, onFailure, predicate);
+        tryHook(() -> MiscUtils.addToMap(new EcoProvider("ecocrates"), providers), "EcoCrates", onSuccess, onFailure, predicate);
+        tryHook(() -> MiscUtils.addToMap(new EcoProvider("ecoitems"), providers), "EcoItems", onSuccess, onFailure, predicate);
+        tryHook(() -> MiscUtils.addToMap(new EcoProvider("ecomobs"), providers), "EcoMobs", onSuccess, onFailure, predicate);
+        tryHook(() -> MiscUtils.addToMap(new EcoProvider("ecopets"), providers), "EcoPets", onSuccess, onFailure, predicate);
+        tryHook(() -> MiscUtils.addToMap(new EcoProvider("ecoscrolls"), providers), "EcoScrolls", onSuccess, onFailure, predicate);
+        tryHook(() -> MiscUtils.addToMap(new EcoProvider("reforges"), providers), "Reforges", onSuccess, onFailure, predicate);
+        tryHook(() -> MiscUtils.addToMap(new EcoProvider("stattrackers"), providers), "StatTrackers", onSuccess, onFailure, predicate);
+        tryHook(() -> MiscUtils.addToMap(new EcoProvider("talismans"), providers), "Talismans", onSuccess, onFailure, predicate);
+        tryHook(() -> MiscUtils.addToMap(HMCCosmeticsProvider.INSTANCE, providers), "HMCCosmetics", onSuccess, onFailure, predicate);
+        tryHook(() -> MiscUtils.addToMap(SertralineProvider.INSTANCE, providers), "Sertraline", onSuccess, onFailure, predicate);
         return providers;
     }
 }
