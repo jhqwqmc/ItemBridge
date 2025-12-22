@@ -55,7 +55,11 @@ dependencies {
 
 ```java
 BukkitItemBridge itemBridge = BukkitItemBridge.builder()
-        .register(new CustomItemProvider())
+        .onHookSuccess(p -> System.out.println("Hooked " + p))
+        .onHookFailure((p, e) -> System.out.println("Failed to hook " + p + ", because " + e.getMessage()))
+        .register(new CustomProvider())
+        .detectSupportedPlugins()
+        .removeById("customplugin")
         .build();
 
 ContextKey<Boolean> fly = ContextKey.of(Boolean.class, "fly");
