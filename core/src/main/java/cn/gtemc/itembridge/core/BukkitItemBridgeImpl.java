@@ -11,12 +11,16 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 
 final class BukkitItemBridgeImpl implements BukkitItemBridge {
     private final Map<String, Provider<ItemStack, Player>> providers;
+    private final boolean immutable;
 
-    private BukkitItemBridgeImpl(Map<String, Provider<ItemStack, Player>> providers) {
-        this.providers = Collections.unmodifiableMap(providers);
+    private BukkitItemBridgeImpl(Map<String, Provider<ItemStack, Player>> providers, boolean immutable) {
+        this.providers = immutable ? Collections.unmodifiableMap(providers) : providers;
+        this.immutable = immutable;
     }
 
     @Override
@@ -123,11 +127,34 @@ final class BukkitItemBridgeImpl implements BukkitItemBridge {
         return ids;
     }
 
+    @Override
+    public boolean immutable() {
+        return this.immutable;
+    }
+
+    @Override
+    public BukkitItemBridge register(@NotNull Provider<ItemStack, Player> provider) {
+        if (this.providers.containsKey(provider.plugin())) {
+            throw new ItemBridgeException("Item provider '" + provider.plugin() + "' already registered");
+        }
+        this.providers.put(provider.plugin(), provider);
+        return this;
+    }
+
+    @Override
+    public BukkitItemBridge removeById(@NotNull String id) {
+        this.providers.remove(id);
+        return this;
+    }
+
     final static class BukkitBuilderImpl implements BukkitBuilder {
         private final Map<String, Provider<ItemStack, Player>> providers;
+        private Consumer<String> onHookSuccess;
+        private BiConsumer<String, Throwable> onHookFailure;
+        private boolean immutable;
 
-        BukkitBuilderImpl(boolean loggingEnabled) {
-            this.providers = HookHelper.getSupportedPlugins(loggingEnabled);
+        BukkitBuilderImpl() {
+            this.providers = new HashMap<>();
         }
 
         @Override
@@ -139,14 +166,39 @@ final class BukkitItemBridgeImpl implements BukkitItemBridge {
             return this;
         }
 
-        @Nullable
-        public Provider<ItemStack, Player> removeById(@NotNull String id) {
-            return this.providers.remove(id);
+        @Override
+        public BukkitBuilder removeById(@NotNull String id) {
+            this.providers.remove(id);
+            return this;
+        }
+
+        @Override
+        public BukkitBuilder immutable(boolean immutable) {
+            this.immutable = immutable;
+            return this;
+        }
+
+        @Override
+        public BukkitBuilder onHookSuccess(Consumer<String> onSuccess) {
+            this.onHookSuccess = onSuccess;
+            return this;
+        }
+
+        @Override
+        public BukkitBuilder onHookFailure(BiConsumer<String, Throwable> onFailure) {
+            this.onHookFailure = onFailure;
+            return this;
+        }
+
+        @Override
+        public BukkitBuilder detectSupportedPlugins() {
+            this.providers.putAll(HookHelper.getSupportedPlugins(this.onHookSuccess, this.onHookFailure));
+            return this;
         }
 
         @Override
         public BukkitItemBridge build() {
-            return new BukkitItemBridgeImpl(this.providers);
+            return new BukkitItemBridgeImpl(this.providers, this.immutable);
         }
     }
 }

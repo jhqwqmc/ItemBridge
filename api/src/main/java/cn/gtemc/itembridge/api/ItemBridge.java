@@ -8,6 +8,9 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
+import java.util.logging.Logger;
 
 /**
  * ItemBridge is a unified item bridging interface used to build and identify items across different plugins.
@@ -156,10 +159,30 @@ public interface ItemBridge<I, P> {
     Map<String, String> getIds(@NotNull I item);
 
     /**
+     * Determines whether the ItemBridge is immutable.
+     *
+     * @return Whether the ItemBridge is immutable.
+     */
+    boolean immutable();
+
+    /**
+     * Registers a {@link Provider} into the ItemBridge.
+     *
+     * @param provider The item provider to register.
+     * @return The current instance, supporting method chaining.
+     */
+    ItemBridge<I, P> register(@NotNull Provider<I, P> provider);
+
+    /**
+     * Removes a registered provider based on the plugin name.
+     *
+     * @param id The lower-case name of the plugin.
+     * @return The current instance, supporting method chaining.
+     */
+    ItemBridge<I, P> removeById(@NotNull String id);
+
+    /**
      * Interface for building and configuring {@link ItemBridge} instances.
-     * <p>
-     * All available built-in item providers are automatically loaded upon creation.
-     * Custom providers can be registered or existing ones removed through this builder.
      */
     interface Builder<I, P> {
 
@@ -175,9 +198,40 @@ public interface ItemBridge<I, P> {
          * Removes a registered provider based on the plugin name.
          *
          * @param id The lower-case name of the plugin.
-         * @return The removed provider, or null if it did not exist.
+         * @return The current builder instance, supporting method chaining.
          */
-        @Nullable Provider<I, P> removeById(@NotNull String id);
+        Builder<I, P> removeById(@NotNull String id);
+
+        /**
+         * Sets whether the ItemBridge is immutable.
+         *
+         * @param immutable Whether the ItemBridge is immutable.
+         * @return The current builder instance, supporting method chaining.
+         */
+        Builder<I, P> immutable(boolean immutable);
+
+        /**
+         * Sets the action to perform when a plugin is successfully hooked.
+         *
+         * @param onSuccess onSuccess a consumer receiving the name of the hooked plugin.
+         * @return The current builder instance, supporting method chaining.
+         */
+        Builder<I, P> onHookSuccess(Consumer<String> onSuccess);
+
+        /**
+         * Sets the action to perform when a hook attempt fails.
+         *
+         * @param onFailure onFailure a bi-consumer receiving the plugin name and the error cause.
+         * @return The current builder instance, supporting method chaining.
+         */
+        Builder<I, P> onHookFailure(BiConsumer<String, Throwable> onFailure);
+
+        /**
+         * Detects and registers all supported plugins.
+         *
+         * @return The current builder instance, supporting method chaining.
+         */
+        Builder<I, P> detectSupportedPlugins();
 
         /**
          * Builds and returns an immutable {@link ItemBridge} instance.
