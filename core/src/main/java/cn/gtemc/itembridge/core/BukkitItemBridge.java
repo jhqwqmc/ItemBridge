@@ -99,10 +99,10 @@ public interface BukkitItemBridge extends ItemBridge<ItemStack, Player> {
         /**
          * Detects and registers all supported plugins.
          *
-         * @param predicate The predicate to filter plugins.
+         * @param filter The predicate to filter plugins.
          * @return The current builder instance, supporting method chaining.
          */
-        BukkitBuilder detectSupportedPlugins(@NotNull Predicate<Plugin> predicate);
+        BukkitBuilder detectSupportedPlugins(@NotNull Predicate<Plugin> filter);
 
         /**
          * Builds and returns an immutable {@link BukkitItemBridge} instance.

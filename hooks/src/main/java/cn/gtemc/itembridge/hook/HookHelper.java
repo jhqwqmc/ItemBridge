@@ -14,7 +14,6 @@ import java.lang.invoke.MethodHandles;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.BiConsumer;
-import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
@@ -40,10 +39,10 @@ public final class HookHelper {
             String pluginName,
             Consumer<String> onSuccess,
             BiConsumer<String, Throwable> onFailure,
-            Predicate<Plugin> predicate
+            Predicate<Plugin> filter
     ) {
         Plugin plugin = Bukkit.getPluginManager().getPlugin(pluginName);
-        if (plugin == null || !predicate.test(plugin)) {
+        if (plugin == null || !filter.test(plugin)) {
             return;
         }
         try {
@@ -59,27 +58,27 @@ public final class HookHelper {
     }
 
     public static Map<String, Provider<ItemStack, Player>> getSupportedPlugins(
-            Consumer<String> onSuccess, BiConsumer<String, Throwable> onFailure, Predicate<Plugin> predicate
+            Consumer<String> onSuccess, BiConsumer<String, Throwable> onFailure, Predicate<Plugin> filter
     ) {
-        Map<String, Provider<ItemStack, Player>> providers = new HashMap<>(j21ProvidersGetter.get(onSuccess, onFailure, predicate));
-        tryHook(() -> MiscUtils.addToMap(CustomFishingProvider.INSTANCE, providers), "CustomFishing", onSuccess, onFailure, predicate);
-        tryHook(() -> MiscUtils.addToMap(ItemsAdderProvider.INSTANCE, providers), "ItemsAdder", onSuccess, onFailure, predicate);
-        tryHook(() -> MiscUtils.addToMap(MMOItemsProvider.INSTANCE, providers), "MMOItems", onSuccess, onFailure, predicate);
-        tryHook(() -> MiscUtils.addToMap(NeigeItemsProvider.INSTANCE, providers), "NeigeItems", onSuccess, onFailure, predicate);
-        tryHook(() -> MiscUtils.addToMap(SXItemProvider.INSTANCE, providers), "SX-Item", onSuccess, onFailure, predicate);
-        tryHook(() -> MiscUtils.addToMap(ZaphkielProvider.INSTANCE, providers), "Zaphkiel", onSuccess, onFailure, predicate);
-        tryHook(() -> MiscUtils.addToMap(SlimefunProvider.INSTANCE, providers), "Slimefun", onSuccess, onFailure, predicate);
-        tryHook(() -> MiscUtils.addToMap(HeadDatabaseProvider.INSTANCE, providers), "HeadDatabase", onSuccess, onFailure, predicate);
-        tryHook(() -> MiscUtils.addToMap(ExecutableItemsProvider.INSTANCE, providers), "ExecutableItems", onSuccess, onFailure, predicate);
-        tryHook(() -> MiscUtils.addToMap(AzureFlowProvider.INSTANCE, providers), "AzureFlow", onSuccess, onFailure, predicate);
-        tryHook(() -> MiscUtils.addToMap(MagicGemProvider.INSTANCE, providers), "MagicGem", onSuccess, onFailure, predicate);
-        tryHook(() -> MiscUtils.addToMap(PxRpgProvider.INSTANCE, providers), "PxRpg", onSuccess, onFailure, predicate);
-        tryHook(() -> MiscUtils.addToMap(RatzielProvider.INSTANCE, providers), "Ratziel", onSuccess, onFailure, predicate);
+        Map<String, Provider<ItemStack, Player>> providers = new HashMap<>(j21ProvidersGetter.get(onSuccess, onFailure, filter));
+        tryHook(() -> MiscUtils.addToMap(CustomFishingProvider.INSTANCE, providers), "CustomFishing", onSuccess, onFailure, filter);
+        tryHook(() -> MiscUtils.addToMap(ItemsAdderProvider.INSTANCE, providers), "ItemsAdder", onSuccess, onFailure, filter);
+        tryHook(() -> MiscUtils.addToMap(MMOItemsProvider.INSTANCE, providers), "MMOItems", onSuccess, onFailure, filter);
+        tryHook(() -> MiscUtils.addToMap(NeigeItemsProvider.INSTANCE, providers), "NeigeItems", onSuccess, onFailure, filter);
+        tryHook(() -> MiscUtils.addToMap(SXItemProvider.INSTANCE, providers), "SX-Item", onSuccess, onFailure, filter);
+        tryHook(() -> MiscUtils.addToMap(ZaphkielProvider.INSTANCE, providers), "Zaphkiel", onSuccess, onFailure, filter);
+        tryHook(() -> MiscUtils.addToMap(SlimefunProvider.INSTANCE, providers), "Slimefun", onSuccess, onFailure, filter);
+        tryHook(() -> MiscUtils.addToMap(HeadDatabaseProvider.INSTANCE, providers), "HeadDatabase", onSuccess, onFailure, filter);
+        tryHook(() -> MiscUtils.addToMap(ExecutableItemsProvider.INSTANCE, providers), "ExecutableItems", onSuccess, onFailure, filter);
+        tryHook(() -> MiscUtils.addToMap(AzureFlowProvider.INSTANCE, providers), "AzureFlow", onSuccess, onFailure, filter);
+        tryHook(() -> MiscUtils.addToMap(MagicGemProvider.INSTANCE, providers), "MagicGem", onSuccess, onFailure, filter);
+        tryHook(() -> MiscUtils.addToMap(PxRpgProvider.INSTANCE, providers), "PxRpg", onSuccess, onFailure, filter);
+        tryHook(() -> MiscUtils.addToMap(RatzielProvider.INSTANCE, providers), "Ratziel", onSuccess, onFailure, filter);
         return providers;
     }
 
     @FunctionalInterface
     interface J21ProvidersGetter {
-        Map<String, Provider<ItemStack, Player>> get(Consumer<String> onSuccess, BiConsumer<String, Throwable> onFailure, Predicate<Plugin> predicate);
+        Map<String, Provider<ItemStack, Player>> get(Consumer<String> onSuccess, BiConsumer<String, Throwable> onFailure, Predicate<Plugin> filter);
     }
 }

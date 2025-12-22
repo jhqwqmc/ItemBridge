@@ -198,8 +198,8 @@ final class BukkitItemBridgeImpl implements BukkitItemBridge {
         }
 
         @Override
-        public BukkitBuilder detectSupportedPlugins(@NotNull Predicate<Plugin> predicate) {
-            this.providers.putAll(HookHelper.getSupportedPlugins(this.onHookSuccess, this.onHookFailure, predicate));
+        public BukkitBuilder detectSupportedPlugins(@NotNull Predicate<Plugin> filter) {
+            this.providers.putAll(HookHelper.getSupportedPlugins(this.onHookSuccess, this.onHookFailure, filter));
             return this;
         }
 
