@@ -1,6 +1,7 @@
 [versions]
-paper = "1.21.11-R0.1-SNAPSHOT"
-paper-legacy = "1.20.4-R0.1-SNAPSHOT"
+paper-j21 = "1.21.11-R0.1-SNAPSHOT"
+paper-j17 = "1.20.4-R0.1-SNAPSHOT"
+spigot-j8 = "1.16.5-R0.1-SNAPSHOT"
 shadowjar = "9.2.2"
 jetbrains-annotations = "26.0.2"
 kotlin = "2.2.0"
@@ -23,8 +24,9 @@ eco = "6.77.2"
 [libraries]
 kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref = "kotlin" }
 jetbrains-annotations = { module = "org.jetbrains:annotations", version.ref = "jetbrains-annotations" }
-platform-paper = { module = "io.papermc.paper:paper-api", version.ref = "paper" }
-platform-paper-legacy = { module = "io.papermc.paper:paper-api", version.ref = "paper-legacy" }
+platform-paper-j21 = { module = "io.papermc.paper:paper-api", version.ref = "paper-j21" }
+platform-paper-j17 = { module = "io.papermc.paper:paper-api", version.ref = "paper-j17" }
+platform-spigot-j8 = { module = "org.spigotmc:spigot-api", version.ref = "spigot-j8" }
 hook-customfishing = { module = "net.momirealms:custom-fishing", version.ref = "customfishing" }
 hook-craftengine-core = { module = "net.momirealms:craft-engine-core", version.ref = "craftengine" }
 hook-craftengine-bukkit = { module = "net.momirealms:craft-engine-bukkit", version.ref = "craftengine" }
@@ -43,16 +45,20 @@ hook-nova = { module = "xyz.xenondevs.nova:nova-api", version.ref = "nova" }
 hook-eco = { module = "com.willfp:eco", version.ref = "eco" }
 
 [bundles]
-hooks = [
-    "hook-customfishing",
+hooks-j8 = [
     "hook-itemsadder",
-    "hook-mmoitems-api",
-    "hook-mmoitems-lib",
     "hook-neigeitems",
     "hook-sxitem",
     "hook-zaphkiel",
     "hook-slimefun",
     "hook-headdatabase",
+]
+hooks-j11 = [
+    "hook-mmoitems-api",
+    "hook-mmoitems-lib",
+]
+hooks-j17 = [
+    "hook-customfishing",
 ]
 hooks-j21 = [
     "hook-craftengine-core",

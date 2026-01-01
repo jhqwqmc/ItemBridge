@@ -3,9 +3,10 @@ plugins {
 }
 
 dependencies {
-    compileOnly(libs.platform.paper.legacy)
+    compileOnly(libs.jetbrains.annotations)
+    compileOnly(libs.platform.spigot.j8)
     compileOnly(libs.kotlin.stdlib) // ratziel need
-    compileOnly(libs.bundles.hooks) { isTransitive = false }
+    compileOnly(libs.bundles.hooks.j8) { isTransitive = false }
     compileOnly(files("${project.rootDir}/libs/SCore-api.jar")) // executableitems
     compileOnly(files("${project.rootDir}/libs/AzureFlow-api.jar")) // azureflow
     compileOnly(files("${project.rootDir}/libs/MagicGem-api.jar")) // magicgem
@@ -15,16 +16,17 @@ dependencies {
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
     toolchain {
-        languageVersion = JavaLanguageVersion.of(17)
+        languageVersion = JavaLanguageVersion.of(21)
     }
     withSourcesJar()
 }
 
 tasks.withType<JavaCompile> {
     options.encoding = "UTF-8"
-    options.release.set(17)
+    options.compilerArgs.addAll(listOf("-Xlint:-options"))
+    options.release.set(8)
     dependsOn(tasks.clean)
 }

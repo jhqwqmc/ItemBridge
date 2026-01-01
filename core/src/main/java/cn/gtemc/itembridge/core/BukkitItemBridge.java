@@ -10,7 +10,6 @@ import org.jetbrains.annotations.NotNull;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
-import java.util.logging.Logger;
 
 /**
  * BukkitItemBridge is a unified item bridging interface used to build and identify items across different plugins.

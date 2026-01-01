@@ -24,6 +24,9 @@ public final class J21HookHelper {
 
     private J21HookHelper() {}
 
+    public static void init() {
+    }
+
     private static Map<String, Provider<ItemStack, Player>> getSupportedPlugins(
             Consumer<String> onSuccess, BiConsumer<String, Throwable> onFailure, Predicate<Plugin> filter
     ) {

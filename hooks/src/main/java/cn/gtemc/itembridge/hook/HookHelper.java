@@ -1,6 +1,5 @@
 package cn.gtemc.itembridge.hook;
 
-import cn.gtemc.itembridge.api.ItemBridgeException;
 import cn.gtemc.itembridge.api.Provider;
 import cn.gtemc.itembridge.api.util.MiscUtils;
 import cn.gtemc.itembridge.api.util.ThrowableRunnable;
@@ -10,7 +9,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 
-import java.lang.invoke.MethodHandles;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.BiConsumer;
@@ -18,17 +16,25 @@ import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 public final class HookHelper {
-    static J21ProvidersGetter j21ProvidersGetter;
+    static ProvidersGetter j21ProvidersGetter;
+    static ProvidersGetter j17ProvidersGetter;
+    static ProvidersGetter j11ProvidersGetter;
 
     static {
-        if (MiscUtils.isRunningOnJava21()) {
-            try {
-                MethodHandles.lookup().ensureInitialized(Class.forName("cn.gtemc.itembridge.hook.J21HookHelper"));
-            } catch (ReflectiveOperationException e) {
-                throw new ItemBridgeException("Failed to load builtin providers", e);
-            }
-        } else {
-            j21ProvidersGetter = (s, f, p) -> Map.of();
+        try {
+            Class.forName("cn.gtemc.itembridge.hook.J21HookHelper").getDeclaredMethod("init").invoke(null);
+        } catch (Throwable e) {
+            j21ProvidersGetter = (s, f, p) -> new HashMap<>();
+        }
+        try {
+            Class.forName("cn.gtemc.itembridge.hook.J17HookHelper").getDeclaredMethod("init").invoke(null);
+        } catch (Throwable e) {
+            j17ProvidersGetter = (s, f, p) -> new HashMap<>();
+        }
+        try {
+            Class.forName("cn.gtemc.itembridge.hook.J11HookHelper").getDeclaredMethod("init").invoke(null);
+        } catch (Throwable e) {
+            j11ProvidersGetter = (s, f, p) -> new HashMap<>();
         }
     }
 
@@ -60,10 +66,10 @@ public final class HookHelper {
     public static Map<String, Provider<ItemStack, Player>> getSupportedPlugins(
             Consumer<String> onSuccess, BiConsumer<String, Throwable> onFailure, Predicate<Plugin> filter
     ) {
-        Map<String, Provider<ItemStack, Player>> providers = new HashMap<>(j21ProvidersGetter.get(onSuccess, onFailure, filter));
-        tryHook(() -> MiscUtils.addToMap(CustomFishingProvider.INSTANCE, providers), "CustomFishing", onSuccess, onFailure, filter);
+        Map<String, Provider<ItemStack, Player>> providers = new HashMap<>();
+        providers.putAll(j17ProvidersGetter.get(onSuccess, onFailure, filter));
+        providers.putAll(j21ProvidersGetter.get(onSuccess, onFailure, filter));
         tryHook(() -> MiscUtils.addToMap(ItemsAdderProvider.INSTANCE, providers), "ItemsAdder", onSuccess, onFailure, filter);
-        tryHook(() -> MiscUtils.addToMap(MMOItemsProvider.INSTANCE, providers), "MMOItems", onSuccess, onFailure, filter);
         tryHook(() -> MiscUtils.addToMap(NeigeItemsProvider.INSTANCE, providers), "NeigeItems", onSuccess, onFailure, filter);
         tryHook(() -> MiscUtils.addToMap(SXItemProvider.INSTANCE, providers), "SX-Item", onSuccess, onFailure, filter);
         tryHook(() -> MiscUtils.addToMap(ZaphkielProvider.INSTANCE, providers), "Zaphkiel", onSuccess, onFailure, filter);
@@ -78,7 +84,7 @@ public final class HookHelper {
     }
 
     @FunctionalInterface
-    interface J21ProvidersGetter {
+    interface ProvidersGetter {
         Map<String, Provider<ItemStack, Player>> get(Consumer<String> onSuccess, BiConsumer<String, Throwable> onFailure, Predicate<Plugin> filter);
     }
 }

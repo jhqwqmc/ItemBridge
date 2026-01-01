@@ -1,4 +1,4 @@
-import io.github.valtechmobility.gradle.credentials.onepassword.OnepasswordAccessCredentials
+    import io.github.valtechmobility.gradle.credentials.onepassword.OnepasswordAccessCredentials
 
 plugins {
     id("java")
@@ -10,17 +10,18 @@ dependencies {
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
     toolchain {
-        languageVersion = JavaLanguageVersion.of(17)
+        languageVersion = JavaLanguageVersion.of(21)
     }
     withSourcesJar()
 }
 
 tasks.withType<JavaCompile> {
     options.encoding = "UTF-8"
-    options.release.set(17)
+    options.compilerArgs.addAll(listOf("-Xlint:-options"))
+    options.release.set(8)
     dependsOn(tasks.clean)
 }
 

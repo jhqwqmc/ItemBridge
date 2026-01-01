@@ -6,6 +6,7 @@ subprojects {
     repositories {
         mavenCentral()
         maven("https://repo.papermc.io/repository/maven-public/") // paper
+        maven("https://hub.spigotmc.org/nexus/content/groups/public/") // spigot
         maven("https://repo.momirealms.net/releases/") // craftengine customfishing
         maven("https://maven.devs.beer/") // itemsadder
         maven("https://repo.nexomc.com/releases/") // nexo

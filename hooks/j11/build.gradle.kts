@@ -5,13 +5,14 @@ plugins {
 dependencies {
     compileOnly(libs.jetbrains.annotations)
     compileOnly(libs.platform.spigot.j8)
+    compileOnly(libs.bundles.hooks.j11) { isTransitive = false }
     compileOnly(project(":api"))
     compileOnly(project(":hooks"))
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
     toolchain {
         languageVersion = JavaLanguageVersion.of(21)
     }
@@ -20,7 +21,6 @@ java {
 
 tasks.withType<JavaCompile> {
     options.encoding = "UTF-8"
-    options.compilerArgs.addAll(listOf("-Xlint:-options"))
-    options.release.set(8)
+    options.release.set(11)
     dependsOn(tasks.clean)
 }

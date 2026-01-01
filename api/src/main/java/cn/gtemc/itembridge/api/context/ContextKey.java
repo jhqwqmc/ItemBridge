@@ -63,9 +63,9 @@ public final class ContextKey<T> {
 
     @Override
     public boolean equals(Object other) {
-        return this == other || other instanceof ContextKey<?> contextKey
-                && this.type.equals(contextKey.type)
-                && this.key.equals(contextKey.key);
+        return this == other || other instanceof ContextKey<?>
+                && this.type.equals(((ContextKey<?>) other).type)
+                && this.key.equals(((ContextKey<?>) other).key);
     }
 
     @Override

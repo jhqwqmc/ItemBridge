@@ -3,7 +3,7 @@ plugins {
 }
 
 dependencies {
-    compileOnly(libs.platform.paper)
+    compileOnly(libs.platform.paper.j21)
     compileOnly(libs.bundles.hooks.j21) { isTransitive = false }
     compileOnly(files("${project.rootDir}/libs/HMCCosmetics-api.jar")) // hmccosmetics
     compileOnly(files("${project.rootDir}/libs/Sertraline-api.jar")) // sertraline

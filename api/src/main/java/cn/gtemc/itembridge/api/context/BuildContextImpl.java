@@ -93,7 +93,9 @@ final class BuildContextImpl implements BuildContext {
         }
     }
 
-    record SimpleSupplier<T>(T value) implements Supplier<T> {
+    private static class SimpleSupplier<T> implements Supplier<T> {
+        private final T value;
+
         SimpleSupplier(@NotNull T value) {
             this.value = Objects.requireNonNull(value);
         }

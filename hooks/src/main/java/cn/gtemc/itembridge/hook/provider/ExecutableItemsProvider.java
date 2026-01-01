@@ -10,6 +10,7 @@ import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
@@ -29,7 +30,7 @@ public class ExecutableItemsProvider implements Provider<ItemStack, Player> {
                 .getExecutableItem(id)
                 .map(item -> {
                     Map<String, Object> map = MiscUtils.adaptString2Object(context);
-                    return item.buildItem(1, Optional.ofNullable(player), map != null ? map : Map.of());
+                    return item.buildItem(1, Optional.ofNullable(player), map != null ? map : new HashMap<>());
                 });
     }
 

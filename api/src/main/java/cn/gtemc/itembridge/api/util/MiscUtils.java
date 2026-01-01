@@ -14,20 +14,6 @@ public final class MiscUtils {
 
     private MiscUtils() {}
 
-    public static boolean isRunningOnJava21() {
-        try {
-            int version = Runtime.version().feature();
-            return version >= 21;
-        } catch (Throwable e) {
-            try {
-                int version = Integer.parseInt(System.getProperty("java.version"));
-                return version >= 21;
-            } catch (Throwable t) {
-                return false;
-            }
-        }
-    }
-
     public static <T, P> void addToMap(Provider<T, P> provider, Map<String, Provider<T, P>> map) {
         map.put(provider.plugin(), provider);
     }

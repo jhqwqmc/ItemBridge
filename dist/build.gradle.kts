@@ -16,12 +16,14 @@ evaluationDependsOn(":api")
 evaluationDependsOn(":core")
 evaluationDependsOn(":hooks")
 evaluationDependsOn(":hooks:j21")
+evaluationDependsOn(":hooks:j17")
+evaluationDependsOn(":hooks:j11")
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
     toolchain {
-        languageVersion = JavaLanguageVersion.of(17)
+        languageVersion = JavaLanguageVersion.of(21)
     }
     withSourcesJar()
 }
@@ -32,18 +34,22 @@ artifacts {
 
 tasks.withType<JavaCompile> {
     options.encoding = "UTF-8"
-    options.release.set(17)
+    options.compilerArgs.addAll(listOf("-Xlint:-options"))
+    options.release.set(8)
+    dependsOn(tasks.clean)
 }
 
 tasks {
     shadowJar {
         from(zipTree(project(":hooks:j21").tasks.jar.get().archiveFile))
+        from(zipTree(project(":hooks:j17").tasks.jar.get().archiveFile))
+        from(zipTree(project(":hooks:j11").tasks.jar.get().archiveFile))
         archiveClassifier = ""
         archiveFileName = "${rootProject.name}-${rootProject.properties["project_version"]}.jar"
         destinationDirectory.set(file("$rootDir/target"))
     }
     named<Jar>("sourcesJar") {
-        val sourceProjects = listOf(project(":api"), project(":core"), project(":hooks"), project(":hooks:j21"))
+        val sourceProjects = listOf(project(":api"), project(":core"), project(":hooks"), project(":hooks:j21"), project(":hooks:j17"), project(":hooks:j11"))
         from(sourceProjects.map { subProject ->
             subProject.the<JavaPluginExtension>().sourceSets.getByName("main").allSource
         })
