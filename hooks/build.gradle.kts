@@ -5,7 +5,6 @@ plugins {
 dependencies {
     compileOnly(libs.jetbrains.annotations)
     compileOnly(libs.platform.spigot.j8)
-    compileOnly(libs.kotlin.stdlib) // ratziel need
     compileOnly(libs.bundles.hooks.j8) { isTransitive = false }
     compileOnly(files("${project.rootDir}/libs/SCore-api.jar")) // executableitems
     compileOnly(files("${project.rootDir}/libs/AzureFlow-api.jar")) // azureflow

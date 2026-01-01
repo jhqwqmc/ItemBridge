@@ -34,7 +34,8 @@ public class RatzielProvider implements Provider<ItemStack, Player> {
         if (player == null) {
             return Optional.ofNullable(itemGenerator.build().thenApply(NeoItemUtilKt::toItemStack).join());
         }
-        SimpleContext simpleContext = new SimpleContext(player);
+        SimpleContext simpleContext = new SimpleContext();
+        simpleContext.put(player);
         for (Supplier<Object> value : context.contextData().values()) {
             simpleContext.put(value.get());
         }
@@ -50,7 +51,8 @@ public class RatzielProvider implements Provider<ItemStack, Player> {
         if (player == null) {
             return itemGenerator.build().thenApply(NeoItemUtilKt::toItemStack).join();
         }
-        SimpleContext simpleContext = new SimpleContext(player);
+        SimpleContext simpleContext = new SimpleContext();
+        simpleContext.put(player);
         for (Supplier<Object> value : context.contextData().values()) {
             simpleContext.put(value.get());
         }

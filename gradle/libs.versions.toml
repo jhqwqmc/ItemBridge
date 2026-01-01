@@ -4,7 +4,6 @@ paper-j17 = "1.20.4-R0.1-SNAPSHOT"
 spigot-j8 = "1.16.5-R0.1-SNAPSHOT"
 shadowjar = "9.2.2"
 jetbrains-annotations = "26.0.2"
-kotlin = "2.2.0"
 customfishing = "2.3.7"
 craftengine = "0.0.66"
 itemsadder = "4.0.10"
@@ -22,7 +21,6 @@ nova = "0.21.2"
 eco = "6.77.2"
 
 [libraries]
-kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref = "kotlin" }
 jetbrains-annotations = { module = "org.jetbrains:annotations", version.ref = "jetbrains-annotations" }
 platform-paper-j21 = { module = "io.papermc.paper:paper-api", version.ref = "paper-j21" }
 platform-paper-j17 = { module = "io.papermc.paper:paper-api", version.ref = "paper-j17" }
