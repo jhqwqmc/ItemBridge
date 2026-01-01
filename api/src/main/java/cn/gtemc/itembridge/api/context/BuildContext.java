@@ -12,7 +12,7 @@ import java.util.function.Supplier;
 /**
  * Item Build Context Interface.
  * <p>
- * Used to pass additional, optional, or mutable parameters during the item building process ({@link Provider#build(String, BuildContext)}).
+ * Used to pass additional, optional, or mutable parameters during the item building process ({@link Provider#build(String, Object, BuildContext)}).
  * <p>
  * Uses a Key-Value pattern to store data, where the Key is a type-safe {@link ContextKey}, ensuring data type safety.
  */
