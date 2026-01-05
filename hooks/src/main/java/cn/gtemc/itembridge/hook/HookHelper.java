@@ -67,6 +67,7 @@ public final class HookHelper {
             Consumer<String> onSuccess, BiConsumer<String, Throwable> onFailure, Predicate<Plugin> filter
     ) {
         Map<String, Provider<ItemStack, Player>> providers = new HashMap<>();
+        providers.putAll(j11ProvidersGetter.get(onSuccess, onFailure, filter));
         providers.putAll(j17ProvidersGetter.get(onSuccess, onFailure, filter));
         providers.putAll(j21ProvidersGetter.get(onSuccess, onFailure, filter));
         tryHook(() -> Utils.addToMap(ItemsAdderProvider.INSTANCE, providers), "ItemsAdder", onSuccess, onFailure, filter);
