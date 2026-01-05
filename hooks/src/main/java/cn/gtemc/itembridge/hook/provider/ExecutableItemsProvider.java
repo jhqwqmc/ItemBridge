@@ -2,7 +2,7 @@ package cn.gtemc.itembridge.hook.provider;
 
 import cn.gtemc.itembridge.api.Provider;
 import cn.gtemc.itembridge.api.context.BuildContext;
-import cn.gtemc.itembridge.api.util.MiscUtils;
+import cn.gtemc.itembridge.api.util.Utils;
 import com.ssomar.score.api.executableitems.ExecutableItemsAPI;
 import com.ssomar.score.sobject.SObjectInterface;
 import org.bukkit.entity.Player;
@@ -29,7 +29,7 @@ public class ExecutableItemsProvider implements Provider<ItemStack, Player> {
         return ExecutableItemsAPI.getExecutableItemsManager()
                 .getExecutableItem(id)
                 .map(item -> {
-                    Map<String, Object> map = MiscUtils.adaptString2Object(context);
+                    Map<String, Object> map = Utils.adaptString2Object(context);
                     return item.buildItem(1, Optional.ofNullable(player), map != null ? map : new HashMap<>());
                 });
     }

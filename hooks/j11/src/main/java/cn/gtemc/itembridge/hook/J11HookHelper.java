@@ -1,7 +1,7 @@
 package cn.gtemc.itembridge.hook;
 
 import cn.gtemc.itembridge.api.Provider;
-import cn.gtemc.itembridge.api.util.MiscUtils;
+import cn.gtemc.itembridge.api.util.Utils;
 import cn.gtemc.itembridge.hook.provider.*;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -31,7 +31,7 @@ public final class J11HookHelper {
             Consumer<String> onSuccess, BiConsumer<String, Throwable> onFailure, Predicate<Plugin> filter
     ) {
         Map<String, Provider<ItemStack, Player>> providers = new HashMap<>();
-        tryHook(() -> MiscUtils.addToMap(MMOItemsProvider.INSTANCE, providers), "MMOItems", onSuccess, onFailure, filter);
+        tryHook(() -> Utils.addToMap(MMOItemsProvider.INSTANCE, providers), "MMOItems", onSuccess, onFailure, filter);
         return providers;
     }
 }

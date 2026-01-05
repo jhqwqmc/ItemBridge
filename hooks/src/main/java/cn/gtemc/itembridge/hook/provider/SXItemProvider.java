@@ -2,7 +2,7 @@ package cn.gtemc.itembridge.hook.provider;
 
 import cn.gtemc.itembridge.api.Provider;
 import cn.gtemc.itembridge.api.context.BuildContext;
-import cn.gtemc.itembridge.api.util.MiscUtils;
+import cn.gtemc.itembridge.api.util.Utils;
 import github.saukiya.sxitem.SXItem;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -23,12 +23,12 @@ public class SXItemProvider implements Provider<ItemStack, Player> {
 
     @Override
     public Optional<ItemStack> build(String id, @Nullable Player player, @NotNull BuildContext context) {
-        return Optional.of(SXItem.getItemManager().getItem(id, player, MiscUtils.adaptObjectArray(context)));
+        return Optional.of(SXItem.getItemManager().getItem(id, player, Utils.adaptObjectArray(context)));
     }
 
     @Override
     public @Nullable ItemStack buildOrNull(String id, @Nullable Player player, @NotNull BuildContext context) {
-        return SXItem.getItemManager().getItem(id, player, MiscUtils.adaptObjectArray(context));
+        return SXItem.getItemManager().getItem(id, player, Utils.adaptObjectArray(context));
     }
 
     @Override

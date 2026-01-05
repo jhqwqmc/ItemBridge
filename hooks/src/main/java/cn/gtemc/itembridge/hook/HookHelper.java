@@ -1,7 +1,7 @@
 package cn.gtemc.itembridge.hook;
 
 import cn.gtemc.itembridge.api.Provider;
-import cn.gtemc.itembridge.api.util.MiscUtils;
+import cn.gtemc.itembridge.api.util.Utils;
 import cn.gtemc.itembridge.api.util.ThrowableRunnable;
 import cn.gtemc.itembridge.hook.provider.*;
 import org.bukkit.Bukkit;
@@ -69,17 +69,17 @@ public final class HookHelper {
         Map<String, Provider<ItemStack, Player>> providers = new HashMap<>();
         providers.putAll(j17ProvidersGetter.get(onSuccess, onFailure, filter));
         providers.putAll(j21ProvidersGetter.get(onSuccess, onFailure, filter));
-        tryHook(() -> MiscUtils.addToMap(ItemsAdderProvider.INSTANCE, providers), "ItemsAdder", onSuccess, onFailure, filter);
-        tryHook(() -> MiscUtils.addToMap(NeigeItemsProvider.INSTANCE, providers), "NeigeItems", onSuccess, onFailure, filter);
-        tryHook(() -> MiscUtils.addToMap(SXItemProvider.INSTANCE, providers), "SX-Item", onSuccess, onFailure, filter);
-        tryHook(() -> MiscUtils.addToMap(ZaphkielProvider.INSTANCE, providers), "Zaphkiel", onSuccess, onFailure, filter);
-        tryHook(() -> MiscUtils.addToMap(SlimefunProvider.INSTANCE, providers), "Slimefun", onSuccess, onFailure, filter);
-        tryHook(() -> MiscUtils.addToMap(HeadDatabaseProvider.INSTANCE, providers), "HeadDatabase", onSuccess, onFailure, filter);
-        tryHook(() -> MiscUtils.addToMap(ExecutableItemsProvider.INSTANCE, providers), "ExecutableItems", onSuccess, onFailure, filter);
-        tryHook(() -> MiscUtils.addToMap(AzureFlowProvider.INSTANCE, providers), "AzureFlow", onSuccess, onFailure, filter);
-        tryHook(() -> MiscUtils.addToMap(MagicGemProvider.INSTANCE, providers), "MagicGem", onSuccess, onFailure, filter);
-        tryHook(() -> MiscUtils.addToMap(PxRpgProvider.INSTANCE, providers), "PxRpg", onSuccess, onFailure, filter);
-        tryHook(() -> MiscUtils.addToMap(RatzielProvider.INSTANCE, providers), "Ratziel", onSuccess, onFailure, filter);
+        tryHook(() -> Utils.addToMap(ItemsAdderProvider.INSTANCE, providers), "ItemsAdder", onSuccess, onFailure, filter);
+        tryHook(() -> Utils.addToMap(NeigeItemsProvider.INSTANCE, providers), "NeigeItems", onSuccess, onFailure, filter);
+        tryHook(() -> Utils.addToMap(SXItemProvider.INSTANCE, providers), "SX-Item", onSuccess, onFailure, filter);
+        tryHook(() -> Utils.addToMap(ZaphkielProvider.INSTANCE, providers), "Zaphkiel", onSuccess, onFailure, filter);
+        tryHook(() -> Utils.addToMap(SlimefunProvider.INSTANCE, providers), "Slimefun", onSuccess, onFailure, filter);
+        tryHook(() -> Utils.addToMap(HeadDatabaseProvider.INSTANCE, providers), "HeadDatabase", onSuccess, onFailure, filter);
+        tryHook(() -> Utils.addToMap(ExecutableItemsProvider.INSTANCE, providers), "ExecutableItems", onSuccess, onFailure, filter);
+        tryHook(() -> Utils.addToMap(AzureFlowProvider.INSTANCE, providers), "AzureFlow", onSuccess, onFailure, filter);
+        tryHook(() -> Utils.addToMap(MagicGemProvider.INSTANCE, providers), "MagicGem", onSuccess, onFailure, filter);
+        tryHook(() -> Utils.addToMap(PxRpgProvider.INSTANCE, providers), "PxRpg", onSuccess, onFailure, filter);
+        tryHook(() -> Utils.addToMap(RatzielProvider.INSTANCE, providers), "Ratziel", onSuccess, onFailure, filter);
         return providers;
     }
 

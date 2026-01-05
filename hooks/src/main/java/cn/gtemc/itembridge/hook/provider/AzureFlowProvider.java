@@ -2,7 +2,7 @@ package cn.gtemc.itembridge.hook.provider;
 
 import cn.gtemc.itembridge.api.Provider;
 import cn.gtemc.itembridge.api.context.BuildContext;
-import cn.gtemc.itembridge.api.util.MiscUtils;
+import cn.gtemc.itembridge.api.util.Utils;
 import io.rokuko.azureflow.api.AzureFlowAPI;
 import io.rokuko.azureflow.api.item.Item;
 import io.rokuko.azureflow.api.item.ItemFactory;
@@ -33,7 +33,7 @@ public class AzureFlowProvider implements Provider<ItemStack, Player> {
         if (factory == null) {
             return Optional.empty();
         }
-        return Optional.ofNullable(factory.build().itemStack(player, MiscUtils.adaptString2Object(context)));
+        return Optional.ofNullable(factory.build().itemStack(player, Utils.adaptString2Object(context)));
     }
 
     @Override
@@ -42,7 +42,7 @@ public class AzureFlowProvider implements Provider<ItemStack, Player> {
         if (factory == null) {
             return null;
         }
-        return factory.build().itemStack(player, MiscUtils.adaptString2Object(context));
+        return factory.build().itemStack(player, Utils.adaptString2Object(context));
     }
 
     @Override

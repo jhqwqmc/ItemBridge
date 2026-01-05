@@ -2,7 +2,7 @@ package cn.gtemc.itembridge.hook.provider;
 
 import cn.gtemc.itembridge.api.Provider;
 import cn.gtemc.itembridge.api.context.BuildContext;
-import cn.gtemc.itembridge.api.util.MiscUtils;
+import cn.gtemc.itembridge.api.util.Utils;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
@@ -23,12 +23,12 @@ public class NeigeItemsProvider implements Provider<ItemStack, Player> {
 
     @Override
     public Optional<ItemStack> build(String id, @Nullable Player player, @NotNull BuildContext context) {
-        return Optional.ofNullable(ItemManager.INSTANCE.getItemStack(id, player, MiscUtils.adaptString2String(context)));
+        return Optional.ofNullable(ItemManager.INSTANCE.getItemStack(id, player, Utils.adaptString2String(context)));
     }
 
     @Override
     public @Nullable ItemStack buildOrNull(String id, @Nullable Player player, @NotNull BuildContext context) {
-        return ItemManager.INSTANCE.getItemStack(id, player, MiscUtils.adaptString2String(context));
+        return ItemManager.INSTANCE.getItemStack(id, player, Utils.adaptString2String(context));
     }
 
     @Override

@@ -10,9 +10,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
 
-public final class MiscUtils {
+public final class Utils {
 
-    private MiscUtils() {}
+    private Utils() {}
 
     public static <T, P> void addToMap(Provider<T, P> provider, Map<String, Provider<T, P>> map) {
         map.put(provider.plugin(), provider);
