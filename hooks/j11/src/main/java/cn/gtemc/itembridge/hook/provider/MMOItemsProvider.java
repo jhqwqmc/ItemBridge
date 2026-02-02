@@ -60,7 +60,7 @@ public class MMOItemsProvider implements Provider<ItemStack, Player> {
         if (type == null || id == null) {
             return Optional.empty();
         }
-        return Optional.of(type + "_" + id);
+        return Optional.of(type.getId() + "_" + id);
     }
 
     @Override
@@ -70,7 +70,7 @@ public class MMOItemsProvider implements Provider<ItemStack, Player> {
         if (type == null || id == null) {
             return null;
         }
-        return type + "_" + id;
+        return type.getId() + "_" + id;
     }
 
     @Override
