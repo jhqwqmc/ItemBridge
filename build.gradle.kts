@@ -8,6 +8,7 @@ subprojects {
         maven("https://repo.papermc.io/repository/maven-public/") // paper
         maven("https://hub.spigotmc.org/nexus/content/groups/public/") // spigot
         maven("https://repo.momirealms.net/releases/") // craftengine customfishing
+        maven("https://repo.momirealms.net/snapshots/") // craftengine
         maven("https://maven.devs.beer/") // itemsadder
         maven("https://repo.nexomc.com/releases/") // nexo
         maven("https://nexus.phoenixdevt.fr/repository/maven-public/") // mmoitems

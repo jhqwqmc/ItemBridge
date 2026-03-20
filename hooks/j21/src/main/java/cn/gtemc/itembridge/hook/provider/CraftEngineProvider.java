@@ -2,9 +2,10 @@ package cn.gtemc.itembridge.hook.provider;
 
 import cn.gtemc.itembridge.api.Provider;
 import cn.gtemc.itembridge.api.context.BuildContext;
-import net.momirealms.craftengine.bukkit.api.BukkitAdaptors;
+import cn.gtemc.itembridge.api.context.ContextKeys;
+import net.momirealms.craftengine.bukkit.api.BukkitAdaptor;
 import net.momirealms.craftengine.bukkit.api.CraftEngineItems;
-import net.momirealms.craftengine.core.item.CustomItem;
+import net.momirealms.craftengine.bukkit.item.BukkitCustomItem;
 import net.momirealms.craftengine.core.item.ItemBuildContext;
 import net.momirealms.craftengine.core.plugin.context.ContextHolder;
 import net.momirealms.craftengine.core.plugin.context.ContextKey;
@@ -16,6 +17,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Supplier;
 
@@ -32,25 +34,25 @@ public class CraftEngineProvider implements Provider<ItemStack, Player> {
     @Override
     public Optional<ItemStack> build(String id, @Nullable Player player, @NotNull BuildContext context) {
         Key itemId = Key.of(id);
-        CustomItem<ItemStack> customItem = CraftEngineItems.byId(itemId);
+        BukkitCustomItem customItem = CraftEngineItems.byId(itemId);
         if (customItem == null) {
             return Optional.empty();
         }
         ContextHolder.Builder builder = ContextHolder.builder().withParameter(DirectContextParameters.ID, itemId);
-        ItemBuildContext itemBuildContext = ItemBuildContext.of(player == null ? null : BukkitAdaptors.adapt(player), adapt(builder, context));
-        return Optional.ofNullable(customItem.buildItemStack(itemBuildContext));
+        ItemBuildContext itemBuildContext = ItemBuildContext.of(player == null ? null : BukkitAdaptor.adapt(player), adapt(builder, context));
+        return Optional.ofNullable(customItem.buildBukkitItem(itemBuildContext, Objects.requireNonNull(context.getOrDefault(ContextKeys.COUNT, 1))));
     }
 
     @Override
     public @Nullable ItemStack buildOrNull(String id, @Nullable Player player, @NotNull BuildContext context) {
         Key itemId = Key.of(id);
-        CustomItem<ItemStack> customItem = CraftEngineItems.byId(itemId);
+        BukkitCustomItem customItem = CraftEngineItems.byId(itemId);
         if (customItem == null) {
             return null;
         }
         ContextHolder.Builder builder = ContextHolder.builder().withParameter(DirectContextParameters.ID, itemId);
-        ItemBuildContext itemBuildContext = ItemBuildContext.of(player == null ? null : BukkitAdaptors.adapt(player), adapt(builder, context));
-        return customItem.buildItemStack(itemBuildContext);
+        ItemBuildContext itemBuildContext = ItemBuildContext.of(player == null ? null : BukkitAdaptor.adapt(player), adapt(builder, context));
+        return customItem.buildBukkitItem(itemBuildContext, Objects.requireNonNull(context.getOrDefault(ContextKeys.COUNT, 1)));
     }
 
     @Override
