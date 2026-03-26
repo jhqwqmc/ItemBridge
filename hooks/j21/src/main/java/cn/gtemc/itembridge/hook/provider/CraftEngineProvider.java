@@ -2,7 +2,6 @@ package cn.gtemc.itembridge.hook.provider;
 
 import cn.gtemc.itembridge.api.Provider;
 import cn.gtemc.itembridge.api.context.BuildContext;
-import cn.gtemc.itembridge.api.context.ContextKeys;
 import net.momirealms.craftengine.bukkit.api.BukkitAdaptor;
 import net.momirealms.craftengine.bukkit.api.CraftEngineItems;
 import net.momirealms.craftengine.bukkit.item.BukkitCustomItem;
@@ -17,7 +16,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Supplier;
 
@@ -40,7 +38,7 @@ public class CraftEngineProvider implements Provider<ItemStack, Player> {
         }
         ContextHolder.Builder builder = ContextHolder.builder().withParameter(DirectContextParameters.ID, itemId);
         ItemBuildContext itemBuildContext = ItemBuildContext.of(player == null ? null : BukkitAdaptor.adapt(player), adapt(builder, context));
-        return Optional.ofNullable(customItem.buildBukkitItem(itemBuildContext, Objects.requireNonNull(context.getOrDefault(ContextKeys.COUNT, 1))));
+        return Optional.ofNullable(customItem.buildBukkitItem(itemBuildContext));
     }
 
     @Override
@@ -52,7 +50,7 @@ public class CraftEngineProvider implements Provider<ItemStack, Player> {
         }
         ContextHolder.Builder builder = ContextHolder.builder().withParameter(DirectContextParameters.ID, itemId);
         ItemBuildContext itemBuildContext = ItemBuildContext.of(player == null ? null : BukkitAdaptor.adapt(player), adapt(builder, context));
-        return customItem.buildBukkitItem(itemBuildContext, Objects.requireNonNull(context.getOrDefault(ContextKeys.COUNT, 1)));
+        return customItem.buildBukkitItem(itemBuildContext);
     }
 
     @Override
