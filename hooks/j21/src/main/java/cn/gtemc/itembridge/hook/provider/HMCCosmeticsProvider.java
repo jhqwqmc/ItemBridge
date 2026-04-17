@@ -12,7 +12,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.Optional;
 
-public class HMCCosmeticsProvider implements Provider<ItemStack, Player> {
+public final class HMCCosmeticsProvider implements Provider<ItemStack, Player> {
     public static final HMCCosmeticsProvider INSTANCE = new HMCCosmeticsProvider();
 
     private HMCCosmeticsProvider() {}

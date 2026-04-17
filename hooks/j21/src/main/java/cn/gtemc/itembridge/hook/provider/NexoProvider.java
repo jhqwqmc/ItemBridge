@@ -11,7 +11,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
-public class NexoProvider implements Provider<ItemStack, Player> {
+public final class NexoProvider implements Provider<ItemStack, Player> {
     public static final NexoProvider INSTANCE = new NexoProvider();
 
     private NexoProvider() {}

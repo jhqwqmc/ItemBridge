@@ -10,7 +10,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
-public class ZaphkielProvider implements Provider<ItemStack, Player> {
+public final class ZaphkielProvider implements Provider<ItemStack, Player> {
     public static final ZaphkielProvider INSTANCE = new ZaphkielProvider();
 
     private ZaphkielProvider() {}

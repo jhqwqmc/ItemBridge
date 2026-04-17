@@ -15,6 +15,7 @@ dependencies {
 evaluationDependsOn(":api")
 evaluationDependsOn(":core")
 evaluationDependsOn(":hooks")
+evaluationDependsOn(":hooks:j21:legacy")
 evaluationDependsOn(":hooks:j21")
 evaluationDependsOn(":hooks:j17")
 evaluationDependsOn(":hooks:j11")
@@ -41,6 +42,7 @@ tasks.withType<JavaCompile> {
 
 tasks {
     shadowJar {
+        from(zipTree(project(":hooks:j21:legacy").tasks.jar.get().archiveFile))
         from(zipTree(project(":hooks:j21").tasks.jar.get().archiveFile))
         from(zipTree(project(":hooks:j17").tasks.jar.get().archiveFile))
         from(zipTree(project(":hooks:j11").tasks.jar.get().archiveFile))
@@ -49,7 +51,15 @@ tasks {
         destinationDirectory.set(file("$rootDir/target"))
     }
     named<Jar>("sourcesJar") {
-        val sourceProjects = listOf(project(":api"), project(":core"), project(":hooks"), project(":hooks:j21"), project(":hooks:j17"), project(":hooks:j11"))
+        val sourceProjects = listOf(
+            project(":api"),
+            project(":core"),
+            project(":hooks"),
+            project(":hooks:j21:legacy"),
+            project(":hooks:j21"),
+            project(":hooks:j17"),
+            project(":hooks:j11")
+        )
         from(sourceProjects.map { subProject ->
             subProject.the<JavaPluginExtension>().sourceSets.getByName("main").allSource
         })

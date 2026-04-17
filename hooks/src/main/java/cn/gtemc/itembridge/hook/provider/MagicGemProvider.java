@@ -11,7 +11,7 @@ import pku.yim.magicgem.gem.GemManager;
 
 import java.util.Optional;
 
-public class MagicGemProvider implements Provider<ItemStack, Player> {
+public final class MagicGemProvider implements Provider<ItemStack, Player> {
     public static final MagicGemProvider INSTANCE = new MagicGemProvider();
 
     private MagicGemProvider() {}

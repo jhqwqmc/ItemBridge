@@ -17,7 +17,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Map;
 import java.util.Optional;
 
-public class AzureFlowProvider implements Provider<ItemStack, Player> {
+public final class AzureFlowProvider implements Provider<ItemStack, Player> {
     public static final AzureFlowProvider INSTANCE = new AzureFlowProvider();
 
     private AzureFlowProvider() {}

@@ -4,12 +4,10 @@ plugins {
 
 dependencies {
     compileOnly(libs.platform.paper.j21)
-    compileOnly(libs.bundles.hooks.j21) { isTransitive = false }
-    compileOnly(files("${project.rootDir}/libs/HMCCosmetics-api.jar")) // hmccosmetics
-    compileOnly(files("${project.rootDir}/libs/Sertraline-api.jar")) // sertraline
+    compileOnly("net.momirealms:craft-engine-core:0.0.67")
+    compileOnly("net.momirealms:craft-engine-bukkit:0.0.67")
     compileOnly(project(":api"))
     compileOnly(project(":hooks"))
-    compileOnly(project(":hooks:j21:legacy"))
 }
 
 java {

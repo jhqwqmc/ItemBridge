@@ -15,7 +15,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Optional;
 import java.util.function.Supplier;
 
-public class RatzielProvider implements Provider<ItemStack, Player> {
+public final class RatzielProvider implements Provider<ItemStack, Player> {
     public static final RatzielProvider INSTANCE = new RatzielProvider();
 
     private RatzielProvider() {}

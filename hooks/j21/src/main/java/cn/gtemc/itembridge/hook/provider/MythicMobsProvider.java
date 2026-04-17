@@ -16,7 +16,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Optional;
 
 @SuppressWarnings("resource")
-public class MythicMobsProvider implements Provider<ItemStack, Player> {
+public final class MythicMobsProvider implements Provider<ItemStack, Player> {
     public static final MythicMobsProvider INSTANCE = new MythicMobsProvider();
 
     private MythicMobsProvider() {}

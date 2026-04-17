@@ -11,7 +11,7 @@ import pers.neige.neigeitems.manager.ItemManager;
 
 import java.util.Optional;
 
-public class NeigeItemsProvider implements Provider<ItemStack, Player> {
+public final class NeigeItemsProvider implements Provider<ItemStack, Player> {
     public static final NeigeItemsProvider INSTANCE = new NeigeItemsProvider();
 
     private NeigeItemsProvider() {}

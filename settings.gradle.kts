@@ -7,3 +7,5 @@ include("hooks:j21")
 include("hooks:j17")
 include("hooks:j11")
 include("dist")
+
+include("hooks:j21:legacy")

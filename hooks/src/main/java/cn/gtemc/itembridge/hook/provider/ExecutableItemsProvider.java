@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-public class ExecutableItemsProvider implements Provider<ItemStack, Player> {
+public final class ExecutableItemsProvider implements Provider<ItemStack, Player> {
     public static final ExecutableItemsProvider INSTANCE = new ExecutableItemsProvider();
 
     private ExecutableItemsProvider() {}

@@ -11,7 +11,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
-public class SXItemProvider implements Provider<ItemStack, Player> {
+public final class SXItemProvider implements Provider<ItemStack, Player> {
     public static final SXItemProvider INSTANCE = new SXItemProvider();
 
     private SXItemProvider() {}
@@ -27,7 +27,7 @@ public class SXItemProvider implements Provider<ItemStack, Player> {
     }
 
     @Override
-    public @Nullable ItemStack buildOrNull(String id, @Nullable Player player, @NotNull BuildContext context) {
+    public @NotNull ItemStack buildOrNull(String id, @Nullable Player player, @NotNull BuildContext context) {
         return SXItem.getItemManager().getItem(id, player, Utils.adaptObjectArray(context));
     }
 

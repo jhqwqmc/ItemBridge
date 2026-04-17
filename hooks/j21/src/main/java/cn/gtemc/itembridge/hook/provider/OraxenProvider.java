@@ -11,7 +11,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
-public class OraxenProvider implements Provider<ItemStack, Player> {
+public final class OraxenProvider implements Provider<ItemStack, Player> {
     public static final OraxenProvider INSTANCE = new OraxenProvider();
 
     private OraxenProvider() {}

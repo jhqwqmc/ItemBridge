@@ -10,7 +10,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
-public class SlimefunProvider implements Provider<ItemStack, Player> {
+public final class SlimefunProvider implements Provider<ItemStack, Player> {
     public static final SlimefunProvider INSTANCE = new SlimefunProvider();
 
     private SlimefunProvider() {}

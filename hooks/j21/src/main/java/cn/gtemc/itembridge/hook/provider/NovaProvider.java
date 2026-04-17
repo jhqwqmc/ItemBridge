@@ -11,7 +11,7 @@ import xyz.xenondevs.nova.api.item.NovaItem;
 
 import java.util.Optional;
 
-public class NovaProvider implements Provider<ItemStack, Player> {
+public final class NovaProvider implements Provider<ItemStack, Player> {
     public static final NovaProvider INSTANCE = new NovaProvider();
 
     private NovaProvider() {}

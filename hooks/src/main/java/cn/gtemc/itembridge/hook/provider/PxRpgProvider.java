@@ -18,7 +18,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
-public class PxRpgProvider implements Provider<ItemStack, Player> {
+public final class PxRpgProvider implements Provider<ItemStack, Player> {
     public static final PxRpgProvider INSTANCE = new PxRpgProvider();
     private final ItemManager itemManager = Module.getModule(ItemModule.class).getItemManager();
 

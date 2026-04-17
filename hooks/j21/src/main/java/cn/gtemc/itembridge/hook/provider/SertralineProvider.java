@@ -11,7 +11,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
-public class SertralineProvider implements Provider<ItemStack, Player> {
+public final class SertralineProvider implements Provider<ItemStack, Player> {
     public static final SertralineProvider INSTANCE = new SertralineProvider();
 
     private SertralineProvider() {}

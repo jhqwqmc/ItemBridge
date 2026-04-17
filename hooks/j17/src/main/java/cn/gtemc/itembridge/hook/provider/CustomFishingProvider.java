@@ -15,7 +15,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.function.Supplier;
 
-public class CustomFishingProvider implements Provider<ItemStack, Player> {
+public final class CustomFishingProvider implements Provider<ItemStack, Player> {
     public static final CustomFishingProvider INSTANCE = new CustomFishingProvider();
 
     private CustomFishingProvider() {}

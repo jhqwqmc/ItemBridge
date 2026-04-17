@@ -12,7 +12,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
-public class MMOItemsProvider implements Provider<ItemStack, Player> {
+public final class MMOItemsProvider implements Provider<ItemStack, Player> {
     public static final MMOItemsProvider INSTANCE = new MMOItemsProvider();
 
     private MMOItemsProvider() {}

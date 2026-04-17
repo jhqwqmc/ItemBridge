@@ -10,7 +10,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
-public class HeadDatabaseProvider implements Provider<ItemStack, Player> {
+public final class HeadDatabaseProvider implements Provider<ItemStack, Player> {
     public static final HeadDatabaseProvider INSTANCE = new HeadDatabaseProvider();
     private final HeadDatabaseAPI api = new HeadDatabaseAPI();
 

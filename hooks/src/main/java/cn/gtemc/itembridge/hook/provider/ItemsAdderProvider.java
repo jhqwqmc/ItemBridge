@@ -10,7 +10,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
-public class ItemsAdderProvider implements Provider<ItemStack, Player> {
+public final class ItemsAdderProvider implements Provider<ItemStack, Player> {
     public static final ItemsAdderProvider INSTANCE = new ItemsAdderProvider();
 
     private ItemsAdderProvider() {}
