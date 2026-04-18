@@ -6,6 +6,7 @@
 - [Baikiruto](https://github.com/YsGqHY/Baikiruto)
 - [CraftEngine](https://github.com/Xiao-MoMi/craft-engine)
 - [CustomFishing](https://github.com/Xiao-MoMi/Custom-Fishing)
+- [DragonArmourers](https://archives.mcbbs.co/read.php?tid=951699)
 - [EcoArmor](https://github.com/Auxilor/EcoArmor)
 - [EcoCrates](https://github.com/Auxilor/EcoCrates)
 - [EcoItems](https://github.com/Auxilor/EcoItems)

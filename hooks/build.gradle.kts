@@ -11,6 +11,7 @@ dependencies {
     compileOnly(files("${project.rootDir}/libs/MagicGem-api.jar")) // magicgem
     compileOnly(files("${project.rootDir}/libs/PxRpg-api.jar")) // pxrpg
     compileOnly(files("${project.rootDir}/libs/Ratziel-api.jar")) // ratziel
+    compileOnly(files("${project.rootDir}/libs/DragonArmourers-api.jar")) // dragonarmourers
     compileOnly(project(":api"))
 }
 

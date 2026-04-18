@@ -83,6 +83,7 @@ public final class HookHelper {
         tryHook(() -> Utils.addToMap(PxRpgProvider.INSTANCE, providers), "PxRpg", onSuccess, onFailure, filter);
         tryHook(() -> Utils.addToMap(RatzielProvider.INSTANCE, providers), "Ratziel", onSuccess, onFailure, filter);
         tryHook(() -> Utils.addToMap(BaikirutoProvider.INSTANCE, providers), "Baikiruto", onSuccess, onFailure, filter);
+        tryHook(() -> Utils.addToMap(DragonArmourersProvider.INSTANCE, providers), "DragonArmourers", onSuccess, onFailure, filter);
         return providers;
     }
 
