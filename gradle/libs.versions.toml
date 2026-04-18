@@ -2,7 +2,7 @@
 paper-j21 = "1.21.11-R0.1-SNAPSHOT"
 paper-j17 = "1.20.4-R0.1-SNAPSHOT"
 spigot-j8 = "1.16.5-R0.1-SNAPSHOT"
-shadowjar = "9.2.2"
+shadowjar = "9.4.1"
 jetbrains-annotations = "26.0.2"
 customfishing = "2.3.7"
 craftengine = "26.4-SNAPSHOT"
@@ -19,6 +19,7 @@ headdatabase = "1.3.2"
 oraxen = "1.200.0"
 nova = "0.21.2"
 eco = "6.77.2"
+baikiruto = "1.6.1"
 
 [libraries]
 jetbrains-annotations = { module = "org.jetbrains:annotations", version.ref = "jetbrains-annotations" }
@@ -41,6 +42,7 @@ hook-headdatabase = { module = "com.arcaniax:HeadDatabase-API", version.ref = "h
 hook-oraxen = { module = "io.th0rgal:oraxen", version.ref = "oraxen" }
 hook-nova = { module = "xyz.xenondevs.nova:nova-api", version.ref = "nova" }
 hook-eco = { module = "com.willfp:eco", version.ref = "eco" }
+hook-baikiruto = { module = "org.tabooproject.baikiruto:Baikiruto", version.ref = "baikiruto" }
 
 [bundles]
 hooks-j8 = [
@@ -50,6 +52,7 @@ hooks-j8 = [
     "hook-zaphkiel",
     "hook-slimefun",
     "hook-headdatabase",
+    "hook-baikiruto",
 ]
 hooks-j11 = [
     "hook-mmoitems-api",

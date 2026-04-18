@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.BiConsumer;
@@ -24,17 +25,17 @@ public final class HookHelper {
         try {
             Class.forName("cn.gtemc.itembridge.hook.J21HookHelper").getDeclaredMethod("init").invoke(null);
         } catch (Throwable e) {
-            j21ProvidersGetter = (s, f, p) -> new HashMap<>();
+            j21ProvidersGetter = (s, f, p) -> Collections.emptyMap();
         }
         try {
             Class.forName("cn.gtemc.itembridge.hook.J17HookHelper").getDeclaredMethod("init").invoke(null);
         } catch (Throwable e) {
-            j17ProvidersGetter = (s, f, p) -> new HashMap<>();
+            j17ProvidersGetter = (s, f, p) -> Collections.emptyMap();
         }
         try {
             Class.forName("cn.gtemc.itembridge.hook.J11HookHelper").getDeclaredMethod("init").invoke(null);
         } catch (Throwable e) {
-            j11ProvidersGetter = (s, f, p) -> new HashMap<>();
+            j11ProvidersGetter = (s, f, p) -> Collections.emptyMap();
         }
     }
 
@@ -81,6 +82,7 @@ public final class HookHelper {
         tryHook(() -> Utils.addToMap(MagicGemProvider.INSTANCE, providers), "MagicGem", onSuccess, onFailure, filter);
         tryHook(() -> Utils.addToMap(PxRpgProvider.INSTANCE, providers), "PxRpg", onSuccess, onFailure, filter);
         tryHook(() -> Utils.addToMap(RatzielProvider.INSTANCE, providers), "Ratziel", onSuccess, onFailure, filter);
+        tryHook(() -> Utils.addToMap(BaikirutoProvider.INSTANCE, providers), "Baikiruto", onSuccess, onFailure, filter);
         return providers;
     }
 

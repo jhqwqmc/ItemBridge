@@ -3,6 +3,7 @@
 ## Supported plugins
 
 - [AzureFlow](https://www.minebbs.com/resources/9673)
+- [Baikiruto](https://github.com/YsGqHY/Baikiruto)
 - [CraftEngine](https://github.com/Xiao-MoMi/craft-engine)
 - [CustomFishing](https://github.com/Xiao-MoMi/Custom-Fishing)
 - [EcoArmor](https://github.com/Auxilor/EcoArmor)
@@ -47,7 +48,7 @@ repositories {
 ```
 ```kts
 dependencies {
-    implementation("cn.gtemc:itembridge:1.0.24")
+    implementation("cn.gtemc:itembridge:1.0.25")
 }
 ```
 

@@ -19,5 +19,6 @@ subprojects {
         maven("https://repo.oraxen.com/releases") // oraxen
         maven("https://repo.xenondevs.xyz/releases") // nova
         maven("https://repo.auxilor.io/repository/maven-public/") // eco plugins
+        maven("https://repo.aeoliancloud.com/repository/releases") // baikiruto
     }
 }
