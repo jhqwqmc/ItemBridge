@@ -17,7 +17,6 @@ publishing {
             artifactId = "itembridge-api"
             version = rootProject.properties["project_version"].toString()
             from(components["java"])
-            artifact(tasks["sourcesJar"])
             publication.applyCommonPom(this, "ItemBridge-API")
         }
     }
