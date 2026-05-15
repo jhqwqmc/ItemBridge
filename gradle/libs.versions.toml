@@ -1,11 +1,10 @@
 [versions]
 paper-j21 = "1.21.11-R0.1-SNAPSHOT"
-paper-j17 = "1.20.4-R0.1-SNAPSHOT"
 spigot-j8 = "1.16.5-R0.1-SNAPSHOT"
-shadowjar = "9.4.1"
 jetbrains-annotations = "26.0.2"
 customfishing = "2.3.7"
 craftengine = "26.5-SNAPSHOT"
+craftengine-legacy = "0.0.67"
 itemsadder = "4.0.10"
 nexo = "1.16.1"
 mmoitems-api = "6.10.1-SNAPSHOT"
@@ -24,11 +23,12 @@ baikiruto = "1.6.1"
 [libraries]
 jetbrains-annotations = { module = "org.jetbrains:annotations", version.ref = "jetbrains-annotations" }
 platform-paper-j21 = { module = "io.papermc.paper:paper-api", version.ref = "paper-j21" }
-platform-paper-j17 = { module = "io.papermc.paper:paper-api", version.ref = "paper-j17" }
 platform-spigot-j8 = { module = "org.spigotmc:spigot-api", version.ref = "spigot-j8" }
 hook-customfishing = { module = "net.momirealms:custom-fishing", version.ref = "customfishing" }
 hook-craftengine-core = { module = "net.momirealms:craft-engine-core", version.ref = "craftengine" }
 hook-craftengine-bukkit = { module = "net.momirealms:craft-engine-bukkit", version.ref = "craftengine" }
+hook-craftengine-core-legacy = { module = "net.momirealms:craft-engine-core", version.ref = "craftengine-legacy" }
+hook-craftengine-bukkit-legacy = { module = "net.momirealms:craft-engine-bukkit", version.ref = "craftengine-legacy" }
 hook-itemsadder = { module = "dev.lone:api-itemsadder", version.ref = "itemsadder" }
 hook-nexo = { module = "com.nexomc:nexo", version.ref = "nexo" }
 hook-mmoitems-api = { module = "net.Indyuce:MMOItems-API", version.ref = "mmoitems-api" }
@@ -45,7 +45,7 @@ hook-eco = { module = "com.willfp:eco", version.ref = "eco" }
 hook-baikiruto = { module = "org.tabooproject.baikiruto:Baikiruto", version.ref = "baikiruto" }
 
 [bundles]
-hooks-j8 = [
+hooks = [
     "hook-itemsadder",
     "hook-neigeitems",
     "hook-sxitem",
@@ -53,15 +53,9 @@ hooks-j8 = [
     "hook-slimefun",
     "hook-headdatabase",
     "hook-baikiruto",
-]
-hooks-j11 = [
     "hook-mmoitems-api",
     "hook-mmoitems-lib",
-]
-hooks-j17 = [
     "hook-customfishing",
-]
-hooks-j21 = [
     "hook-craftengine-core",
     "hook-craftengine-bukkit",
     "hook-nexo",
@@ -71,5 +65,7 @@ hooks-j21 = [
     "hook-eco",
 ]
 
-[plugins]
-shadowjar = { id = "com.gradleup.shadow", version.ref = "shadowjar" }
+hooks-legacy = [
+    "hook-craftengine-core-legacy",
+    "hook-craftengine-bukkit-legacy",
+]

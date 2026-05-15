@@ -8,8 +8,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Optional;
-import java.util.function.BiConsumer;
-import java.util.function.Consumer;
 
 /**
  * ItemBridge is a unified item bridging interface used to build and identify items across different plugins.
@@ -49,10 +47,10 @@ public interface ItemBridge<I, P> {
      *
      * @param plugin The lower-case name of the plugin.
      * @param id     The item ID.
-     * @param player  An optional {@link P} representing the player.
+     * @param player An optional {@link P} representing the player.
      * @return An {@code Optional} containing the successfully built {@link I}, or {@code Optional.empty()} if building fails or the {@link Provider} does not exist.
      */
-    default Optional<I> build(@NotNull String plugin, @Nullable P player, @NotNull String id) {
+    default Optional<I> build(@NotNull String plugin, @NotNull String id, @Nullable P player) {
         return build(plugin, id, player, BuildContext.empty());
     }
 
@@ -208,22 +206,6 @@ public interface ItemBridge<I, P> {
          * @return The current builder instance, supporting method chaining.
          */
         Builder<I, P> immutable(boolean immutable);
-
-        /**
-         * Sets the action to perform when a plugin is successfully hooked.
-         *
-         * @param onSuccess onSuccess a consumer receiving the name of the hooked plugin.
-         * @return The current builder instance, supporting method chaining.
-         */
-        Builder<I, P> onHookSuccess(Consumer<String> onSuccess);
-
-        /**
-         * Sets the action to perform when a hook attempt fails.
-         *
-         * @param onFailure onFailure a bi-consumer receiving the plugin name and the error cause.
-         * @return The current builder instance, supporting method chaining.
-         */
-        Builder<I, P> onHookFailure(BiConsumer<String, Throwable> onFailure);
 
         /**
          * Detects and registers all supported plugins.

@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
@@ -73,22 +74,6 @@ public interface BukkitItemBridge extends ItemBridge<ItemStack, Player> {
         BukkitBuilder immutable(boolean immutable);
 
         /**
-         * Sets the action to perform when a plugin is successfully hooked.
-         *
-         * @param onSuccess onSuccess a consumer receiving the name of the hooked plugin.
-         * @return The current builder instance, supporting method chaining.
-         */
-        BukkitBuilder onHookSuccess(Consumer<String> onSuccess);
-
-        /**
-         * Sets the action to perform when a hook attempt fails.
-         *
-         * @param onFailure onFailure a bi-consumer receiving the plugin name and the error cause.
-         * @return The current builder instance, supporting method chaining.
-         */
-        BukkitBuilder onHookFailure(BiConsumer<String, Throwable> onFailure);
-
-        /**
          * Detects and registers all supported plugins.
          *
          * @return The current builder instance, supporting method chaining.
@@ -101,7 +86,17 @@ public interface BukkitItemBridge extends ItemBridge<ItemStack, Player> {
          * @param filter The predicate to filter plugins.
          * @return The current builder instance, supporting method chaining.
          */
-        BukkitBuilder detectSupportedPlugins(@NotNull Predicate<Plugin> filter);
+        BukkitBuilder detectSupportedPlugins(@Nullable Predicate<Plugin> filter);
+
+        /**
+         * Detects and registers all supported plugins.
+         *
+         * @param onSuccess On success a consumer receiving the name of the hooked plugin.
+         * @param onFailure On failure a bi-consumer receiving the plugin name and the error cause.
+         * @param filter    The predicate to filter plugins.
+         * @return The current builder instance, supporting method chaining.
+         */
+        BukkitBuilder detectSupportedPlugins(@Nullable Consumer<String> onSuccess, @Nullable BiConsumer<String, Throwable> onFailure, @Nullable Predicate<Plugin> filter);
 
         /**
          * Builds and returns an immutable {@link BukkitItemBridge} instance.

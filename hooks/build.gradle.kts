@@ -1,11 +1,9 @@
-plugins {
-    id("java")
-}
-
 dependencies {
     compileOnly(libs.jetbrains.annotations)
-    compileOnly(libs.platform.spigot.j8)
-    compileOnly(libs.bundles.hooks.j8) { isTransitive = false }
+    compileOnly(libs.platform.paper.j21)
+    compileOnly(libs.bundles.hooks) { isTransitive = false }
+    compileOnly(files("${project.rootDir}/libs/HMCCosmetics-api.jar")) // hmccosmetics
+    compileOnly(files("${project.rootDir}/libs/Sertraline-api.jar")) // sertraline
     compileOnly(files("${project.rootDir}/libs/SCore-api.jar")) // executableitems
     compileOnly(files("${project.rootDir}/libs/AzureFlow-api.jar")) // azureflow
     compileOnly(files("${project.rootDir}/libs/MagicGem-api.jar")) // magicgem
@@ -13,20 +11,9 @@ dependencies {
     compileOnly(files("${project.rootDir}/libs/Ratziel-api.jar")) // ratziel
     compileOnly(files("${project.rootDir}/libs/DragonArmourers-api.jar")) // dragonarmourers
     compileOnly(project(":api"))
-}
-
-java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
-    }
-    withSourcesJar()
+    implementation(project(":hooks:legacy"))
 }
 
 tasks.withType<JavaCompile> {
-    options.encoding = "UTF-8"
-    options.compilerArgs.addAll(listOf("-Xlint:-options"))
     options.release.set(8)
-    dependsOn(tasks.clean)
 }

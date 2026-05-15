@@ -35,9 +35,10 @@ final class BuildContextImpl implements BuildContext {
     }
 
     @Override
-    public <T> T getOrDefault(ContextKey<T> key, T defaultValue) {
+    public <T> @NotNull T getOrDefault(ContextKey<T> key, @NotNull T defaultValue) {
         Supplier<T> supplier = (Supplier<T>) this.contextData.get(key);
-        return supplier == null ? defaultValue : supplier.get();
+        T value = supplier == null ? defaultValue : supplier.get();
+        return value == null ? defaultValue : value;
     }
 
     @Override

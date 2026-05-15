@@ -76,7 +76,7 @@ public interface BuildContext {
      * @return The corresponding value, or the default value.
      * @param <T> The type of the data.
      */
-    <T> @Nullable T getOrDefault(ContextKey<T> key, T defaultValue);
+    <T> @NotNull T getOrDefault(ContextKey<T> key, @NotNull T defaultValue);
 
     @ApiStatus.Internal
     Map<ContextKey<?>, Supplier<Object>> contextData();
