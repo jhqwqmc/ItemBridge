@@ -41,9 +41,10 @@ subprojects {
         dependsOn(tasks.clean)
     }
 
+    val allowed = listOf("compileClasspath", "runtimeClasspath", "testCompileClasspath", "testRuntimeClasspath")
     plugins.withType<JavaPlugin> {
         configurations.matching {
-            it.isCanBeResolved && it.name != "compileOnly"
+            it.isCanBeResolved && it.name in allowed
         }.all {
             attributes {
                 attribute(TargetJvmVersion.TARGET_JVM_VERSION_ATTRIBUTE, Int.MAX_VALUE)

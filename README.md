@@ -40,7 +40,7 @@
 
 ## How to use
 
-### Add dependencies to the project
+### Add dependency to the project
 
 ```kts
 repositories {
