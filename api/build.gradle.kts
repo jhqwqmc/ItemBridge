@@ -1,4 +1,4 @@
-    import io.github.valtechmobility.gradle.credentials.onepassword.OnepasswordAccessCredentials
+import io.github.valtechmobility.gradle.credentials.onepassword.OnepasswordAccessCredentials
 
 plugins {
     id("java")
