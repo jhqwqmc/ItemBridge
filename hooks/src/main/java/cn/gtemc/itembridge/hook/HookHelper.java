@@ -16,29 +16,6 @@ import java.util.function.Predicate;
 public final class HookHelper {
     private HookHelper() {}
 
-    static void tryHook(
-            ThrowableRunnable runnable,
-            String pluginName,
-            @Nullable Consumer<String> onSuccess,
-            @Nullable BiConsumer<String, Throwable> onFailure,
-            @Nullable Predicate<Plugin> filter
-    ) {
-        Plugin plugin = Bukkit.getPluginManager().getPlugin(pluginName);
-        if (plugin == null || (filter != null && !filter.test(plugin))) {
-            return;
-        }
-        try {
-            runnable.run();
-            if (onSuccess != null) {
-                onSuccess.accept(pluginName);
-            }
-        } catch (Throwable e) {
-            if (onFailure != null) {
-                onFailure.accept(pluginName, e);
-            }
-        }
-    }
-
     public static Map<String, Provider<ItemStack, Player>> getSupportedPlugins(
             @Nullable Consumer<String> onSuccess,
             @Nullable BiConsumer<String, Throwable> onFailure,
@@ -79,8 +56,31 @@ public final class HookHelper {
         return providers;
     }
 
+    private static void tryHook(
+            ThrowableRunnable runnable,
+            String pluginName,
+            @Nullable Consumer<String> onSuccess,
+            @Nullable BiConsumer<String, Throwable> onFailure,
+            @Nullable Predicate<Plugin> filter
+    ) {
+        Plugin plugin = Bukkit.getPluginManager().getPlugin(pluginName);
+        if (plugin == null || (filter != null && !filter.test(plugin))) {
+            return;
+        }
+        try {
+            runnable.run();
+            if (onSuccess != null) {
+                onSuccess.accept(pluginName);
+            }
+        } catch (Throwable e) {
+            if (onFailure != null) {
+                onFailure.accept(pluginName, e);
+            }
+        }
+    }
+
     @FunctionalInterface
-    public interface ThrowableRunnable {
+    private interface ThrowableRunnable {
 
         void run() throws Throwable;
     }
