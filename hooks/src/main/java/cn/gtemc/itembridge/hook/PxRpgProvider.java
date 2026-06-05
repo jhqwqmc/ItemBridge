@@ -110,7 +110,9 @@ final class PxRpgProvider implements Provider<ItemStack, Player> {
         return itemManager.getRegister(split[0]) != null;
     }
 
-    static boolean conflictCheck(Plugin plugin) {
-        return Utils.classExists("com{}pxpmc{}pxrpg{}api{}MAPI");
+    final static class Check {
+        static boolean conflictCheck(Plugin plugin) {
+            return Utils.classExists("com{}pxpmc{}pxrpg{}api{}MAPI");
+        }
     }
 }

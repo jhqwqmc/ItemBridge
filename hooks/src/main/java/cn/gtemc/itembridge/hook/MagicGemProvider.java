@@ -68,7 +68,9 @@ final class MagicGemProvider implements Provider<ItemStack, Player> {
         return GemManager.getGemByName(id) != null;
     }
 
-    static boolean conflictCheck(Plugin plugin) {
-        return Utils.classExists("pku{}yim{}magicgem{}gem{}Gem");
+    final static class Check {
+        static boolean conflictCheck(Plugin plugin) {
+            return Utils.classExists("pku{}yim{}magicgem{}gem{}Gem");
+        }
     }
 }

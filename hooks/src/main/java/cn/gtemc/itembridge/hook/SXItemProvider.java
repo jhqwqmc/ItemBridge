@@ -51,7 +51,9 @@ final class SXItemProvider implements Provider<ItemStack, Player> {
         return SXItem.getItemManager().hasItem(id);
     }
 
-    static boolean conflictCheck(Plugin plugin) {
-        return Utils.classExists("github{}saukiya{}sxitem{}SXItem");
+    final static class Check {
+        static boolean conflictCheck(Plugin plugin) {
+            return Utils.classExists("github{}saukiya{}sxitem{}SXItem");
+        }
     }
 }

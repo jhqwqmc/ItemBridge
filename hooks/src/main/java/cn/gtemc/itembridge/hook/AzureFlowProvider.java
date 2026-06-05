@@ -85,7 +85,9 @@ final class AzureFlowProvider implements Provider<ItemStack, Player> {
         return AzureFlowAPI.INSTANCE.getFactory(id) != null;
     }
 
-    static boolean conflictCheck(Plugin plugin) {
-        return Utils.classExists("io{}rokuko{}azureflow{}api{}AzureFlowAPI");
+    final static class Check {
+        static boolean conflictCheck(Plugin plugin) {
+            return Utils.classExists("io{}rokuko{}azureflow{}api{}AzureFlowAPI");
+        }
     }
 }

@@ -68,7 +68,9 @@ final class CrazyVouchersProvider implements Provider<ItemStack, Player> {
         return CrazyVouchers.get().getCrazyManager().getVoucher(id) != null;
     }
 
-    static boolean conflictCheck(Plugin plugin) {
-        return Utils.classExists("com{}badbones69{}crazyvouchers{}CrazyVouchers");
+    final static class Check {
+        static boolean conflictCheck(Plugin plugin) {
+            return Utils.classExists("com{}badbones69{}crazyvouchers{}CrazyVouchers");
+        }
     }
 }

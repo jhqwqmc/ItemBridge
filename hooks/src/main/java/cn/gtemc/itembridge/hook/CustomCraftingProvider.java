@@ -71,7 +71,9 @@ final class CustomCraftingProvider implements Provider<ItemStack, Player> {
         return CustomCrafting.inst().getApi().getRegistries().getCustomItems().has(NamespacedKey.of(id));
     }
 
-    static boolean conflictCheck(Plugin plugin) {
-        return Utils.classExists("me{}wolfyscript{}customcrafting{}CustomCrafting");
+    final static class Check {
+        static boolean conflictCheck(Plugin plugin) {
+            return Utils.classExists("me{}wolfyscript{}customcrafting{}CustomCrafting");
+        }
     }
 }

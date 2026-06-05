@@ -77,7 +77,9 @@ final class MythicMobsProvider implements Provider<ItemStack, Player> {
         return MythicBukkit.inst().getItemManager().getItem(id).isPresent();
     }
 
-    static boolean conflictCheck(Plugin plugin) {
-        return Utils.classExists("io{}lumine{}mythic{}core{}items{}MythicItem");
+    final static class Check {
+        static boolean conflictCheck(Plugin plugin) {
+            return Utils.classExists("io{}lumine{}mythic{}core{}items{}MythicItem");
+        }
     }
 }

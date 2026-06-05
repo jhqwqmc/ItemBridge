@@ -60,7 +60,9 @@ final class OraxenProvider implements Provider<ItemStack, Player> {
         return OraxenItems.exists(id);
     }
 
-    static boolean conflictCheck(Plugin plugin) {
-        return Utils.classExists("io{}th0rgal{}oraxen{}api{}OraxenItems");
+    final static class Check {
+        static boolean conflictCheck(Plugin plugin) {
+            return Utils.classExists("io{}th0rgal{}oraxen{}api{}OraxenItems");
+        }
     }
 }

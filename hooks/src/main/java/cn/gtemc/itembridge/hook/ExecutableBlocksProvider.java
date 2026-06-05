@@ -61,7 +61,9 @@ final class ExecutableBlocksProvider implements Provider<ItemStack, Player> {
         return ExecutableBlocksAPI.getExecutableBlocksManager().isValidID(id);
     }
 
-    static boolean conflictCheck(Plugin plugin) {
-        return Utils.classExists("com{}ssomar{}score{}api{}executableblocks{}ExecutableBlocksAPI");
+    final static class Check {
+        static boolean conflictCheck(Plugin plugin) {
+            return Utils.classExists("com{}ssomar{}score{}api{}executableblocks{}ExecutableBlocksAPI");
+        }
     }
 }

@@ -64,7 +64,10 @@ final class ItemEditProvider implements Provider<ItemStack, Player> {
         return ItemEdit.get().getServerStorage().getItem(id) != null;
     }
 
-    static boolean conflictCheck(Plugin plugin) {
-        return Utils.classExists("emanondev{}itemedit{}ItemEdit");
+    final static class Check {
+        static boolean conflictCheck(Plugin plugin) {
+            return Utils.classExists("emanondev{}itemedit{}ItemEdit");
+        }
     }
+
 }

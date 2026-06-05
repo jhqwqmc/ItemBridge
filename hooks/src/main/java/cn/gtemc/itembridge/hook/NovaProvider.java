@@ -68,7 +68,9 @@ final class NovaProvider implements Provider<ItemStack, Player> {
         return Nova.getNova().getItemRegistry().getOrNull(id) != null;
     }
 
-    static boolean conflictCheck(Plugin plugin) {
-        return Utils.classExists("xyz{}xenondevs{}nova{}api{}item{}NovaItem");
+    final static class Check {
+        static boolean conflictCheck(Plugin plugin) {
+            return Utils.classExists("xyz{}xenondevs{}nova{}api{}item{}NovaItem");
+        }
     }
 }

@@ -74,7 +74,9 @@ final class CustomFishingProvider implements Provider<ItemStack, Player> {
         builder.arg(key, (T) value);
     }
 
-    static boolean conflictCheck(Plugin plugin) {
-        return Utils.classExists("net{}momirealms{}customfishing{}api{}BukkitCustomFishingPlugin");
+    final static class Check {
+        static boolean conflictCheck(Plugin plugin) {
+            return Utils.classExists("net{}momirealms{}customfishing{}api{}BukkitCustomFishingPlugin");
+        }
     }
 }

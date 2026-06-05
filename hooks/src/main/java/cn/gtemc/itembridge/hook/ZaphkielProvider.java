@@ -51,7 +51,9 @@ final class ZaphkielProvider implements Provider<ItemStack, Player> {
         return Zaphkiel.INSTANCE.api().getItemManager().getItem(id) != null;
     }
 
-    static boolean conflictCheck(Plugin plugin) {
-        return Utils.classExists("ink{}ptms{}zaphkiel{}Zaphkiel");
+    final static class Check {
+        static boolean conflictCheck(Plugin plugin) {
+            return Utils.classExists("ink{}ptms{}zaphkiel{}Zaphkiel");
+        }
     }
 }

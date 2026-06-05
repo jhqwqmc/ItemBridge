@@ -67,7 +67,9 @@ final class SlimefunProvider implements Provider<ItemStack, Player> {
         return SlimefunItem.getById(id) != null;
     }
 
-    static boolean conflictCheck(Plugin plugin) {
-        return Utils.classExists("io{}github{}thebusybiscuit{}slimefun4{}api{}items{}SlimefunItem");
+    final static class Check {
+        static boolean conflictCheck(Plugin plugin) {
+            return Utils.classExists("io{}github{}thebusybiscuit{}slimefun4{}api{}items{}SlimefunItem");
+        }
     }
 }

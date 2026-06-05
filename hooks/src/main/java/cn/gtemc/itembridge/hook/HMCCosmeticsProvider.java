@@ -75,7 +75,9 @@ final class HMCCosmeticsProvider implements Provider<ItemStack, Player> {
         return HMCCosmeticsAPI.getCosmetic(id) != null;
     }
 
-    static boolean conflictCheck(Plugin plugin) {
-        return Utils.classExists("com{}hibiscusmc{}hmccosmetics{}api{}HMCCosmeticsAPI");
+    final static class Check {
+        static boolean conflictCheck(Plugin plugin) {
+            return Utils.classExists("com{}hibiscusmc{}hmccosmetics{}api{}HMCCosmeticsAPI");
+        }
     }
 }

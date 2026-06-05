@@ -68,7 +68,9 @@ final class ItemsXLProvider implements Provider<ItemStack, Player> {
         return CaliburnAPI.getInstance().getExItem(id) != null;
     }
 
-    static boolean conflictCheck(Plugin plugin) {
-        return Utils.classExists("de{}erethon{}caliburn{}CaliburnAPI");
+    final static class Check {
+        static boolean conflictCheck(Plugin plugin) {
+            return Utils.classExists("de{}erethon{}caliburn{}CaliburnAPI");
+        }
     }
 }

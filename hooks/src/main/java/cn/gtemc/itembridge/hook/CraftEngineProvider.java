@@ -91,7 +91,9 @@ final class CraftEngineProvider implements Provider<ItemStack, Player> {
         builder.withParameter(key, (T) value);
     }
 
-    static boolean conflictCheck(Plugin plugin) {
-        return Utils.classExists("net{}momirealms{}craftengine{}bukkit{}api{}CraftEngineItems");
+    final static class Check {
+        static boolean conflictCheck(Plugin plugin) {
+            return Utils.classExists("net{}momirealms{}craftengine{}bukkit{}api{}CraftEngineItems");
+        }
     }
 }

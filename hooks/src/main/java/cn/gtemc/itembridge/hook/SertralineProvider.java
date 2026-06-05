@@ -51,7 +51,9 @@ final class SertralineProvider implements Provider<ItemStack, Player> {
         return Sertraline.INSTANCE.api().isRegisteredItem(id);
     }
 
-    static boolean conflictCheck(Plugin plugin) {
-        return Utils.classExists("io{}github{}zzzyyylllty{}sertraline{}Sertraline");
+    final static class Check {
+        static boolean conflictCheck(Plugin plugin) {
+            return Utils.classExists("io{}github{}zzzyyylllty{}sertraline{}Sertraline");
+        }
     }
 }

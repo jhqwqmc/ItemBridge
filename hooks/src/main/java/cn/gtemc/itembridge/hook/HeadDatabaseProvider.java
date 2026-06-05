@@ -52,7 +52,9 @@ final class HeadDatabaseProvider implements Provider<ItemStack, Player> {
         return api.isHead(id);
     }
 
-    static boolean conflictCheck(Plugin plugin) {
-        return Utils.classExists("me{}arcaniax{}hdb{}api{}HeadDatabaseAPI");
+    final static class Check {
+        static boolean conflictCheck(Plugin plugin) {
+            return Utils.classExists("me{}arcaniax{}hdb{}api{}HeadDatabaseAPI");
+        }
     }
 }

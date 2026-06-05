@@ -67,7 +67,9 @@ final class ItemsAdderProvider implements Provider<ItemStack, Player> {
         return CustomStack.isInRegistry(id);
     }
 
-    static boolean conflictCheck(Plugin plugin) {
-        return Utils.classExists("dev{}lone{}itemsadder{}api{}CustomStack");
+    final static class Check {
+        static boolean conflictCheck(Plugin plugin) {
+            return Utils.classExists("dev{}lone{}itemsadder{}api{}CustomStack");
+        }
     }
 }

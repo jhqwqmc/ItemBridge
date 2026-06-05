@@ -94,7 +94,9 @@ final class MMOItemsProvider implements Provider<ItemStack, Player> {
         return MMOItems.plugin.getMMOItem(Type.get(split[0]), mmoItemId) != null;
     }
 
-    static boolean conflictCheck(Plugin plugin) {
-        return Utils.classExists("net{}Indyuce{}mmoitems{}MMOItems");
+    final static class Check {
+        static boolean conflictCheck(Plugin plugin) {
+            return Utils.classExists("net{}Indyuce{}mmoitems{}MMOItems");
+        }
     }
 }

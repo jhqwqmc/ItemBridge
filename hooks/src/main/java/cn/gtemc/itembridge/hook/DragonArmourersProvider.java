@@ -52,7 +52,9 @@ final class DragonArmourersProvider implements Provider<ItemStack, Player> {
         return DragonAPI.getAllSkins().contains(id);
     }
 
-    static boolean conflictCheck(Plugin plugin) {
-        return Utils.classExists("eos{}moe{}armourers{}api{}DragonAPI");
+    final static class Check {
+        static boolean conflictCheck(Plugin plugin) {
+            return Utils.classExists("eos{}moe{}armourers{}api{}DragonAPI");
+        }
     }
 }

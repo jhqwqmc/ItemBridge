@@ -60,7 +60,9 @@ final class NexoProvider implements Provider<ItemStack, Player> {
         return NexoItems.exists(id);
     }
 
-    static boolean conflictCheck(Plugin plugin) {
-        return Utils.classExists("com{}nexomc{}nexo{}api{}NexoItems");
+    final static class Check {
+        static boolean conflictCheck(Plugin plugin) {
+            return Utils.classExists("com{}nexomc{}nexo{}api{}NexoItems");
+        }
     }
 }

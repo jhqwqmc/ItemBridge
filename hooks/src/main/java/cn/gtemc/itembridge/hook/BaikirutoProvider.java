@@ -75,7 +75,9 @@ final class BaikirutoProvider implements Provider<ItemStack, Player> {
         return params;
     }
 
-    static boolean conflictCheck(Plugin plugin) {
-        return Utils.classExists("org{}tabooproject{}baikiruto{}core{}Baikiruto");
+    final static class Check {
+        static boolean conflictCheck(Plugin plugin) {
+            return Utils.classExists("org{}tabooproject{}baikiruto{}core{}Baikiruto");
+        }
     }
 }

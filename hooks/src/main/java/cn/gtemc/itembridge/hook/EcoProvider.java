@@ -71,7 +71,9 @@ final class EcoProvider implements Provider<ItemStack, Player> {
         return Items.lookup(plugin + ":" + id) instanceof CustomItem;
     }
 
-    static boolean conflictCheck(Plugin plugin) {
-        return Utils.classExists("com{}willfp{}eco{}core{}items{}Items");
+    final static class Check {
+        static boolean conflictCheck(Plugin plugin) {
+            return Utils.classExists("com{}willfp{}eco{}core{}items{}Items");
+        }
     }
 }

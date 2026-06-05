@@ -51,7 +51,9 @@ final class NeigeItemsProvider implements Provider<ItemStack, Player> {
         return ItemManager.INSTANCE.hasItem(id);
     }
 
-    static boolean conflictCheck(Plugin plugin) {
-        return Utils.classExists("pers{}neige{}neigeitems{}manager{}ItemManager");
+    final static class Check {
+        static boolean conflictCheck(Plugin plugin) {
+            return Utils.classExists("pers{}neige{}neigeitems{}manager{}ItemManager");
+        }
     }
 }

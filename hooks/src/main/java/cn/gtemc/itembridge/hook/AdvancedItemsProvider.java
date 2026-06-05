@@ -76,7 +76,9 @@ final class AdvancedItemsProvider implements Provider<ItemStack, Player> {
         return Core.getItemsHandler().getCustomItem(id) != null;
     }
 
-    static boolean conflictCheck(Plugin plugin) {
-        return Utils.classExists("net{}advancedplugins{}items{}Core");
+    final static class Check {
+        static boolean conflictCheck(Plugin plugin) {
+            return Utils.classExists("net{}advancedplugins{}items{}Core");
+        }
     }
 }

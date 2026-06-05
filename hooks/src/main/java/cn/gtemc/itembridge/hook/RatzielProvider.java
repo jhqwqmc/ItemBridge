@@ -88,7 +88,9 @@ final class RatzielProvider implements Provider<ItemStack, Player> {
         return ItemManager.INSTANCE.getRegistry().containsKey(id);
     }
 
-    static boolean conflictCheck(Plugin plugin) {
-        return Utils.classExists("cn{}fd{}ratziel{}module{}item{}ItemManager");
+    final static class Check {
+        static boolean conflictCheck(Plugin plugin) {
+            return Utils.classExists("cn{}fd{}ratziel{}module{}item{}ItemManager");
+        }
     }
 }
