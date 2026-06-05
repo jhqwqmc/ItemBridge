@@ -6,6 +6,7 @@ import com.nexomc.nexo.api.NexoItems;
 import com.nexomc.nexo.items.ItemBuilder;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -57,5 +58,9 @@ final class NexoProvider implements Provider<ItemStack, Player> {
     @Override
     public boolean has(@NotNull String id) {
         return NexoItems.exists(id);
+    }
+
+    static boolean conflictCheck(Plugin plugin) {
+        return Utils.classExists("com{}nexomc{}nexo{}api{}NexoItems");
     }
 }

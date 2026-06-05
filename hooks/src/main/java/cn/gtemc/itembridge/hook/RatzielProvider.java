@@ -9,6 +9,7 @@ import cn.gtemc.itembridge.api.Provider;
 import cn.gtemc.itembridge.api.context.BuildContext;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -85,5 +86,9 @@ final class RatzielProvider implements Provider<ItemStack, Player> {
     @Override
     public boolean has(@NotNull String id) {
         return ItemManager.INSTANCE.getRegistry().containsKey(id);
+    }
+
+    static boolean conflictCheck(Plugin plugin) {
+        return Utils.classExists("cn{}fd{}ratziel{}module{}item{}ItemManager");
     }
 }

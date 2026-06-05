@@ -12,6 +12,7 @@ import net.momirealms.craftengine.core.plugin.context.parameter.DirectContextPar
 import net.momirealms.craftengine.core.util.Key;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -88,5 +89,9 @@ final class CraftEngineProvider implements Provider<ItemStack, Player> {
     @SuppressWarnings("unchecked")
     private static <T, C> void withParameter(ContextHolder.Builder builder, ContextKey<T> key, Supplier<C> value) {
         builder.withParameter(key, (T) value);
+    }
+
+    static boolean conflictCheck(Plugin plugin) {
+        return Utils.classExists("net{}momirealms{}craftengine{}bukkit{}api{}CraftEngineItems");
     }
 }

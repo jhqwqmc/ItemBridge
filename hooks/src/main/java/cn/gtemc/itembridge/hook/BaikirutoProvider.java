@@ -5,6 +5,7 @@ import cn.gtemc.itembridge.api.context.BuildContext;
 import cn.gtemc.itembridge.api.context.ContextKey;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.tabooproject.baikiruto.core.Baikiruto;
@@ -72,5 +73,9 @@ final class BaikirutoProvider implements Provider<ItemStack, Player> {
             params.put(entry.getKey().key(), entry.getValue().get());
         }
         return params;
+    }
+
+    static boolean conflictCheck(Plugin plugin) {
+        return Utils.classExists("org{}tabooproject{}baikiruto{}core{}Baikiruto");
     }
 }

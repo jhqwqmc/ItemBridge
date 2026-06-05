@@ -7,6 +7,7 @@ import net.Indyuce.mmoitems.api.Type;
 import net.Indyuce.mmoitems.api.item.mmoitem.MMOItem;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -91,5 +92,9 @@ final class MMOItemsProvider implements Provider<ItemStack, Player> {
         }
         String mmoItemId = split[1].toUpperCase().replace("-", "_").replace(" ", "_");
         return MMOItems.plugin.getMMOItem(Type.get(split[0]), mmoItemId) != null;
+    }
+
+    static boolean conflictCheck(Plugin plugin) {
+        return Utils.classExists("net{}Indyuce{}mmoitems{}MMOItems");
     }
 }

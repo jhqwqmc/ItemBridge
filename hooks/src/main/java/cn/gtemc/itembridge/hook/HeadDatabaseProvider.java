@@ -5,6 +5,7 @@ import cn.gtemc.itembridge.api.context.BuildContext;
 import me.arcaniax.hdb.api.HeadDatabaseAPI;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -49,5 +50,9 @@ final class HeadDatabaseProvider implements Provider<ItemStack, Player> {
     @Override
     public boolean has(@NotNull String id) {
         return api.isHead(id);
+    }
+
+    static boolean conflictCheck(Plugin plugin) {
+        return Utils.classExists("me{}arcaniax{}hdb{}api{}HeadDatabaseAPI");
     }
 }

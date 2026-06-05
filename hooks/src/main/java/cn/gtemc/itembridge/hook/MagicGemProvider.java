@@ -4,6 +4,7 @@ import cn.gtemc.itembridge.api.Provider;
 import cn.gtemc.itembridge.api.context.BuildContext;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pku.yim.magicgem.gem.Gem;
@@ -65,5 +66,9 @@ final class MagicGemProvider implements Provider<ItemStack, Player> {
     @Override
     public boolean has(@NotNull String id) {
         return GemManager.getGemByName(id) != null;
+    }
+
+    static boolean conflictCheck(Plugin plugin) {
+        return Utils.classExists("pku{}yim{}magicgem{}gem{}Gem");
     }
 }

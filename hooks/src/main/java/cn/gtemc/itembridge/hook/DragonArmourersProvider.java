@@ -6,6 +6,7 @@ import eos.moe.armourers.api.DragonAPI;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -49,5 +50,9 @@ final class DragonArmourersProvider implements Provider<ItemStack, Player> {
     @Override
     public boolean has(@NotNull String id) {
         return DragonAPI.getAllSkins().contains(id);
+    }
+
+    static boolean conflictCheck(Plugin plugin) {
+        return Utils.classExists("eos{}moe{}armourers{}api{}DragonAPI");
     }
 }

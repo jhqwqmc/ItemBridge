@@ -4,6 +4,7 @@ import cn.gtemc.itembridge.api.Provider;
 import cn.gtemc.itembridge.api.context.BuildContext;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import xyz.xenondevs.nova.api.Nova;
@@ -65,5 +66,9 @@ final class NovaProvider implements Provider<ItemStack, Player> {
     @Override
     public boolean has(@NotNull String id) {
         return Nova.getNova().getItemRegistry().getOrNull(id) != null;
+    }
+
+    static boolean conflictCheck(Plugin plugin) {
+        return Utils.classExists("xyz{}xenondevs{}nova{}api{}item{}NovaItem");
     }
 }

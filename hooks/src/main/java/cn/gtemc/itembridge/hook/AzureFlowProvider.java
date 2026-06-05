@@ -10,6 +10,7 @@ import io.rokuko.azureflow.features.item.factory.AzureFlowItemFactoryService;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -82,5 +83,9 @@ final class AzureFlowProvider implements Provider<ItemStack, Player> {
     @Override
     public boolean has(@NotNull String id) {
         return AzureFlowAPI.INSTANCE.getFactory(id) != null;
+    }
+
+    static boolean conflictCheck(Plugin plugin) {
+        return Utils.classExists("io{}rokuko{}azureflow{}api{}AzureFlowAPI");
     }
 }

@@ -13,6 +13,7 @@ import com.pxpmc.pxrpg.api.modules.item.ItemModule;
 import com.pxpmc.pxrpg.api.util.ParameterResolver;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -107,5 +108,9 @@ final class PxRpgProvider implements Provider<ItemStack, Player> {
             return false;
         }
         return itemManager.getRegister(split[0]) != null;
+    }
+
+    static boolean conflictCheck(Plugin plugin) {
+        return Utils.classExists("com{}pxpmc{}pxrpg{}api{}MAPI");
     }
 }

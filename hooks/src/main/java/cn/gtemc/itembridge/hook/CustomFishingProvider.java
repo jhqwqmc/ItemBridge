@@ -8,6 +8,7 @@ import net.momirealms.customfishing.api.mechanic.context.Context;
 import net.momirealms.customfishing.api.mechanic.context.ContextKeys;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -71,5 +72,9 @@ final class CustomFishingProvider implements Provider<ItemStack, Player> {
     @SuppressWarnings("unchecked")
     private static <T, C> void arg(Context<Player> builder, ContextKeys<T> key, C value) {
         builder.arg(key, (T) value);
+    }
+
+    static boolean conflictCheck(Plugin plugin) {
+        return Utils.classExists("net{}momirealms{}customfishing{}api{}BukkitCustomFishingPlugin");
     }
 }

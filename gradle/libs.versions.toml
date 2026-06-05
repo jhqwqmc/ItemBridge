@@ -12,13 +12,19 @@ mmoitems-lib = "1.7.1-SNAPSHOT"
 mythicmobs = "5.9.0"
 neigeitems = "1.21.42"
 sxitem = "4.4.6"
-zaphkiel = "2.1.0"
 slimefun = "RC-32"
 headdatabase = "1.3.2"
 oraxen = "1.200.0"
 nova = "0.21.2"
 eco = "6.77.2"
 baikiruto = "1.6.1"
+crazyvouchers = "3.6.4"
+score = "5.25.3.9"
+itemxl = "1.0.3"
+advanceditems = "1.9.4"
+customcrafting = "4.19.1.0"
+customcrafting-wolfyutilities = "4.19.1.2"
+itemedit = "2.17"
 
 [libraries]
 jetbrains-annotations = { module = "org.jetbrains:annotations", version.ref = "jetbrains-annotations" }
@@ -36,20 +42,25 @@ hook-mmoitems-lib = { module = "io.lumine:MythicLib-dist", version.ref = "mmoite
 hook-mythicmobs = { module = "io.lumine:Mythic-Dist", version.ref = "mythicmobs" }
 hook-neigeitems = { module = "pers.neige.neigeitems:NeigeItems", version.ref = "neigeitems" }
 hook-sxitem = { module = "com.github.Saukiya:SX-Item", version.ref = "sxitem" }
-hook-zaphkiel = { module = "ink.ptms:ZaphkielAPI", version.ref = "zaphkiel" }
 hook-slimefun = { module = "io.github.Slimefun:Slimefun4", version.ref = "slimefun" }
 hook-headdatabase = { module = "com.arcaniax:HeadDatabase-API", version.ref = "headdatabase" }
 hook-oraxen = { module = "io.th0rgal:oraxen", version.ref = "oraxen" }
 hook-nova = { module = "xyz.xenondevs.nova:nova-api", version.ref = "nova" }
 hook-eco = { module = "com.willfp:eco", version.ref = "eco" }
 hook-baikiruto = { module = "org.tabooproject.baikiruto:Baikiruto", version.ref = "baikiruto" }
+hook-crazyvouchers = { module = "com.badbones69.crazyvouchers:crazyvouchers-paper-api", version.ref = "crazyvouchers" }
+hook-score = { module = "com.github.Ssomar-Developement:SCore", version.ref = "score" }
+hook-itemxl = { module = "de.erethon:caliburn", version.ref = "itemxl" }
+hook-advanceditems = { module = "net.advancedplugins:advanceditems", version.ref = "advanceditems" }
+hook-customcrafting = { module = "com.wolfyscript.customcrafting:customcrafting-spigot", version.ref = "customcrafting" }
+hook-customcrafting-wolfyutilities = { module = "com.wolfyscript.wolfyutils.spigot:wolfyutils-spigot", version.ref = "customcrafting-wolfyutilities" }
+hook-itemedit = { module = "com.github.emanondev:ItemEdit", version.ref = "itemedit" }
 
 [bundles]
 hooks = [
     "hook-itemsadder",
     "hook-neigeitems",
     "hook-sxitem",
-    "hook-zaphkiel",
     "hook-slimefun",
     "hook-headdatabase",
     "hook-baikiruto",
@@ -63,6 +74,13 @@ hooks = [
     "hook-nova",
     "hook-mythicmobs",
     "hook-eco",
+    "hook-crazyvouchers",
+    "hook-score",
+    "hook-itemxl",
+    "hook-advanceditems",
+    "hook-customcrafting",
+    "hook-customcrafting-wolfyutilities",
+    "hook-itemedit",
 ]
 
 hooks-legacy = [

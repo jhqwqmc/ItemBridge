@@ -2,7 +2,7 @@ package cn.gtemc.itembridge.hook;
 
 import cn.gtemc.itembridge.api.Provider;
 import cn.gtemc.itembridge.api.context.BuildContext;
-import com.ssomar.score.api.executableitems.ExecutableItemsAPI;
+import com.ssomar.score.api.executableblocks.ExecutableBlocksAPI;
 import com.ssomar.score.sobject.SObjectInterface;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -14,20 +14,20 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-final class ExecutableItemsProvider implements Provider<ItemStack, Player> {
-    public static final ExecutableItemsProvider INSTANCE = new ExecutableItemsProvider();
+final class ExecutableBlocksProvider implements Provider<ItemStack, Player> {
+    public static final ExecutableBlocksProvider INSTANCE = new ExecutableBlocksProvider();
 
-    private ExecutableItemsProvider() {}
+    private ExecutableBlocksProvider() {}
 
     @Override
     public String plugin() {
-        return "executableitems";
+        return "executableblocks";
     }
 
     @Override
     public Optional<ItemStack> build(String id, @Nullable Player player, @NotNull BuildContext context) {
-        return ExecutableItemsAPI.getExecutableItemsManager()
-                .getExecutableItem(id)
+        return ExecutableBlocksAPI.getExecutableBlocksManager()
+                .getExecutableBlock(id)
                 .map(item -> {
                     Map<String, Object> map = Utils.adaptString2Object(context);
                     return item.buildItem(1, Optional.ofNullable(player), map != null ? map : new HashMap<>());
@@ -41,8 +41,8 @@ final class ExecutableItemsProvider implements Provider<ItemStack, Player> {
 
     @Override
     public Optional<String> id(@NotNull ItemStack item) {
-        return ExecutableItemsAPI.getExecutableItemsManager()
-                .getExecutableItem(item)
+        return ExecutableBlocksAPI.getExecutableBlocksManager()
+                .getExecutableBlock(item)
                 .map(SObjectInterface::getId);
     }
 
@@ -53,15 +53,15 @@ final class ExecutableItemsProvider implements Provider<ItemStack, Player> {
 
     @Override
     public boolean is(@NotNull ItemStack item) {
-        return ExecutableItemsAPI.getExecutableItemsManager().getExecutableItem(item).isPresent();
+        return ExecutableBlocksAPI.getExecutableBlocksManager().getExecutableBlock(item).isPresent();
     }
 
     @Override
     public boolean has(@NotNull String id) {
-        return ExecutableItemsAPI.getExecutableItemsManager().isValidID(id);
+        return ExecutableBlocksAPI.getExecutableBlocksManager().isValidID(id);
     }
 
     static boolean conflictCheck(Plugin plugin) {
-        return Utils.classExists("com{}ssomar{}score{}api{}executableitems{}ExecutableItemsAPI");
+        return Utils.classExists("com{}ssomar{}score{}api{}executableblocks{}ExecutableBlocksAPI");
     }
 }

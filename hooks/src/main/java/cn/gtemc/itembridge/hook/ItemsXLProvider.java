@@ -2,9 +2,8 @@ package cn.gtemc.itembridge.hook;
 
 import cn.gtemc.itembridge.api.Provider;
 import cn.gtemc.itembridge.api.context.BuildContext;
-import com.willfp.eco.core.items.CustomItem;
-import com.willfp.eco.core.items.Items;
-import com.willfp.eco.core.items.TestableItem;
+import de.erethon.caliburn.CaliburnAPI;
+import de.erethon.caliburn.item.ExItem;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
@@ -13,65 +12,63 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
-final class EcoProvider implements Provider<ItemStack, Player> {
-    private final String plugin;
+final class ItemsXLProvider implements Provider<ItemStack, Player> {
+    public static final ItemsXLProvider INSTANCE = new ItemsXLProvider();
 
-    public EcoProvider(@NotNull String plugin) {
-        this.plugin = plugin;
-    }
+    private ItemsXLProvider() {}
 
     @Override
     public String plugin() {
-        return this.plugin;
+        return "itemsxl";
     }
 
     @Override
     public Optional<ItemStack> build(String id, @Nullable Player player, @NotNull BuildContext context) {
-        TestableItem item = Items.lookup(plugin + ":" + id);
-        if (!(item instanceof CustomItem)) {
+        ExItem item = CaliburnAPI.getInstance().getExItem(id);
+        if (item == null) {
             return Optional.empty();
         }
-        return Optional.ofNullable(item.getItem());
+        return Optional.ofNullable(item.toItemStack());
     }
 
     @Override
     public @Nullable ItemStack buildOrNull(String id, @Nullable Player player, @NotNull BuildContext context) {
-        TestableItem item = Items.lookup(plugin + ":" + id);
-        if (!(item instanceof CustomItem)) {
+        ExItem item = CaliburnAPI.getInstance().getExItem(id);
+        if (item == null) {
             return null;
         }
-        return item.getItem();
+        return item.toItemStack();
     }
 
     @Override
     public Optional<String> id(@NotNull ItemStack item) {
-        CustomItem customItem = Items.getCustomItem(item);
-        if (customItem == null) {
+        ExItem exItem = CaliburnAPI.getInstance().getExItem(item);
+        if (exItem == null) {
             return Optional.empty();
         }
-        return Optional.of(customItem.getKey().toString());
+        return Optional.ofNullable(exItem.getId());
     }
 
     @Override
     public @Nullable String idOrNull(@NotNull ItemStack item) {
-        CustomItem customItem = Items.getCustomItem(item);
-        if (customItem == null) {
+        ExItem exItem = CaliburnAPI.getInstance().getExItem(item);
+        if (exItem == null) {
             return null;
         }
-        return customItem.getKey().toString();
+        return exItem.getId();
     }
 
     @Override
     public boolean is(@NotNull ItemStack item) {
-        return Items.getCustomItem(item) != null;
+        return CaliburnAPI.getInstance().getExItem(item) != null;
     }
 
     @Override
     public boolean has(@NotNull String id) {
-        return Items.lookup(plugin + ":" + id) instanceof CustomItem;
+        return CaliburnAPI.getInstance().getExItem(id) != null;
     }
 
     static boolean conflictCheck(Plugin plugin) {
-        return Utils.classExists("com{}willfp{}eco{}core{}items{}Items");
+        return Utils.classExists("de{}erethon{}caliburn{}CaliburnAPI");
     }
 }

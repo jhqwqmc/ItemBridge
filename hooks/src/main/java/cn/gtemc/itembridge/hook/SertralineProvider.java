@@ -5,6 +5,7 @@ import cn.gtemc.itembridge.api.context.BuildContext;
 import io.github.zzzyyylllty.sertraline.Sertraline;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -25,9 +26,8 @@ final class SertralineProvider implements Provider<ItemStack, Player> {
         return Optional.ofNullable(Sertraline.INSTANCE.api().buildItem(id, player, null, 1, Utils.adaptString2Object(context)));
     }
 
-    @Nullable
     @Override
-    public ItemStack buildOrNull(String id, @Nullable Player player, @NotNull BuildContext context) {
+    public @Nullable ItemStack buildOrNull(String id, @Nullable Player player, @NotNull BuildContext context) {
         return Sertraline.INSTANCE.api().buildItem(id, player, null, 1, Utils.adaptString2Object(context));
     }
 
@@ -36,9 +36,8 @@ final class SertralineProvider implements Provider<ItemStack, Player> {
         return Optional.ofNullable(Sertraline.INSTANCE.api().getId(item));
     }
 
-    @Nullable
     @Override
-    public String idOrNull(@NotNull ItemStack item) {
+    public @Nullable String idOrNull(@NotNull ItemStack item) {
         return Sertraline.INSTANCE.api().getId(item);
     }
 
@@ -50,5 +49,9 @@ final class SertralineProvider implements Provider<ItemStack, Player> {
     @Override
     public boolean has(@NotNull String id) {
         return Sertraline.INSTANCE.api().isRegisteredItem(id);
+    }
+
+    static boolean conflictCheck(Plugin plugin) {
+        return Utils.classExists("io{}github{}zzzyyylllty{}sertraline{}Sertraline");
     }
 }

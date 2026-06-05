@@ -5,6 +5,7 @@ import cn.gtemc.itembridge.api.context.BuildContext;
 import dev.lone.itemsadder.api.CustomStack;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -64,5 +65,9 @@ final class ItemsAdderProvider implements Provider<ItemStack, Player> {
     @Override
     public boolean has(@NotNull String id) {
         return CustomStack.isInRegistry(id);
+    }
+
+    static boolean conflictCheck(Plugin plugin) {
+        return Utils.classExists("dev{}lone{}itemsadder{}api{}CustomStack");
     }
 }

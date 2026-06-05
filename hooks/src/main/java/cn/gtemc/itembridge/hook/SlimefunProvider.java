@@ -5,6 +5,7 @@ import cn.gtemc.itembridge.api.context.BuildContext;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -64,5 +65,9 @@ final class SlimefunProvider implements Provider<ItemStack, Player> {
     @Override
     public boolean has(@NotNull String id) {
         return SlimefunItem.getById(id) != null;
+    }
+
+    static boolean conflictCheck(Plugin plugin) {
+        return Utils.classExists("io{}github{}thebusybiscuit{}slimefun4{}api{}items{}SlimefunItem");
     }
 }

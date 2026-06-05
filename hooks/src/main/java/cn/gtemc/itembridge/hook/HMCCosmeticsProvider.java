@@ -6,6 +6,7 @@ import com.hibiscusmc.hmccosmetics.api.HMCCosmeticsAPI;
 import com.hibiscusmc.hmccosmetics.cosmetic.Cosmetic;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -72,5 +73,9 @@ final class HMCCosmeticsProvider implements Provider<ItemStack, Player> {
     @Override
     public boolean has(@NotNull String id) {
         return HMCCosmeticsAPI.getCosmetic(id) != null;
+    }
+
+    static boolean conflictCheck(Plugin plugin) {
+        return Utils.classExists("com{}hibiscusmc{}hmccosmetics{}api{}HMCCosmeticsAPI");
     }
 }

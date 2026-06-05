@@ -2,9 +2,12 @@
 
 ## Supported plugins
 
+- [AdvancedItems](https://www.spigotmc.org/resources/110438)
 - [AzureFlow](https://www.minebbs.com/resources/9673)
 - [Baikiruto](https://github.com/YsGqHY/Baikiruto)
 - [CraftEngine](https://github.com/Xiao-MoMi/craft-engine)
+- [CrazyVouchers](https://github.com/Crazy-Crew/CrazyVouchers)
+- [CustomCrafting](https://github.com/WolfyScript/CustomCrafting)
 - [CustomFishing](https://github.com/Xiao-MoMi/Custom-Fishing)
 - [DragonArmourers](https://archives.mcbbs.co/read.php?tid=951699)
 - [EcoArmor](https://github.com/Auxilor/EcoArmor)
@@ -13,11 +16,14 @@
 - [EcoMobs](https://github.com/Auxilor/EcoMobs)
 - [EcoPets](https://github.com/Auxilor/EcoPets)
 - [EcoScrolls](https://github.com/Auxilor/EcoScrolls)
+- [ExecutableBlocks](https://www.spigotmc.org/resources/93406)
 - [ExecutableItems](https://modrinth.com/plugin/executableitems)
 - [HeadDatabase](https://www.spigotmc.org/resources/14280)
 - [HMCCosmetics](https://github.com/HibiscusMC/HMCCosmetics)
+- [ItemEdit](https://github.com/emanondev/ItemEdit)
 - [ItemsAdder](https://www.spigotmc.org/resources/73355)
-- [MagicGem](https://liyi2015.gitbook.io/magicgem/)
+- [ItemsXL](https://github.com/DRE2N/ItemsXL)
+- [MagicGem](https://liyi2015.gitbook.io/magicgem)
 - [MMOItems](https://gitlab.com/phoenix-dvpmt/mmoitems)
 - [MythicMobs](https://mythiccraft.io/index.php?resources/1)
 - [NeigeItems](https://github.com/ankhorg/NeigeItems-Kotlin)

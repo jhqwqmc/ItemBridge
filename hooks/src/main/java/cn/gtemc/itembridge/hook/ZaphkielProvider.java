@@ -5,6 +5,7 @@ import cn.gtemc.itembridge.api.context.BuildContext;
 import ink.ptms.zaphkiel.Zaphkiel;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -48,5 +49,9 @@ final class ZaphkielProvider implements Provider<ItemStack, Player> {
     @Override
     public boolean has(@NotNull String id) {
         return Zaphkiel.INSTANCE.api().getItemManager().getItem(id) != null;
+    }
+
+    static boolean conflictCheck(Plugin plugin) {
+        return Utils.classExists("ink{}ptms{}zaphkiel{}Zaphkiel");
     }
 }

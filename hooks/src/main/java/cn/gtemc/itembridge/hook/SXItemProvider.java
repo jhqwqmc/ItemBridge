@@ -5,6 +5,7 @@ import cn.gtemc.itembridge.api.context.BuildContext;
 import github.saukiya.sxitem.SXItem;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -48,5 +49,9 @@ final class SXItemProvider implements Provider<ItemStack, Player> {
     @Override
     public boolean has(@NotNull String id) {
         return SXItem.getItemManager().hasItem(id);
+    }
+
+    static boolean conflictCheck(Plugin plugin) {
+        return Utils.classExists("github{}saukiya{}sxitem{}SXItem");
     }
 }

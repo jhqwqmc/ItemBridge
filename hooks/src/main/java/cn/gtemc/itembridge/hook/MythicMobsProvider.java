@@ -10,6 +10,7 @@ import io.lumine.mythic.core.drops.DropMetadataImpl;
 import io.lumine.mythic.core.items.MythicItem;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -74,5 +75,9 @@ final class MythicMobsProvider implements Provider<ItemStack, Player> {
     @Override
     public boolean has(@NotNull String id) {
         return MythicBukkit.inst().getItemManager().getItem(id).isPresent();
+    }
+
+    static boolean conflictCheck(Plugin plugin) {
+        return Utils.classExists("io{}lumine{}mythic{}core{}items{}MythicItem");
     }
 }
