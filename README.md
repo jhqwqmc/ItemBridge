@@ -16,6 +16,7 @@
 - [EcoMobs](https://github.com/Auxilor/EcoMobs)
 - [EcoPets](https://github.com/Auxilor/EcoPets)
 - [EcoScrolls](https://github.com/Auxilor/EcoScrolls)
+- [EmakiItem]()
 - [ExecutableBlocks](https://www.spigotmc.org/resources/93406)
 - [ExecutableItems](https://modrinth.com/plugin/executableitems)
 - [HeadDatabase](https://www.spigotmc.org/resources/14280)

@@ -10,6 +10,7 @@ dependencies {
     compileOnly(files("${project.rootDir}/libs/Ratziel-api.jar")) // ratziel
     compileOnly(files("${project.rootDir}/libs/DragonArmourers-api.jar")) // dragonarmourers
     compileOnly(files("${project.rootDir}/libs/Zaphkiel-api.jar")) // zaphkiel
+    compileOnly(files("${project.rootDir}/libs/EmakiItem-api.jar")) // emakiitem
     compileOnly(files("${project.rootDir}/libs/j8-record.jar"))
     compileOnly(project(":api"))
     implementation(project(":hooks:legacy"))
