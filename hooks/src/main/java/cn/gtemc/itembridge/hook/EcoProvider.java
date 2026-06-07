@@ -4,17 +4,13 @@ import cn.gtemc.itembridge.api.Provider;
 import cn.gtemc.itembridge.api.context.BuildContext;
 import com.willfp.eco.core.items.CustomItem;
 import com.willfp.eco.core.items.Items;
-import com.willfp.eco.core.items.TestableItem;
-import com.willfp.eco.core.recipe.parts.GroupedTestableItems;
-import com.willfp.eco.core.recipe.parts.ModifiedTestableItem;
-import com.willfp.eco.core.recipe.parts.TestableStack;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Iterator;
 import java.util.Optional;
 
 final class EcoProvider implements Provider<ItemStack, Player> {
@@ -31,20 +27,20 @@ final class EcoProvider implements Provider<ItemStack, Player> {
 
     @Override
     public Optional<ItemStack> build(String id, @Nullable Player player, @NotNull BuildContext context) {
-        CustomItem item = getCustomItem(Items.lookup(plugin + ":" + id));
-        if (item == null) {
+        ItemStack item = Items.lookup(plugin + ":" + id).getItem();
+        if (item.getType() == Material.AIR) {
             return Optional.empty();
         }
-        return Optional.ofNullable(item.getItem());
+        return Optional.of(item);
     }
 
     @Override
     public @Nullable ItemStack buildOrNull(String id, @Nullable Player player, @NotNull BuildContext context) {
-        CustomItem item = getCustomItem(Items.lookup(plugin + ":" + id));
-        if (item == null) {
+        ItemStack item = Items.lookup(plugin + ":" + id).getItem();
+        if (item.getType() == Material.AIR) {
             return null;
         }
-        return item.getItem();
+        return item;
     }
 
     @Override
@@ -73,25 +69,6 @@ final class EcoProvider implements Provider<ItemStack, Player> {
     @Override
     public boolean has(@NotNull String id) {
         return Items.lookup(plugin + ":" + id) instanceof CustomItem;
-    }
-
-    private static @Nullable CustomItem getCustomItem(TestableItem item) {
-        if (item instanceof CustomItem) {
-            return (CustomItem) item;
-        }
-        if (item instanceof ModifiedTestableItem) {
-            return getCustomItem(((ModifiedTestableItem) item).getHandle());
-        }
-        if (item instanceof TestableStack) {
-            return getCustomItem(((TestableStack) item).getHandle());
-        }
-        if (item instanceof GroupedTestableItems) {
-            Iterator<TestableItem> iterator = ((GroupedTestableItems) item).getChildren().iterator();
-            if (iterator.hasNext()) {
-                return getCustomItem(iterator.next());
-            }
-        }
-        return null;
     }
 
     final static class Check {

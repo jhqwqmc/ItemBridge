@@ -56,7 +56,7 @@ repositories {
 ```
 ```kts
 dependencies {
-    implementation("cn.gtemc:itembridge:1.0.28")
+    implementation("cn.gtemc:itembridge:1.0.31")
 }
 ```
 
