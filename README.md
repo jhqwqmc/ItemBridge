@@ -47,6 +47,53 @@
 
 ## How to use
 
+### For users
+
+<details>
+<summary>Click to expand</summary>
+
+| Plugin name      | Plugin id          | Item id                                                                     | Example Item id      |
+|------------------|--------------------|-----------------------------------------------------------------------------|----------------------|
+| AdvancedItems    | `advanceditems`    | `<id>`                                                                      | `your_item_id`       |
+| AzureFlow        | `azureflow`        | `<id>`                                                                      | `your_item_id`       |
+| Baikiruto        | `baikiruto`        | `<id>`                                                                      | `your_item_id`       |
+| CraftEngine      | `craftengine`      | `<id>`                                                                      | `default:palm_log`   |
+| CrazyVouchers    | `crazyvouchers`    | `<id>`                                                                      | `your_item_id`       |
+| CustomCrafting   | `customcrafting`   | `<id>`                                                                      | `your_item_id`       |
+| CustomFishing    | `customfishing`    | `<id>`                                                                      | `common_bait`        |
+| DragonArmourers  | `dragonarmourers`  | `<id>`                                                                      | `your_item_id`       |
+| EcoArmor         | `ecoarmor`         | `set_<set>_<slot>` `set_<set>_<slot>_advanced` `shard_<set>` `crystal_<id>` | `set_angelic_helmet` |
+| EcoCrates        | `ecocrates`        | `<crate>_key`                                                               | `demo_key`           |
+| EcoItems         | `ecoitems`         | `<id>`                                                                      | `your_item_id`       |
+| EcoMobs          | `ecomobs`          | `<id>_spawn_egg`                                                            | `zombie_spawn_egg`   |
+| EcoPets          | `ecopets`          | `<id>_spawn_egg`                                                            | `blaze_spawn_egg`    |
+| EcoScrolls       | `ecoscrolls`       | `scroll_<id>`                                                               | `scroll_autosmelt`   |
+| EmakiItem        | `emakiitem`        | `<id>`                                                                      | `your_item_id`       |
+| ExecutableBlocks | `executableblocks` | `<id>`                                                                      | `your_item_id`       |
+| ExecutableItems  | `executableitems`  | `<id>`                                                                      | `your_item_id`       |
+| HeadDatabase     | `headdatabase`     | `<id>`                                                                      | `your_item_id`       |
+| HMCCosmetics     | `hmccosmetics`     | `<id>`                                                                      | `your_item_id`       |
+| ItemEdit         | `itemedit`         | `<id>`                                                                      | `your_item_id`       |
+| ItemsAdder       | `itemsadder`       | `<id>`                                                                      | `your_item_id`       |
+| ItemsXL          | `itemsxl`          | `<id>`                                                                      | `your_item_id`       |
+| MagicGem         | `magicgem`         | `<id>`                                                                      | `your_item_id`       |
+| MMOItems         | `mmoitems`         | `<id>`                                                                      | `your_item_id`       |
+| MythicMobs       | `mythicmobs`       | `<id>`                                                                      | `your_item_id`       |
+| NeigeItems       | `neigeitems`       | `<id>`                                                                      | `your_item_id`       |
+| Nexo             | `nexo`             | `<id>`                                                                      | `your_item_id`       |
+| Nova             | `nova`             | `<id>`                                                                      | `your_item_id`       |
+| Oraxen           | `oraxen`           | `<id>`                                                                      | `your_item_id`       |
+| PxRpg            | `pxrpg`            | `<id>`                                                                      | `your_item_id`       |
+| Ratziel          | `ratziel`          | `<id>`                                                                      | `your_item_id`       |
+| Reforges         | `reforges`         | `stone_<id>`                                                                | `stone_acute`        |
+| Sertraline       | `sertraline`       | `<id>`                                                                      | `your_item_id`       |
+| Slimefun         | `slimefun`         | `<id>`                                                                      | `your_item_id`       |
+| StatTrackers     | `stattrackers`     | `<id>`                                                                      | `your_item_id`       |
+| SX-Item          | `sxitem`           | `<id>`                                                                      | `your_item_id`       |
+| Talismans        | `talismans`        | `<id>`                                                                      | `your_item_id`       |
+| Zaphkiel         | `zaphkiel`         | `<id>`                                                                      | `your_item_id`       |
+</details>
+
 ### Add dependency to the project
 
 ```kts
