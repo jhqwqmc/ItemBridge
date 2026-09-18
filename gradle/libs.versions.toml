@@ -20,11 +20,11 @@ eco = "6.77.2"
 baikiruto = "1.6.1"
 crazyvouchers = "3.6.4"
 score = "5.25.3.9"
-itemxl = "1.0.3"
 advanceditems = "1.9.4"
 customcrafting = "4.19.1.0"
 customcrafting-wolfyutilities = "4.19.1.2"
 itemedit = "2.17"
+breweryx = "3.7.0"
 
 [libraries]
 jetbrains-annotations = { module = "org.jetbrains:annotations", version.ref = "jetbrains-annotations" }
@@ -50,11 +50,11 @@ hook-eco = { module = "com.willfp:eco", version.ref = "eco" }
 hook-baikiruto = { module = "org.tabooproject.baikiruto:Baikiruto", version.ref = "baikiruto" }
 hook-crazyvouchers = { module = "com.badbones69.crazyvouchers:crazyvouchers-paper-api", version.ref = "crazyvouchers" }
 hook-score = { module = "com.github.Ssomar-Developement:SCore", version.ref = "score" }
-hook-itemxl = { module = "de.erethon:caliburn", version.ref = "itemxl" }
 hook-advanceditems = { module = "net.advancedplugins:advanceditems", version.ref = "advanceditems" }
 hook-customcrafting = { module = "com.wolfyscript.customcrafting:customcrafting-spigot", version.ref = "customcrafting" }
 hook-customcrafting-wolfyutilities = { module = "com.wolfyscript.wolfyutils.spigot:wolfyutils-spigot", version.ref = "customcrafting-wolfyutilities" }
 hook-itemedit = { module = "com.github.emanondev:ItemEdit", version.ref = "itemedit" }
+hook-breweryx = { module = "com.dre.brewery:BreweryX", version.ref = "breweryx" }
 
 [bundles]
 hooks = [
@@ -76,11 +76,11 @@ hooks = [
     "hook-eco",
     "hook-crazyvouchers",
     "hook-score",
-    "hook-itemxl",
     "hook-advanceditems",
     "hook-customcrafting",
     "hook-customcrafting-wolfyutilities",
     "hook-itemedit",
+    "hook-breweryx",
 ]
 
 hooks-legacy = [

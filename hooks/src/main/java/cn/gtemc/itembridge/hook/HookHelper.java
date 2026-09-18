@@ -63,6 +63,7 @@ public final class HookHelper {
         tryHook(() -> Utils.addToMap(CustomCraftingProvider.INSTANCE, providers), "CustomCrafting", CustomCraftingProvider.Check::conflictCheck, onSuccess, onFailure, filter);
         tryHook(() -> Utils.addToMap(ItemEditProvider.INSTANCE, providers), "ItemEdit", ItemEditProvider.Check::conflictCheck, onSuccess, onFailure, filter);
         tryHook(() -> Utils.addToMap(EmakiItemProvider.INSTANCE, providers), "EmakiItem", EmakiItemProvider.Check::conflictCheck, onSuccess, onFailure, filter);
+        tryHook(() -> Utils.addToMap(BreweryXProvider.INSTANCE, providers), "BreweryX", BreweryXProvider.Check::conflictCheck, onSuccess, onFailure, filter);
         return providers;
     }
 

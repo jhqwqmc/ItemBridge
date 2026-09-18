@@ -15,20 +15,20 @@ subprojects {
         maven("https://hub.spigotmc.org/nexus/content/groups/public/") // spigot
         maven("https://repo.momirealms.net/releases/") // craftengine customfishing
         maven("https://repo.momirealms.net/snapshots/") // craftengine
-        maven("https://maven.devs.beer/") // itemsadder
         maven("https://repo.nexomc.com/releases/") // nexo
         maven("https://nexus.phoenixdevt.fr/repository/maven-public/") // mmoitems
         maven("https://mvn.lumine.io/repository/maven-public/") // mythicmobs
         maven("https://r.irepo.space/maven/") // neigeitems
+        maven("https://repo.auxilor.io/repository/maven-public/") // eco plugins
         maven("https://jitpack.io") // sxitem | slimefun | executableitems | executableblocks | itemedit
         maven("https://repo.oraxen.com/releases") // oraxen
         maven("https://repo.xenondevs.xyz/releases") // nova
-        maven("https://repo.auxilor.io/repository/maven-public/") // eco plugins
         maven("https://repo.aeoliancloud.com/repository/releases") // baikiruto
         maven("https://repo.crazycrew.us/releases") // crazyvouchers
-        maven("https://erethon.de/repo/") // itemxl
         maven("https://repo.rosewooddev.io/repository/public/") // advanceditems
         maven("https://artifacts.wolfyscript.com/artifactory/gradle-dev-local/") // customcrafting
+        maven("https://repo.jsinco.dev/releases") // breweryx
+        maven("https://maven.devs.beer/") // itemsadder
     }
 
     extensions.create<PublishExtension>("publication")

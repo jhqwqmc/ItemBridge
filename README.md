@@ -5,6 +5,7 @@
 - [AdvancedItems](https://www.spigotmc.org/resources/110438)
 - [AzureFlow](https://www.minebbs.com/resources/9673)
 - [Baikiruto](https://github.com/YsGqHY/Baikiruto)
+- [BreweryX](https://github.com/BreweryTeam/BreweryX)
 - [CraftEngine](https://github.com/Xiao-MoMi/craft-engine)
 - [CrazyVouchers](https://github.com/Crazy-Crew/CrazyVouchers)
 - [CustomCrafting](https://github.com/WolfyScript/CustomCrafting)
@@ -57,6 +58,7 @@
 | AdvancedItems    | `advanceditems`    | `<id>`                                                                      | `your_item_id`       |
 | AzureFlow        | `azureflow`        | `<id>`                                                                      | `your_item_id`       |
 | Baikiruto        | `baikiruto`        | `<id>`                                                                      | `your_item_id`       |
+| BreweryX         | `breweryx`         | `<id>`                                                                      | `your_item_id`       |
 | CraftEngine      | `craftengine`      | `<id>`                                                                      | `default:palm_log`   |
 | CrazyVouchers    | `crazyvouchers`    | `<id>`                                                                      | `your_item_id`       |
 | CustomCrafting   | `customcrafting`   | `<id>`                                                                      | `your_item_id`       |
@@ -103,7 +105,7 @@ repositories {
 ```
 ```kts
 dependencies {
-    implementation("cn.gtemc:itembridge:1.0.31")
+    implementation("cn.gtemc:itembridge:1.0.32")
 }
 ```
 

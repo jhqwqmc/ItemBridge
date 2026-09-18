@@ -1,7 +1,8 @@
-dependencies {
+ dependencies {
     compileOnly(libs.jetbrains.annotations)
     compileOnly(libs.platform.paper.j21)
     compileOnly(libs.bundles.hooks) { isTransitive = false }
+     compileOnly(files("${project.rootDir}/libs/j8-record.jar"))
     compileOnly(files("${project.rootDir}/libs/HMCCosmetics-api.jar")) // hmccosmetics
     compileOnly(files("${project.rootDir}/libs/Sertraline-api.jar")) // sertraline
     compileOnly(files("${project.rootDir}/libs/AzureFlow-api.jar")) // azureflow
@@ -10,8 +11,8 @@ dependencies {
     compileOnly(files("${project.rootDir}/libs/Ratziel-api.jar")) // ratziel
     compileOnly(files("${project.rootDir}/libs/DragonArmourers-api.jar")) // dragonarmourers
     compileOnly(files("${project.rootDir}/libs/Zaphkiel-api.jar")) // zaphkiel
-    compileOnly(files("${project.rootDir}/libs/EmakiItem-api.jar")) // emakiitem
-    compileOnly(files("${project.rootDir}/libs/j8-record.jar"))
+     compileOnly(files("${project.rootDir}/libs/EmakiItem-api.jar")) // emakiitem
+     compileOnly(files("${project.rootDir}/libs/ItemsXL-api.jar")) // itemsxl
     compileOnly(project(":api"))
     implementation(project(":hooks:legacy"))
 }
