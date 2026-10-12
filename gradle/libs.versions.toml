@@ -25,6 +25,7 @@ customcrafting = "4.19.1.0"
 customcrafting-wolfyutilities = "4.19.1.2"
 itemedit = "2.17"
 breweryx = "3.7.0"
+rpgitems = "3.8-SNAPSHOT"
 
 [libraries]
 jetbrains-annotations = { module = "org.jetbrains:annotations", version.ref = "jetbrains-annotations" }
@@ -55,6 +56,7 @@ hook-customcrafting = { module = "com.wolfyscript.customcrafting:customcrafting-
 hook-customcrafting-wolfyutilities = { module = "com.wolfyscript.wolfyutils.spigot:wolfyutils-spigot", version.ref = "customcrafting-wolfyutilities" }
 hook-itemedit = { module = "com.github.emanondev:ItemEdit", version.ref = "itemedit" }
 hook-breweryx = { module = "com.dre.brewery:BreweryX", version.ref = "breweryx" }
+hook-rpgitems = { module = "cat.nyaa:rpgitems", version.ref = "rpgitems" }
 
 [bundles]
 hooks = [
@@ -81,6 +83,7 @@ hooks = [
     "hook-customcrafting-wolfyutilities",
     "hook-itemedit",
     "hook-breweryx",
+    "hook-rpgitems",
 ]
 
 hooks-legacy = [

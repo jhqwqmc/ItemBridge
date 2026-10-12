@@ -29,6 +29,7 @@ subprojects {
         maven("https://artifacts.wolfyscript.com/artifactory/gradle-dev-local/") // customcrafting
         maven("https://repo.jsinco.dev/releases") // breweryx
         maven("https://maven.devs.beer/") // itemsadder
+        maven("https://ci.nyaacat.com/maven/") // rpgitems
     }
 
     extensions.create<PublishExtension>("publication")

@@ -35,6 +35,7 @@
 - [PxRpg](https://www.pxpmc.com/a/pxrpgfree.html)
 - [Ratziel](https://github.com/TheFloodDragon/Ratziel-Beta)
 - [Reforges](https://github.com/Auxilor/Reforges)
+- [RPGItems](https://github.com/NyaaCat/RPGItems-reloaded)
 - [Sertraline](https://github.com/zzzyyylllty/Sertraline-Hydrochloride)
 - [Slimefun](https://github.com/Slimefun/Slimefun4)
 - [StatTrackers](https://github.com/Auxilor/StatTrackers)
@@ -88,6 +89,7 @@
 | PxRpg            | `pxrpg`            | `<id>`                                                                      | `your_item_id`       |
 | Ratziel          | `ratziel`          | `<id>`                                                                      | `your_item_id`       |
 | Reforges         | `reforges`         | `stone_<id>`                                                                | `stone_acute`        |
+| RPGItems         | `rpgitems`         | `<id>`                                                                      | `your_item_id`       |
 | Sertraline       | `sertraline`       | `<id>`                                                                      | `your_item_id`       |
 | Slimefun         | `slimefun`         | `<id>`                                                                      | `your_item_id`       |
 | StatTrackers     | `stattrackers`     | `<id>`                                                                      | `your_item_id`       |
@@ -105,7 +107,7 @@ repositories {
 ```
 ```kts
 dependencies {
-    implementation("cn.gtemc:itembridge:1.0.32")
+    implementation("cn.gtemc:itembridge:1.0.33")
 }
 ```
 
